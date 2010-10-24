@@ -16,7 +16,7 @@ namespace Core
         }
     }
 
-    public class TState
+    private class TState
     {
         public TStateDescription C;
         public TState N;
