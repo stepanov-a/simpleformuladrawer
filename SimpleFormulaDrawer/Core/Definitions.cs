@@ -9,17 +9,24 @@ namespace Core
         {
             private Dictionary<int, object> Arr;
 
+            public DSet(string What)
+            {
+                Arr = new Dictionary<int, object>();
+                if (What==null) {return;}
+                for (int i = 0; i < What.Length; i++)
+                {
+                    Arr.Add(i, What[i]);
+                }
+            }
             public DSet(params object[] What)
             {
                 Arr=new Dictionary<int,object>();
                 if (What == null) { return; }
                 for (int i = 0; i < What.Length; i++)
                 {
-                    if (What[i] == null) { throw new Exception("Missing " + i.ToString() + " argument!"); }
                     Arr.Add(i, What[i]);
                 }
             }
-
             public bool Exists(object What)
             {
                 return Arr.ContainsValue(What);
