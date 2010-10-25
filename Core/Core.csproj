@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Definitions.cs" />
     <Compile Include="LibraryManager.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="WorldStates.cs" />
