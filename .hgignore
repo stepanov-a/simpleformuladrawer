@@ -2,4 +2,5 @@ syntax: glob
 Bin/
 *obj/
 *.suo
+*.user
 syntax: regexp

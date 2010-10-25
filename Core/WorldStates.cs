@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core
 {
-    public class TStateDescription
+    class TStateDescription
     {
         public int Code;
         public string Description;
@@ -16,7 +16,7 @@ namespace Core
         }
     }
 
-    private class TState
+    class TState
     {
         public TStateDescription C;
         public TState N;
@@ -26,7 +26,7 @@ namespace Core
         }
     }
 
-    public static class WorldStates
+    static class WorldStates
     {
         private static TState SStart;
 

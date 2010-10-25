@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace SimpleFormulaDrawer
 {
@@ -22,6 +23,11 @@ namespace SimpleFormulaDrawer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            LibraryManager LMGR=new LibraryManager("x^x");
         }
     }
 }
