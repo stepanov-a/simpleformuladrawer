@@ -28,11 +28,6 @@ namespace SimpleFormulaDrawer
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             LibraryManager LMGR=new LibraryManager();
-            if (LMGR == null)
-            {
-                MessageBoxResult M = MessageBox.Show("ACHTUNG!!!");
-                return;
-            }
             LMGR.AddFunction("x^x");
             LMGR.CompileSource();
         }

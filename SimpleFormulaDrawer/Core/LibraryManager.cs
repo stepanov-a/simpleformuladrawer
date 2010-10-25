@@ -55,7 +55,6 @@ namespace Core
         {
             CompilerDirectives = new Dictionary<string, string>();
             CompilerDirectives.Add("Compiler Version", "v4.0");
-            Functions=new MethodInfo[1];
             Source=new SourceManager();
         }
 
