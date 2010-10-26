@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SimpleFormulaDrawer
+namespace SimpleFormulaDrawer.interfac
 {
     /// <summary>
     /// Логика взаимодействия для DebugForm.xaml
@@ -20,12 +20,12 @@ namespace SimpleFormulaDrawer
     {
         public DebugForm()
         {
-         //   InitializeComponent();
+            InitializeComponent();
         }
-        public void addmessage(string str)
+
+        public void AddMessage(string What)
         {
-            this.Title = str;
-            this.textbox1.text = str;
+            this.listBox1.Items.Add(What);
         }
-    }//end debugform class
+    }
 }
