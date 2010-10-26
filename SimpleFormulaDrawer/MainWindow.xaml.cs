@@ -28,7 +28,8 @@ namespace SimpleFormulaDrawer
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             LibraryManager LMGR=new LibraryManager();
-            LMGR.AddFunction("x^x+5SIN(x)-5^x");
+            LMGR.AddFunction("x^x+5SIN(x)-5^x",false);
+            LMGR.AddFunction("x*y", true);
             LMGR.CompileSource();
             this.textBlock1.Text = LMGR.GetSource();
         }

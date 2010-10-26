@@ -23,14 +23,27 @@ namespace Core
                     static void Main() {}
             ";
         }
-        public void Add(string Func)
+        public void Add(string Func,bool Is3D)
         {
-            Text += @"
+            if (!Is3D)
+            {
+                Text += @"
                     public static double Func" + FuncNumber.ToString() + @"(double x)
                     {
                         return " + Func + @";
                     }
             ";
+            }
+            else
+            {
+                Text += @"
+                    public static double Func" + FuncNumber.ToString() + @"(double x, double y)
+                    {
+                        return " + Func + @";
+                    }
+            ";
+            }
+            FuncNumber++;
         }
         public void CompleteSource()
         {
@@ -63,9 +76,9 @@ namespace Core
             Source=new SourceManager();
         }
 
-        public void AddFunction(string Function)
+        public void AddFunction(string Function,bool Is3D)
         {
-            Source.Add(ParseFunction(Function));
+            Source.Add(ParseFunction(Function),Is3D);
         }
 
         public void CompileSource()
@@ -184,7 +197,7 @@ namespace Core
             bool Need = false;
             DSet Operators=new DSet("1234567890)");
             DSet OperatorsEx = new DSet("1234567890+-*/^");
-            DSet Letters = new DSet("abcdefghijklmnopqrstuvwyz");
+            DSet Letters = new DSet("abcdefghijklmnopqrstuvwz");
 
             #region FirstStep
             for (int i = 0; i < Func.Length; i++)
@@ -274,6 +287,21 @@ namespace Core
                 Functions = new MethodInfo[0];
             }
             return;
+        }
+
+        public float[] Funcs(float x, float y)
+        {
+            object[] INum = new object[2];
+            object ONum = new object();
+            float[] RES = new float[Functions.Length];
+            INum[0] = x;
+            INum[1] = y;
+            for (int i = 0; i < Functions.Length; i++)
+            {
+                ONum = Functions[i].Invoke(null, INum);
+                RES[i] = float.Parse(ONum.ToString());
+            }
+            return RES;
         }
 
         public float[] Funcs(float x)
