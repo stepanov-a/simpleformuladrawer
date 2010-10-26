@@ -1,0 +1,8 @@
+﻿<Window x:Class="SimpleFormulaDrawer.interfac.DebugForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DebugForm" Height="300" Width="300">
+    <Grid>
+        <TextBox Height="237" HorizontalAlignment="Left" Margin="12,12,0,0" Name="textBox1" VerticalAlignment="Top" Width="244" Background="#FFCB2727" />
+    </Grid>
+</Window>
