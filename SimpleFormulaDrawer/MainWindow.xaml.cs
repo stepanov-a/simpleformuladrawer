@@ -34,5 +34,12 @@ namespace SimpleFormulaDrawer
             LMGR.CompileSource();
             this.textBlock1.Text = LMGR.GetSource();
         }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            DebugForm DF=new DebugForm();
+            DF.Show();
+            DF.addmessage("asas");
+        }
     }
 }
