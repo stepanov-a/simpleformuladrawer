@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core;
+using SimpleFormulaDrawer.interfac;
 
 namespace SimpleFormulaDrawer
 {
@@ -39,7 +40,7 @@ namespace SimpleFormulaDrawer
         {
             DebugForm DF=new DebugForm();
             DF.Show();
-            DF.addmessage("asas");
+            DF.AddMessage("asas");
         }
     }
 }
