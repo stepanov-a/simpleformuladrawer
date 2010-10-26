@@ -28,7 +28,7 @@ namespace Core
             if (!Is3D)
             {
                 Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double x)
+                    public static double Func" + FuncNumber.ToString() + @"(double X)
                     {
                         return " + Func + @";
                     }
@@ -37,7 +37,7 @@ namespace Core
             else
             {
                 Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double x, double y)
+                    public static double Func" + FuncNumber.ToString() + @"(double X, double Y)
                     {
                         return " + Func + @";
                     }
@@ -197,7 +197,7 @@ namespace Core
             bool Need = false;
             DSet Operators=new DSet("1234567890)");
             DSet OperatorsEx = new DSet("1234567890+-*/^");
-            DSet Letters = new DSet("abcdefghijklmnopqrstuvwz.");
+            DSet Letters = new DSet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
 
             #region FirstStep
             for (int i = 0; i < Func.Length; i++)

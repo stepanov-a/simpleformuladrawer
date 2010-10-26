@@ -4,6 +4,6 @@
         Title="MainWindow" Height="550" Width="725" Icon="/SimpleFormulaDrawer;component/SimpleFormulaDrawer.ico">
     <Grid>
         <Button Content="Button" Height="23" HorizontalAlignment="Left" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
-        <TextBlock Height="499" HorizontalAlignment="Left" Margin="81,0,0,0" Name="textBlock1" VerticalAlignment="Top" Width="601" Focusable="True" />
+        <TextBlock Height="499" HorizontalAlignment="Left" Margin="81,0,0,0" Name="textBlock1" VerticalAlignment="Top" Width="601" Focusable="False" ForceCursor="False" />
     </Grid>
 </Window>

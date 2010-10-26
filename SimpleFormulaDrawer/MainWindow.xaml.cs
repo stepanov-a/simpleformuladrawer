@@ -30,7 +30,6 @@ namespace SimpleFormulaDrawer
             LibraryManager LMGR=new LibraryManager();
             LMGR.AddFunction("x^x+5SIN(x)-5^x",false);
             LMGR.AddFunction("x*y", true);
-            System.Diagnostics.Process.Start("notepad.exe");
             LMGR.AddFunction("System.Diagnostics.Process.Start(\"notepad.exe\")",false);
             LMGR.CompileSource();
             this.textBlock1.Text = LMGR.GetSource();
