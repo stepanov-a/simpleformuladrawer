@@ -91,8 +91,8 @@ namespace Core
         {
             int State;
             int o;
-            DSet Num = new DSet('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
-            DSet OPS=new DSet('+','-','*','/');
+            DSet Num = new DSet("0.123456789.");
+            DSet OPS=new DSet("+-*/");
             #region PREPOWER
             switch (Func[i-1])
             {
@@ -197,7 +197,7 @@ namespace Core
             bool Need = false;
             DSet Operators=new DSet("1234567890)");
             DSet OperatorsEx = new DSet("1234567890+-*/^");
-            DSet Letters = new DSet("abcdefghijklmnopqrstuvwz");
+            DSet Letters = new DSet("abcdefghijklmnopqrstuvwz.");
 
             #region FirstStep
             for (int i = 0; i < Func.Length; i++)
