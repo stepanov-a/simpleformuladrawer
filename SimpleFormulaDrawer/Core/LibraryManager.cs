@@ -6,23 +6,12 @@ using Microsoft.CSharp;
 using System.Reflection;
 using System.CodeDom.Compiler;
 
-
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 namespace Core
 {
     public class SourceManager
     {
         private string Text;
-        private int FuncNumber=0;
+        public int FuncNumber=0;
         public SourceManager()
         {
             FuncNumber = 0;
@@ -231,9 +220,9 @@ namespace Core
             }
             #endregion
 
+            #region ThirdStep
             TMP = "";
             State = 0;
-            #region ThirdStep
             for (int i = 0; i < Func.Length; i++)
             {
                 switch (State)
@@ -267,7 +256,38 @@ namespace Core
 
         private void Compile()
         {
+            CSharpCodeProvider Compiler = new CSharpCodeProvider(CompilerDirectives);
+            CompilerParameters CPR=new CompilerParameters();
+            CPR.GenerateInMemory=true;
+            CompilerResults CR=Compiler.CompileAssemblyFromSource(CPR,Source.GetSourceString());
+            Functions = new MethodInfo[Source.FuncNumber];
+            if (CR.Errors.Count == 0)
+            {
+                for (int i = 0; i < Source.FuncNumber; i++)
+                {
+                    Functions[i] = CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func" + i.ToString());
+                }
+            }
+            else
+            {
+                WorldStates.AddState(2, "Formula Error");
+                Functions = new MethodInfo[0];
+            }
             return;
+        }
+
+        public float[] Funcs(float x)
+        {
+            object[] INum = new object[1];
+            object ONum=new object();
+            float[] RES = new float[Functions.Length];
+            INum[0] = x;
+            for (int i = 0; i < Functions.Length; i++)
+            {
+                ONum = Functions[i].Invoke(null, INum);
+                RES[i] = float.Parse(ONum.ToString());
+            }
+            return RES;
         }
     }
 }
