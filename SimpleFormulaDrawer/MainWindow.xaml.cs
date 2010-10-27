@@ -29,11 +29,11 @@ namespace SimpleFormulaDrawer
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             LibraryManager LMGR=new LibraryManager();
-            LMGR.AddFunction("x^x+5SIN(x)-5^x",false);
-            LMGR.AddFunction("x*y", true);
-            LMGR.AddFunction("System.Diagnostics.Process.Start(\"notepad.exe\")",false);
+            this.textBlock1.Text+=LMGR.AddFunction("x^x+5SIN(x)-5^x").ToString()+"\n";
+            this.textBlock1.Text += LMGR.AddFunction("x*y").ToString() + "\n";
+            this.textBlock1.Text += LMGR.AddFunction("System.Diagnostics.Process.Start(\"notepad.exe\")").ToString() + "\n";
             LMGR.CompileSource();
-            this.textBlock1.Text = LMGR.GetSource();
+            this.textBlock1.Text += LMGR.GetSource();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
