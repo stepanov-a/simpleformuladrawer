@@ -25,13 +25,13 @@ namespace SimpleFormulaDrawer.interfac
 
         public void AddMessage(string What)
         {//метод добавления нового элемента. кэп.
-            this.listBox1.Items.Add(What);
+            listBox1.Items.Add(What);
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {//Размеры текстбокса совпадают с размерами формы. кэп.
-            this.listBox1.Height=this.Height;
-            this.listBox1.Width=this.Width;
+            listBox1.Height=Height;
+            listBox1.Width=Width;
         }
 
     }

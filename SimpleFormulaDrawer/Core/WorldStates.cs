@@ -1,10 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Core
+namespace SimpleFormulaDrawer.Core
 {
+    static class WorldStatesParser
+    {
+        private static readonly bool Work = true;
+        static WorldStatesParser()
+        {
+            int State;
+            string Param;
+            while (Work)
+            {
+                State = WorldStates.GetState().Code;
+                if (State == -1) { continue; }
+                Param = WorldStates.GetState().Description;
+                switch (State)
+                {
+                    case -2:
+                        {
+                            Work = false;
+                            break;
+                        }
+                }
+            }
+        }
+    }
+
     static class WorldStates
     {
         private static TState SStart;
@@ -33,11 +54,7 @@ namespace Core
 
         public static TStateDescription GetState()
         {
-            if (SStart == null)
-            {
-                return new TStateDescription(-1, "EMPTY");
-            }
-            return SStart.C;
+            return SStart == null ? new TStateDescription(-1, "EMPTY") : SStart.C;
         }
 
         public static void CompleteState()
@@ -51,7 +68,7 @@ namespace Core
         private static void FlushStates()
         {
             SStart = new TState(-2, "0");
-            System.GC.Collect();
+            GC.Collect();
         }
 
         public static string Serialize(Object[] What)
@@ -60,8 +77,8 @@ namespace Core
             {
                 return "";
             }
-            string Res = "";
-            for (int i = 0; i<What.Length; i++)
+            var Res = "";
+            for (var i = 0; i<What.Length; i++)
             {
                 if (What[i] != null) { Res += What[i].ToString(); }
                 if (i < What.Length - 1) { Res += ";"; }
@@ -71,10 +88,8 @@ namespace Core
 
         public static Object[] UnSerialize(string What, string SerializeMask)
         {
-            Object[] Res;
-            Res = new object[SerializeMask.Length];
-            string[] TMP;
-            TMP = What.Split(';');
+            var Res = new object[SerializeMask.Length];
+            var TMP = What.Split(';');
             if (TMP.Length != SerializeMask.Length)
             {
                 return null;

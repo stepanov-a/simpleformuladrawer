@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using SimpleFormulaDrawer.interfac;
 
-namespace Core
+namespace SimpleFormulaDrawer.Core
 {
+    public static class Forms
+    {
+        public static DebugForm DF = new DebugForm();
+        //ConfigForm CF=new ConfigForm();
+    }
+
     public class DSet
         {
-            private Dictionary<int, object> Arr;
+            private readonly Dictionary<int, object> Arr;
 
             public DSet(string What)
             {
                 Arr = new Dictionary<int, object>();
                 if (What==null) {return;}
-                for (int i = 0; i < What.Length; i++)
+                for (var i = 0; i < What.Length; i++)
                 {
                     Arr.Add(i, What[i]);
                 }
@@ -22,7 +28,7 @@ namespace Core
             {
                 Arr=new Dictionary<int,object>();
                 if (What == null) { return; }
-                for (int i = 0; i < What.Length; i++)
+                for (var i = 0; i < What.Length; i++)
                 {
                     Arr.Add(i, What[i]);
                 }
@@ -42,9 +48,9 @@ namespace Core
             {
                 if (Arr.ContainsValue(What))
                 {
-                    for (int i = 0; i < Arr.Count; i++)
+                    for (var i = 0; i < Arr.Count; i++)
                     {
-                        if (Object.Equals(Arr.ElementAt(i), What))
+                        if (Equals(Arr.ElementAt(i), What))
                         {
                             Arr.Remove(i);
                             return;
@@ -72,7 +78,7 @@ namespace Core
             public TState N;
             public TState(int Code, string Description)
             {
-                this.C = new TStateDescription(Code, Description);
+                C = new TStateDescription(Code, Description);
             }
         }
 }
