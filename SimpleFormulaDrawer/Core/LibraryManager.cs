@@ -28,7 +28,7 @@ namespace Core
             if (!Is3D)
             {
                 Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double X)
+                    public static double Func" + FuncNumber.ToString() + @"(double x)
                     {
                         return " + Func + @";
                     }
@@ -37,7 +37,7 @@ namespace Core
             else
             {
                 Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double X, double Y)
+                    public static double Func" + FuncNumber.ToString() + @"(double x, double y)
                     {
                         return " + Func + @";
                     }
@@ -76,15 +76,49 @@ namespace Core
             Source=new SourceManager();
         }
 
-        public void AddFunction(string Function,bool Is3D)
+        //Returns true if Function has 3D graph
+        public bool AddFunction(string Function)
         {
-            Source.Add(ParseFunction(Function),Is3D);
+            string ParsedFunction = ParseFunction(Function);
+            bool Is3D = Check3D(ParsedFunction);
+            Source.Add(ParsedFunction, Is3D);
+            return Is3D;
         }
 
         public void CompileSource()
         {
             Source.CompleteSource();
             Compile();
+        }
+
+        private bool Check3D(string Function)
+        {
+            int State = 0;
+            DSet Operators=new DSet("+-*/()^");
+            for (int i = 0; i < Function.Length; i++)
+            {
+                switch (State)
+                {
+                    case 0:
+                        {
+                            if (Function[i] == 'y') { State = 1; }
+                            if (Function[i] == 'M') { State = 2; }
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (Operators.Exists(Function[i])) {return true;}
+                            State = 0;
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (Operators.Exists(Function[i])) { State = 0; }
+                            break;
+                        }
+                }
+            }
+            return State==1?true:false;
         }
 
         private void MakeStep(ref string Func, ref string TMP, ref int i)
@@ -198,6 +232,7 @@ namespace Core
             DSet Operators=new DSet("1234567890)");
             DSet OperatorsEx = new DSet("1234567890+-*/^");
             DSet Letters = new DSet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
+            DSet VarLetters=new DSet("xyXY");
 
             #region FirstStep
             for (int i = 0; i < Func.Length; i++)
@@ -242,7 +277,7 @@ namespace Core
                 {
                     case 0:
                         {
-                            if (Letters.Exists(Func[i]))
+                            if (Letters.Exists(Func[i]) && !VarLetters.Exists(Func[i]))
                             {
                                 TMP += "Math.";
                                 TMP += char.ToUpper(Func[i]);
