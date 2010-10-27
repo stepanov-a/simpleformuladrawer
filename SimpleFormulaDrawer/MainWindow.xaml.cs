@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Core;
+using SimpleFormulaDrawer.Core;
 using SimpleFormulaDrawer.interfac;
 
 namespace SimpleFormulaDrawer
@@ -23,24 +23,24 @@ namespace SimpleFormulaDrawer
     {
         public MainWindow()
         {
+            LogManager.Init("debug.log", "error.log");
             InitializeComponent();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            LibraryManager LMGR=new LibraryManager();
-            this.textBlock1.Text+=LMGR.AddFunction("x^x+5SIN(x)-5^x").ToString()+"\n";
-            this.textBlock1.Text += LMGR.AddFunction("x*y").ToString() + "\n";
-            this.textBlock1.Text += LMGR.AddFunction("System.Diagnostics.Process.Start(\"notepad.exe\")").ToString() + "\n";
+            var LMGR=new LibraryManager();
+            LMGR.AddFunction("x^x+5SIN(x)-5^x");
+            LMGR.AddFunction("x*y");
             LMGR.CompileSource();
-            this.textBlock1.Text += LMGR.GetSource();
+            this.textBlock1.Text = LMGR.GetSource();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            DebugForm DF=new DebugForm();
-            DF.Show();
-            DF.AddMessage("asas");
+            LogManager.WriteDebug("GAY");
+            Forms.DF.AddMessage("asas");
+            Forms.DF.Show();
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)

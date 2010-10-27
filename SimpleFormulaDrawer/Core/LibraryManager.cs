@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.CSharp;
 using System.Reflection;
 using System.CodeDom.Compiler;
 
-namespace Core
+namespace SimpleFormulaDrawer.Core
 {
     public class SourceManager
     {
         private string Text;
-        public int FuncNumber=0;
+        public int FuncNumber;
         public SourceManager()
         {
             FuncNumber = 0;
@@ -25,32 +23,36 @@ namespace Core
         }
         public void Add(string Func,bool Is3D)
         {
-            if (!Is3D)
+            if (Is3D)
             {
-                Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double x)
-                    {
-                        return " + Func + @";
-                    }
-            ";
+                Text +=
+                    string.Format(
+                        @"
+                    public static double Func{0}(double x, double y)
+                    {{
+                        return {1};
+                    }}
+            ",
+                        FuncNumber, Func);
             }
             else
             {
-                Text += @"
-                    public static double Func" + FuncNumber.ToString() + @"(double x, double y)
-                    {
-                        return " + Func + @";
-                    }
-            ";
+                Text +=
+                    string.Format(
+                        @"
+                    public static double Func{0}(double x)
+                    {{
+                        return {1};
+                    }}
+            ",
+                        FuncNumber, Func);
             }
             FuncNumber++;
         }
+
         public void CompleteSource()
         {
-            Text += @"
-                }
-            }
-            ";
+            Text += "\r\n                }\r\n            }\r\n            ";
         }
         public string GetSourceString()
         {
@@ -60,8 +62,8 @@ namespace Core
 
     public class LibraryManager
     {
-        private SourceManager Source;
-        private Dictionary<string, string> CompilerDirectives;
+        private readonly SourceManager Source;
+        private readonly Dictionary<string, string> CompilerDirectives;
         private MethodInfo[] Functions;
 
         public string GetSource()
@@ -71,16 +73,15 @@ namespace Core
 
         public LibraryManager()
         {
-            CompilerDirectives = new Dictionary<string, string>();
-            CompilerDirectives.Add("Compiler Version", "v4.0");
+            CompilerDirectives = new Dictionary<string, string> {{"Compiler Version", "v4.0"}};
             Source=new SourceManager();
         }
 
         //Returns true if Function has 3D graph
         public bool AddFunction(string Function)
         {
-            string ParsedFunction = ParseFunction(Function);
-            bool Is3D = Check3D(ParsedFunction);
+            var ParsedFunction = ParseFunction(Function);
+            var Is3D = Check3D(ParsedFunction);
             Source.Add(ParsedFunction, Is3D);
             return Is3D;
         }
@@ -91,29 +92,29 @@ namespace Core
             Compile();
         }
 
-        private bool Check3D(string Function)
+        private static bool Check3D(IEnumerable<char> Function)
         {
-            int State = 0;
-            DSet Operators=new DSet("+-*/()^");
-            for (int i = 0; i < Function.Length; i++)
+            var State = 0;
+            var Operators=new DSet("+-*/()^");
+            foreach (var t in Function)
             {
                 switch (State)
                 {
                     case 0:
                         {
-                            if (Function[i] == 'y') { State = 1; }
-                            if (Function[i] == 'M') { State = 2; }
+                            if (t == 'y') { State = 1; }
+                            if (t == 'M') { State = 2; }
                             break;
                         }
                     case 1:
                         {
-                            if (Operators.Exists(Function[i])) {return true;}
+                            if (Operators.Exists(t)) {return true;}
                             State = 0;
                             break;
                         }
                     case 2:
                         {
-                            if (Operators.Exists(Function[i])) { State = 0; }
+                            if (Operators.Exists(t)) { State = 0; }
                             break;
                         }
                 }
@@ -121,12 +122,12 @@ namespace Core
             return State==1?true:false;
         }
 
-        private void MakeStep(ref string Func, ref string TMP, ref int i)
+        private static void MakeStep(ref string Func, ref string TMP, ref int i)
         {
             int State;
             int o;
-            DSet Num = new DSet("0.123456789.");
-            DSet OPS=new DSet("+-*/");
+            var Num = new DSet("0.123456789");
+            var OPS=new DSet("+-*/");
             #region PREPOWER
             switch (Func[i-1])
             {
@@ -209,12 +210,21 @@ namespace Core
                         i++; i++;
                         while (State!=0) 
                         {
-                            if (Func[i] == '(') { State++; } else
-                            if (Func[i] == ')') { State--; } else
-                            if (Func[i]=='^') {MakeStep(ref Func,ref TMP,ref i);} else
+                            switch (Func[i])
                             {
-                                TMP+=Func[i];
-                                i++;
+                                case '(':
+                                    State++;
+                                    break;
+                                case ')':
+                                    State--;
+                                    break;
+                                case '^':
+                                    MakeStep(ref Func,ref TMP,ref i);
+                                    break;
+                                default:
+                                    TMP+=Func[i];
+                                    i++;
+                                    break;
                             }
                         }
                         TMP += ')';
@@ -224,31 +234,32 @@ namespace Core
             #endregion
         }
 
-        private string ParseFunction(string Func)
+        private static string ParseFunction(string Func)
         {
-            string TMP="";
-            int State = 0;
-            bool Need = false;
-            DSet Operators=new DSet("1234567890)");
-            DSet OperatorsEx = new DSet("1234567890+-*/^");
-            DSet Letters = new DSet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
-            DSet VarLetters=new DSet("xyXY");
+            var TMP = "";
+            var State = 0;
+            var Operators=new DSet("1234567890)");
+            var OperatorsEx = new DSet("1234567890+-*/^");
+            var Letters = new DSet("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
+            var VarLetters = new DSet("xyXY");
 
             #region FirstStep
-            for (int i = 0; i < Func.Length; i++)
+            foreach (var t in Func)
             {
-                if (Operators.Exists(Func[i])) {State=1;}
-                else if (Func[i] == '^') { State = 0; }
-                else if (State == 1 && !OperatorsEx.Exists(Func[i]))
+                if (Operators.Exists(t)) {State=1;}
+                else if (t == '^') { State = 0; }
+                else if (State == 1 && !OperatorsEx.Exists(t))
                 {
-                    if (Func[i] != ')') { State = 0; }
+                    if (t != ')') { State = 0; }
                     TMP += '*';
                 }
-                TMP += Char.ToLower(Func[i]);
+                TMP += Char.ToLower(t);
             }
             #endregion
 
             #region SecondStep
+
+            bool Need;
             while (Func.IndexOf('^') != -1)
             {
                 State = 0;
@@ -271,7 +282,7 @@ namespace Core
             #region ThirdStep
             TMP = "";
             State = 0;
-            for (int i = 0; i < Func.Length; i++)
+            for (var i = 0; i < Func.Length; i++)
             {
                 switch (State)
                 {
@@ -304,16 +315,15 @@ namespace Core
 
         private void Compile()
         {
-            CSharpCodeProvider Compiler = new CSharpCodeProvider(CompilerDirectives);
-            CompilerParameters CPR=new CompilerParameters();
-            CPR.GenerateInMemory=true;
-            CompilerResults CR=Compiler.CompileAssemblyFromSource(CPR,Source.GetSourceString());
+            var Compiler = new CSharpCodeProvider(CompilerDirectives);
+            var CPR = new CompilerParameters {GenerateInMemory = true};
+            var CR = Compiler.CompileAssemblyFromSource(CPR, Source.GetSourceString());
             Functions = new MethodInfo[Source.FuncNumber];
             if (CR.Errors.Count == 0)
             {
-                for (int i = 0; i < Source.FuncNumber; i++)
+                for (var i = 0; i < Source.FuncNumber; i++)
                 {
-                    Functions[i] = CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func" + i.ToString());
+                    Functions[i] = CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func" + i);
                 }
             }
             else
@@ -326,12 +336,12 @@ namespace Core
 
         public float[] Funcs(float x, float y)
         {
-            object[] INum = new object[2];
-            object ONum = new object();
-            float[] RES = new float[Functions.Length];
+            var INum = new object[2];
+            object ONum;
+            var RES = new float[Functions.Length];
             INum[0] = x;
             INum[1] = y;
-            for (int i = 0; i < Functions.Length; i++)
+            for (var i = 0; i < Functions.Length; i++)
             {
                 ONum = Functions[i].Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
@@ -341,11 +351,11 @@ namespace Core
 
         public float[] Funcs(float x)
         {
-            object[] INum = new object[1];
-            object ONum=new object();
-            float[] RES = new float[Functions.Length];
+            var INum = new object[1];
+            object ONum;
+            var RES = new float[Functions.Length];
             INum[0] = x;
-            for (int i = 0; i < Functions.Length; i++)
+            for (var i = 0; i < Functions.Length; i++)
             {
                 ONum = Functions[i].Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());

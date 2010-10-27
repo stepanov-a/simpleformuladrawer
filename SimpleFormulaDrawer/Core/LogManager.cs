@@ -1,57 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
-namespace Core
+namespace SimpleFormulaDrawer.Core
 {
     public static class LogManager
     {
         private class Log
         {
-            private StreamWriter File;
+            private readonly StreamWriter File;
 
-            public Log(string FileName)
+            public Log(string fileName)
             {
-                File = new StreamWriter(FileName);
+                File = new StreamWriter(fileName);
             }
 
-            ~Log()
-            {
-                File.Close();
-            }
-
-            private string Time()
+            private static string Time()
             {
                 return DateTime.Now.ToString();
             }
 
-            public void Write(string What)
+            public void Write(string what)
             {
-                string STR = string.Format("{0}||{1}", Time(), What);
+                var STR = string.Format("{0}||{1}", Time(), what);
                 File.WriteLine(STR);
-                WorldStates.AddState(3, STR);
+                WorldStates.AddState(2, STR);
                 File.Flush();
             }
         }
         private static Log Debug;
         private static Log Error;
-        public static void init(string DebugName,string ErrorName)
+        public static void Init(string debugName,string errorName)
         {
-            Debug = new Log(DebugName);
-            Error=new Log(ErrorName);
+            Debug = new Log(debugName);
+            Error=new Log(errorName);
             Directory.CreateDirectory("Logs");
             Directory.SetCurrentDirectory("Logs");
         }
-        public static void WriteDebug(string What)
+        public static void WriteDebug(string what)
         {
-            Debug.Write(What);
+            Debug.Write(what);
         }
-        public static void WriteError(string What)
+        public static void WriteError(string what)
         {
-            Error.Write(What);
-            Debug.Write(What);
+            Error.Write(what);
+            Debug.Write(what);
         }
     }
 }
