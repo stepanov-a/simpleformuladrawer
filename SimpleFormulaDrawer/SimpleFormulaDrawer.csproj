@@ -105,6 +105,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="interfac\GraphForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="interfac\MainForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,6 +127,12 @@
     <Compile Include="Core\WorldStates.cs" />
     <Compile Include="interfac\DebugForm.xaml.cs">
       <DependentUpon>DebugForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="interfac\GraphForm.xaml.cs">
+      <DependentUpon>GraphForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="interfac\MainForm.xaml.cs">
+      <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

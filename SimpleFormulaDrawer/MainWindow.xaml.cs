@@ -42,5 +42,17 @@ namespace SimpleFormulaDrawer
             DF.Show();
             DF.AddMessage("asas");
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            GraphForm Graph = new GraphForm();
+            Graph.Show();
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            MainForm Main = new MainForm();
+            Main.Show();
+        }
     }
 }
