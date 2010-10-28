@@ -7,7 +7,7 @@ namespace SimpleFormulaDrawer.Core
 {
     public static class Forms
     {
-        public static DebugForm DF = new DebugForm();
+        public static readonly DebugForm DF = new DebugForm();
         //ConfigForm CF=new ConfigForm();
     }
 
@@ -61,8 +61,8 @@ namespace SimpleFormulaDrawer.Core
         
     public class TStateDescription
         {
-            public int Code;
-            public string Description;
+            public readonly int Code;
+            public readonly string Description;
             public TStateDescription(int Code, string Description)
             {
                 this.Code = Code;
@@ -72,7 +72,7 @@ namespace SimpleFormulaDrawer.Core
 
     public class TState
         {
-            public TStateDescription C;
+            public readonly TStateDescription C;
             public TState N;
             public TState(int Code, string Description)
             {

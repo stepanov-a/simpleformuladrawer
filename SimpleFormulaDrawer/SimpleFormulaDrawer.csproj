@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\ConfigurationSystem.cs" />
     <Compile Include="Core\Definitions.cs" />
     <Compile Include="Core\LibraryManager.cs" />
     <Compile Include="Core\LogManager.cs" />
