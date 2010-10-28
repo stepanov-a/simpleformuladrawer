@@ -1,0 +1,6 @@
+﻿<Window x:Class="SimpleFormulaDrawer.interfac.MainForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainForm" Height="449" Width="149" Initialized="Window_Initialized">
+    <Grid></Grid>
+</Window>
