@@ -22,7 +22,7 @@
         <Button Content="Add" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
         <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="1" Background="#23000000" Grid.ColumnSpan="2" />
         <Slider Grid.Row="6" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" />
-        <TextBox Grid.Row="3" HorizontalAlignment="Stretch" Name="XminTextbox" VerticalAlignment="Stretch" Text="" HorizontalContentAlignment="Center" FontSize="14" DataContext="{Binding}" ToolTip="Xmin" />
+        <TextBox Grid.Row="3" HorizontalAlignment="Stretch" Name="XminTextbox" VerticalAlignment="Stretch" Text="xmin" HorizontalContentAlignment="Center" FontSize="14" />
         <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Xmax" HorizontalContentAlignment="Center" FontSize="14" />
         <TextBox Grid.Row="4" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="ymin" HorizontalContentAlignment="Center" FontSize="14" />
         <TextBox Grid.Row="4" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="ymax" HorizontalContentAlignment="Center" FontSize="14" />

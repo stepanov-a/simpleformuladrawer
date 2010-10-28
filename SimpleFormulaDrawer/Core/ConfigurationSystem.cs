@@ -7,11 +7,11 @@ using System.Windows;
 
 namespace SimpleFormulaDrawer.Core
 {
-    static class ConfigurationSystem
+    public static class ConfigurationSystem
     {
         private readonly static StreamReader ConfigFile;
         private readonly static Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
-        
+
         static ConfigurationSystem()
         {
             string Temp;
@@ -21,40 +21,41 @@ namespace SimpleFormulaDrawer.Core
             {
                 ConfigFile = new StreamReader("config.conf");
             }
-            catch (Exception E)
+            catch
             {
-                MR = MessageBox.Show(E.Message);
-                App.Current.Shutdown();
+                MR = MessageBox.Show("Нет конфигурационного файла. Будут использованы значения по умолчанию.");
             }
-
-            while (!ConfigFile.EndOfStream)
+            if (ConfigFile != null)
             {
-                Temp=ConfigFile.ReadLine();
-                if (Temp == null)
+                while (!ConfigFile.EndOfStream)
                 {
-                    MR = MessageBox.Show("Ошибка чтения конфигурационного файла");
-                }
-                else
-                {
-                    if (Temp.Split('=').Length == 2)
+                    Temp = ConfigFile.ReadLine();
+                    if (Temp == null)
                     {
-                        Params = Temp.Split('=');
-                        Params[0] = Params[0].Trim();
-                        Params[1] = Params[1].Trim();
-                        ConfigParameters.Add(Params[0], Params[1]);
+                        MR = MessageBox.Show("Ошибка чтения конфигурационного файла");
                     }
                     else
                     {
-                        MR = MessageBox.Show(
-                            string.Format(
-                                "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
-                                Params[0]));
+                        if (Temp.Split('=').Length == 2)
+                        {
+                            Params = Temp.Split('=');
+                            Params[0] = Params[0].Trim();
+                            Params[1] = Params[1].Trim();
+                            ConfigParameters.Add(Params[0], Params[1]);
+                        }
+                        else
+                        {
+                            MR = MessageBox.Show(
+                                string.Format(
+                                    "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
+                                    Params[0]));
+                        }
                     }
                 }
             }
         }
         
-        static T ReadConfig<T>(string What)
+        public static T ReadConfig<T>(string What)
         {
             object TMP;
             string OUTVAR;
@@ -67,6 +68,21 @@ namespace SimpleFormulaDrawer.Core
             {
                 return default(T);
             }
+        }
+
+        public static T ReadConfig<T>(string What,T Def)
+        {
+            object TMP;
+            string OUTVAR;
+            if (ConfigParameters.TryGetValue(What, out OUTVAR))
+            {
+                TMP = OUTVAR;
+                return (T)TMP;
+            }
+            else
+            {
+                return Def;
+            }            
         }
     }
 }
