@@ -31,5 +31,24 @@ namespace SimpleFormulaDrawer.interfac
             this.Top = 5;
             this.Height = Hsize-this.Top;
         }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+  /*          this.progressBar1.Width = this.Width;
+            this.listBox1.Width = this.Width;
+            double heiff = (double) (this.Height/3);
+            heiff = Math.Round(heiff);
+            int H = (int) heiff;
+            this.listBox1.Height = H;*/
+          //  this.progressBar1.top=this.Top; 
+
+        }
+
+        private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+       
     }
 }
