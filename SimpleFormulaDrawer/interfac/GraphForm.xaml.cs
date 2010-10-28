@@ -30,8 +30,8 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            this.image1.Width = this.Width;
-            this.image1.Height = this.Height;
+            image1.Width = Width;
+            image1.Height = Height;
         }
     }
 }

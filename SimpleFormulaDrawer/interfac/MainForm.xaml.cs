@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms; //для скрина
+
 namespace SimpleFormulaDrawer.interfac
 {
     /// <summary>
@@ -25,11 +26,11 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            int Wsize= System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width;//ширина 
-            int Hsize = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
-            this.Left = 5;
-            this.Top = 5;
-            this.Height = Hsize-this.Top;
+            var Wsize= Screen.AllScreens[0].WorkingArea.Width;//ширина 
+            var Hsize = Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
+            Left = 5;
+            Top = 5;
+            Height = Hsize-Top;
         }
     }
 }
