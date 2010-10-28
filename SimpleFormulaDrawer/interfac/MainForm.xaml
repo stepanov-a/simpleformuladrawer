@@ -1,17 +1,30 @@
 ﻿<Window x:Class="SimpleFormulaDrawer.interfac.MainForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainForm" Height="449" Width="149" Initialized="Window_Initialized" SizeChanged="Window_SizeChanged" MinWidth="150" MinHeight="620">
+        Title="MainForm" Height="620" Width="149" Initialized="Window_Initialized" SizeChanged="Window_SizeChanged" MinWidth="150" MinHeight="620">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="36*" />
-            <RowDefinition Height="34*" />
-            <RowDefinition Height="185*" />
-            <RowDefinition Height="326*" />
+        <Grid.ColumnDefinitions> <!--Столбцы-->
+            <ColumnDefinition Width="64*" />
+            <ColumnDefinition Width="64*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><!--Строки-->
+            <RowDefinition Height="22*" /><!--ButtonAdd-->
+            <RowDefinition Height="34*" /><!--TextBox-->
+            <RowDefinition Height="185*" /> <!--Listox-->
+            <RowDefinition Height="23*" />
+            <RowDefinition Height="23*" /><!--Edit's-->
+            <RowDefinition Height="251*" />
+            <RowDefinition Height="24*" />
+            <RowDefinition Height="19*" />
         </Grid.RowDefinitions>
-        <ListBox Height="185" HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Top" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="2" Background="#23000000" />
-        <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="3" Margin="0,0,1,0" />
-        <Button Content="Add" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="1" Background="#23000000" />
+        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="2" Background="#23000000" Grid.ColumnSpan="2" />
+        <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="7" Maximum="100" Grid.ColumnSpan="2" />
+        <Button Content="Add" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
+        <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="1" Background="#23000000" Grid.ColumnSpan="2" />
+        <Slider Grid.Row="6" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" />
+        <TextBox Grid.Row="3" HorizontalAlignment="Stretch" Name="XminTextbox" VerticalAlignment="Stretch" Text="xmin" HorizontalContentAlignment="Center" FontSize="14" />
+        <TextBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Xmax" HorizontalContentAlignment="Center" FontSize="14" />
+        <TextBox Grid.Row="4" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="ymin" HorizontalContentAlignment="Center" FontSize="14" />
+        <TextBox Grid.Row="4" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="ymax" HorizontalContentAlignment="Center" FontSize="14" />
     </Grid>
 </Window>
