@@ -33,7 +33,7 @@ namespace SimpleFormulaDrawer
             LMGR.AddFunction("x^x+5SIN(x)-5^x");
             LMGR.AddFunction("x*y");
             LMGR.CompileSource();
-            this.textBlock1.Text = LMGR.GetSource();
+            textBlock1.Text = LMGR.GetSource();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -45,13 +45,13 @@ namespace SimpleFormulaDrawer
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            GraphForm Graph = new GraphForm();
+            var Graph = new GraphForm();
             Graph.Show();
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            MainForm Main = new MainForm();
+            var Main = new MainForm();
             Main.Show();
         }
     }
