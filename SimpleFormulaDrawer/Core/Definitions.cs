@@ -50,11 +50,9 @@ namespace SimpleFormulaDrawer.Core
                 {
                     for (var i = 0; i < Arr.Count; i++)
                     {
-                        if (Equals(Arr.ElementAt(i), What))
-                        {
-                            Arr.Remove(i);
-                            return;
-                        }
+                        if (!Equals(Arr.ElementAt(i), What)) continue;
+                        Arr.Remove(i);
+                        return;
                     }
                 }
                 return;
