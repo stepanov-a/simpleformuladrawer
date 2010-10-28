@@ -26,11 +26,12 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            var Wsize= Screen.AllScreens[0].WorkingArea.Width;//ширина 
+            var Wsize=(int) Screen.AllScreens[0].WorkingArea.Width /5;//ширина 
             var Hsize = Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
             Left = 5;
             Top = 5;
             Height = Hsize-Top;
+            Width = Wsize;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
