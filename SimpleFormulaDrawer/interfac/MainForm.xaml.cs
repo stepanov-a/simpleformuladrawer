@@ -23,6 +23,12 @@ namespace SimpleFormulaDrawer.interfac
     /// </summary>
     public partial class MainForm : Window
     {
+
+        public class GraphArray
+        {
+        
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,8 +51,8 @@ namespace SimpleFormulaDrawer.interfac
             double heiff = (double) (this.Height/3);
             heiff = Math.Round(heiff);
             int H = (int) heiff;
-            this.listBox1.Height = H;*/
-          //  this.progressBar1.top=this.Top; 
+            this.listBox1.Height = H;
+          //  this.progressBar1.top=this.Top; */
 
         }
 
@@ -72,5 +78,18 @@ namespace SimpleFormulaDrawer.interfac
                 (sender as TextBox).Text = (sender as TextBox).Tag.ToString();
             }
         }
+
+        private void AddFormul_Click(object sender, RoutedEventArgs e)
+        {
+            string formule = this.FormulText.Text;
+            this.FormulListBox1.Items.Add(formule);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+   
 }
