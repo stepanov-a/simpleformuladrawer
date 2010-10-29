@@ -11,55 +11,54 @@ namespace SimpleFormulaDrawer.Core
     {
         private static StreamReader ConfigFile;
         private static readonly Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
-        private static readonly string ConfigFileName =/* Application.Current.StartupUri.AbsolutePath+*/"config.conf";
+        private static readonly string ConfigFileName = "config.conf";
 
         static ConfigurationSystem()
         {
             ReloadConfig();
         }
-        
+
         public static void ReloadConfig()
         {
             string Temp;
-            var Params = new string[] { };
+            var Params = new string[] {};
             try
             {
                 ConfigFile = new StreamReader(ConfigFileName);
+                while (!ConfigFile.EndOfStream)
+                {
+                    Temp = ConfigFile.ReadLine();
+                    if (Temp == null)
+                    {
+                        MessageBox.Show("Ошибка чтения конфигурационного файла");
+                    }
+                    else
+                    {
+                        if (Temp[0] != '#')
+                        {
+                            if (Temp.Split('=').Length == 2)
+                            {
+                                Params = Temp.Split('=');
+                                Params[0] = Params[0].Trim();
+                                Params[1] = Params[1].Trim();
+                                ConfigParameters.Add(Params[0], Params[1]);
+                            }
+                            else
+                            {
+                                MessageBox.Show(
+                                    string.Format(
+                                        "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
+                                        Params[0]));
+                            }
+                        }
+                    }
+                }
+                ConfigFile.Close();
             }
             catch
             {
                 MessageBox.Show("Нет конфигурационного файла. Будут использованы значения по умолчанию.");
             }
-            if (ConfigFile == null) return;
-            while (!ConfigFile.EndOfStream)
-            {
-                Temp = ConfigFile.ReadLine();
-                if (Temp == null)
-                {
-                    MessageBox.Show("Ошибка чтения конфигурационного файла");
-                }
-                else
-                {
-                    if (Temp[0] != '#')
-                    {
-                        if (Temp.Split('=').Length == 2)
-                        {
-                            Params = Temp.Split('=');
-                            Params[0] = Params[0].Trim();
-                            Params[1] = Params[1].Trim();
-                            ConfigParameters.Add(Params[0], Params[1]);
-                        }
-                        else
-                        {
-                            MessageBox.Show(
-                                string.Format(
-                                    "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
-                                    Params[0]));
-                        }
-                    }
-                }
-            }
-            ConfigFile.Close();
         }
 
         public static T ReadConfig<T>(string What)
@@ -85,12 +84,14 @@ namespace SimpleFormulaDrawer.Core
                 TMP = OUTVAR;
                 return (T)TMP;
             }
+            ConfigParameters.Add(What, Def.ToString());
+            WriteConfigFile();
             return Def;
         }
 
         private static void WriteConfigFile()
         {
-            var Config = new StreamWriter(ConfigFileName);
+            var Config = new StreamWriter(ConfigFileName,false);
             try
             {
                 Config.WriteLine("#Configuration");
@@ -100,7 +101,6 @@ namespace SimpleFormulaDrawer.Core
                 MessageBox.Show(
                         @"Невозможно обновить конфигурационный файл 
  Проверьте, есть ли доступ на чтение к папке программы.");
-                return;
             }
 
             foreach (var Item in ConfigParameters)
