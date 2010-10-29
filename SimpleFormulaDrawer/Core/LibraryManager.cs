@@ -86,7 +86,10 @@ namespace SimpleFormulaDrawer.Core
             var TSource = new SourceManager();
             TSource.Add(Function,Check3D(Function));
             TSource.CompleteSource();
-            return 0;
+            var Compiler = new CSharpCodeProvider(CompilerDirectives);
+            var CPR = new CompilerParameters { GenerateInMemory = true };
+            var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
+            return CR.Errors.Count == 0 ? 0 : CR.Errors[0].Column;
         }
 
         public void CompileSource()
