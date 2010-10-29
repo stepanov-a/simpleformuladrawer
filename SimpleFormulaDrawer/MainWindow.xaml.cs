@@ -23,7 +23,11 @@ namespace SimpleFormulaDrawer
     {
         public MainWindow()
         {
+            var Main = new MainForm();
             LogManager.Init("debug.log", "error.log");
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            Application.Current.MainWindow = Main;
+            Main.Show();
             InitializeComponent();
         }
 
@@ -34,7 +38,7 @@ namespace SimpleFormulaDrawer
             LMGR.AddFunction("x*y");
             LMGR.CompileSource();
             textBlock1.Text = LMGR.GetSource();
-            var MR=MessageBox.Show(ConfigurationSystem.ReadConfig("CONFIG_FORM_THEME", "Default"));
+            //var MR=MessageBox.Show(ConfigurationSystem.ReadConfig("CONFIG_FORM_THEME", "Default"));
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -48,12 +52,6 @@ namespace SimpleFormulaDrawer
         {
             var Graph = new GraphForm();
             Graph.Show();
-        }
-
-        private void button4_Click(object sender, RoutedEventArgs e)
-        {
-            var Main = new MainForm();
-            Main.Show();
         }
     }
 }

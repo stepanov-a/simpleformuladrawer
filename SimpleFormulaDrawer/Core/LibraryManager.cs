@@ -18,8 +18,7 @@ namespace SimpleFormulaDrawer.Core
             {
                 public class Functions
                 {
-                    static void Main() {}
-            ";
+                    static void Main() {}";
         }
         public void Add(string Func,bool Is3D)
         {
@@ -27,13 +26,11 @@ namespace SimpleFormulaDrawer.Core
             {
                 Text +=
                     string.Format(
-                        @"
+                        @"  
                     public static double Func{0}(double x, double y)
                     {{
                         return {1};
-                    }}
-            ",
-                        FuncNumber, Func);
+                    }}",FuncNumber, Func);
             }
             else
             {
@@ -43,9 +40,7 @@ namespace SimpleFormulaDrawer.Core
                     public static double Func{0}(double x)
                     {{
                         return {1};
-                    }}
-            ",
-                        FuncNumber, Func);
+                    }}",FuncNumber, Func);
             }
             FuncNumber++;
         }
