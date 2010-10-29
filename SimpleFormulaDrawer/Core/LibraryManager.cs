@@ -81,6 +81,14 @@ namespace SimpleFormulaDrawer.Core
             return Is3D;
         }
 
+        public int CheckError(string Function)
+        {
+            var TSource = new SourceManager();
+            TSource.Add(Function,Check3D(Function));
+            TSource.CompleteSource();
+            return 0;
+        }
+
         public void CompileSource()
         {
             Source.CompleteSource();
