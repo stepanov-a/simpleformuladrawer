@@ -58,6 +58,7 @@ namespace SimpleFormulaDrawer.Core
                     }
                 }
             }
+            ConfigFile.Close();
         }
 
         public static T ReadConfig<T>(string What)
@@ -98,12 +99,14 @@ namespace SimpleFormulaDrawer.Core
                 MessageBox.Show(
                         @"Невозможно обновить конфигурационный файл 
  Проверьте, есть ли доступ на чтение к папке программы.");
+                return;
             }
 
             foreach (var Item in ConfigParameters)
             {
                 Config.WriteLine(Item.Key,'=',Item.Value);
             }
+            Config.Close();
             return;
         }
     }

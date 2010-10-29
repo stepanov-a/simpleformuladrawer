@@ -2,30 +2,6 @@
 
 namespace SimpleFormulaDrawer.Core
 {
-    static class WorldStatesParser
-    {
-        private static readonly bool Work = true;
-        static WorldStatesParser()
-        {
-            int State;
-            string Param;
-            while (Work)
-            {
-                State = WorldStates.GetState().Code;
-                if (State == -1) { continue; }
-                Param = WorldStates.GetState().Description;
-                switch (State)
-                {
-                    case -2:
-                        {
-                            Work = false;
-                            break;
-                        }
-                }
-            }
-        }
-    }
-
     static class WorldStates
     {
         private static TState SStart;
