@@ -30,10 +30,10 @@ namespace SimpleFormulaDrawer.Core
         private static Log Error;
         public static void Init(string debugName,string errorName)
         {
-            Debug = new Log(debugName);
-            Error=new Log(errorName);
             Directory.CreateDirectory("Logs");
             Directory.SetCurrentDirectory("Logs");
+            Debug = new Log(debugName);
+            Error=new Log(errorName);
         }
         public static void WriteDebug(string what)
         {
