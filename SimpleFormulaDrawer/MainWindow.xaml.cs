@@ -38,7 +38,6 @@ namespace SimpleFormulaDrawer
             LMGR.AddFunction("x*y");
             LMGR.CompileSource();
             textBlock1.Text = LMGR.GetSource();
-            //var MR=MessageBox.Show(ConfigurationSystem.ReadConfig("CONFIG_FORM_THEME", "Default"));
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -52,6 +51,11 @@ namespace SimpleFormulaDrawer
         {
             var Graph = new GraphForm();
             Graph.Show();
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(ConfigurationSystem.ReadConfig("CONFIG_FORM_THEME", "Default"));
         }
     }
 }

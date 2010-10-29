@@ -11,7 +11,7 @@ namespace SimpleFormulaDrawer.Core
 
             public Log(string fileName)
             {
-                File = new StreamWriter(fileName);
+                File = new StreamWriter(fileName) {AutoFlush = true};
             }
 
             private static string Time()
@@ -24,7 +24,6 @@ namespace SimpleFormulaDrawer.Core
                 var STR = string.Format("{0}||{1}", Time(), what);
                 File.WriteLine(STR);
                 WorldStates.AddState(2, STR);
-                File.Flush();
             }
         }
         private static Log Debug;

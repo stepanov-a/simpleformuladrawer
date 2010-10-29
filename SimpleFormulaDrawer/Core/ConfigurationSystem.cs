@@ -11,6 +11,7 @@ namespace SimpleFormulaDrawer.Core
     {
         private static StreamReader ConfigFile;
         private static readonly Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
+        private static readonly string ConfigFileName =/* Application.Current.StartupUri.AbsolutePath+*/"config.conf";
 
         static ConfigurationSystem()
         {
@@ -23,7 +24,7 @@ namespace SimpleFormulaDrawer.Core
             var Params = new string[] { };
             try
             {
-                ConfigFile = new StreamReader("config.conf");
+                ConfigFile = new StreamReader(ConfigFileName);
             }
             catch
             {
@@ -70,6 +71,8 @@ namespace SimpleFormulaDrawer.Core
                 TMP = OUTVAR;
                 return (T)TMP;
             }
+            ConfigParameters.Add(What, "");
+            WriteConfigFile();
             return default(T);
         }
 
@@ -82,14 +85,12 @@ namespace SimpleFormulaDrawer.Core
                 TMP = OUTVAR;
                 return (T)TMP;
             }
-            ConfigParameters.Add(What,(Def as object).ToString());
-            WriteConfigFile();
             return Def;
         }
 
         private static void WriteConfigFile()
         {
-            var Config = new StreamWriter("config.conf");
+            var Config = new StreamWriter(ConfigFileName);
             try
             {
                 Config.WriteLine("#Configuration");
@@ -104,7 +105,7 @@ namespace SimpleFormulaDrawer.Core
 
             foreach (var Item in ConfigParameters)
             {
-                Config.WriteLine(Item.Key,'=',Item.Value);
+                Config.WriteLine(String.Format("{0}={1}",Item.Key,Item.Value));
             }
             Config.Close();
             return;
