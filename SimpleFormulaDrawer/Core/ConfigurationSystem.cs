@@ -11,7 +11,6 @@ namespace SimpleFormulaDrawer.Core
     {
         private static StreamReader ConfigFile;
         private static readonly Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
-        private static MessageBoxResult MR;
 
         static ConfigurationSystem()
         {
@@ -28,7 +27,7 @@ namespace SimpleFormulaDrawer.Core
             }
             catch
             {
-                MR = MessageBox.Show("Нет конфигурационного файла. Будут использованы значения по умолчанию.");
+                MessageBox.Show("Нет конфигурационного файла. Будут использованы значения по умолчанию.");
             }
             if (ConfigFile != null)
             {
@@ -37,7 +36,7 @@ namespace SimpleFormulaDrawer.Core
                     Temp = ConfigFile.ReadLine();
                     if (Temp == null)
                     {
-                        MR = MessageBox.Show("Ошибка чтения конфигурационного файла");
+                        MessageBox.Show("Ошибка чтения конфигурационного файла");
                     }
                     else
                     {
@@ -52,7 +51,7 @@ namespace SimpleFormulaDrawer.Core
                             }
                             else
                             {
-                                MR = MessageBox.Show(
+                                MessageBox.Show(
                                     string.Format(
                                         "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
                                         Params[0]));
@@ -72,10 +71,7 @@ namespace SimpleFormulaDrawer.Core
                 TMP = OUTVAR;
                 return (T)TMP;
             }
-            else
-            {
-                return default(T);
-            }
+            return default(T);
         }
 
         public static T ReadConfig<T>(string What,T Def)
@@ -87,12 +83,9 @@ namespace SimpleFormulaDrawer.Core
                 TMP = OUTVAR;
                 return (T)TMP;
             }
-            else
-            {
-                ConfigParameters.Add(What,(Def as object).ToString());
-                WriteConfigFile();
-                return Def;
-            }            
+            ConfigParameters.Add(What,(Def as object).ToString());
+            WriteConfigFile();
+            return Def;
         }
 
         private static void WriteConfigFile()
@@ -104,7 +97,7 @@ namespace SimpleFormulaDrawer.Core
             }
             catch (Exception)
             {
-                MR =MessageBox.Show(
+                MessageBox.Show(
                         @"Невозможно обновить конфигурационный файл 
  Проверьте, есть ли доступ на чтение к папке программы.");
             }
