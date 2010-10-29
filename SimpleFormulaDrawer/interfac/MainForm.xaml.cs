@@ -72,5 +72,12 @@ namespace SimpleFormulaDrawer.interfac
                 (sender as TextBox).Text = (sender as TextBox).Tag.ToString();
             }
         }
+
+        private void AddFormul_Click(object sender, RoutedEventArgs e)
+        {
+            string str = this.FormulText.Text;
+            this.FormulListBox1.Items.Add(str);
+          
+        }
     }
 }
