@@ -24,6 +24,7 @@ namespace SimpleFormulaDrawer.Core
                     Arr.Add(i, What[i]);
                 }
             }
+
             public DSet(params object[] What)
             {
                 Arr=new Dictionary<int,object>();
@@ -33,6 +34,7 @@ namespace SimpleFormulaDrawer.Core
                     Arr.Add(i, What[i]);
                 }
             }
+
             public bool Exists(object What)
             {
                 return Arr.ContainsValue(What);

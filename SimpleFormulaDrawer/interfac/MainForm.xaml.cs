@@ -30,7 +30,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            var Wsize=(int) Screen.AllScreens[0].WorkingArea.Width /5;//ширина 
+            var Wsize= Screen.AllScreens[0].WorkingArea.Width /5;//ширина 
             var Hsize = Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
             Left = 5;
             Top = 5;
@@ -57,6 +57,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            if ((sender as TextBox) == null) return;
             if ((sender as TextBox).Text == (sender as TextBox).Tag.ToString())
             {
                 (sender as TextBox).Text = "";
@@ -65,6 +66,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            if ((sender as TextBox) == null) return;
             if ((sender as TextBox).Text == "")
             {
                 (sender as TextBox).Text = (sender as TextBox).Tag.ToString();

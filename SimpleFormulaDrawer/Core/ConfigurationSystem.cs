@@ -29,33 +29,31 @@ namespace SimpleFormulaDrawer.Core
             {
                 MessageBox.Show("Нет конфигурационного файла. Будут использованы значения по умолчанию.");
             }
-            if (ConfigFile != null)
+            if (ConfigFile == null) return;
+            while (!ConfigFile.EndOfStream)
             {
-                while (!ConfigFile.EndOfStream)
+                Temp = ConfigFile.ReadLine();
+                if (Temp == null)
                 {
-                    Temp = ConfigFile.ReadLine();
-                    if (Temp == null)
+                    MessageBox.Show("Ошибка чтения конфигурационного файла");
+                }
+                else
+                {
+                    if (Temp[0] != '#')
                     {
-                        MessageBox.Show("Ошибка чтения конфигурационного файла");
-                    }
-                    else
-                    {
-                        if (Temp[0] != '#')
+                        if (Temp.Split('=').Length == 2)
                         {
-                            if (Temp.Split('=').Length == 2)
-                            {
-                                Params = Temp.Split('=');
-                                Params[0] = Params[0].Trim();
-                                Params[1] = Params[1].Trim();
-                                ConfigParameters.Add(Params[0], Params[1]);
-                            }
-                            else
-                            {
-                                MessageBox.Show(
-                                    string.Format(
-                                        "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
-                                        Params[0]));
-                            }
+                            Params = Temp.Split('=');
+                            Params[0] = Params[0].Trim();
+                            Params[1] = Params[1].Trim();
+                            ConfigParameters.Add(Params[0], Params[1]);
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                string.Format(
+                                    "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
+                                    Params[0]));
                         }
                     }
                 }
