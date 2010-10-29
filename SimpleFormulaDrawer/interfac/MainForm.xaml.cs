@@ -10,7 +10,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Forms; //для скрина
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
+using TextBox = System.Windows.Controls.TextBox;
+
+//для скрина
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -51,6 +55,20 @@ namespace SimpleFormulaDrawer.interfac
 
         }
 
-       
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as TextBox).Text == (sender as TextBox).Tag.ToString())
+            {
+                (sender as TextBox).Text = "";
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as TextBox).Text == "")
+            {
+                (sender as TextBox).Text = (sender as TextBox).Tag.ToString();
+            }
+        }
     }
 }
