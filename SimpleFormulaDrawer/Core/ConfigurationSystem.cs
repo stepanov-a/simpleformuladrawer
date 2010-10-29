@@ -9,14 +9,19 @@ namespace SimpleFormulaDrawer.Core
 {
     public static class ConfigurationSystem
     {
-        private readonly static StreamReader ConfigFile;
-        private readonly static Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
+        private static StreamReader ConfigFile;
+        private static readonly Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
+        private static MessageBoxResult MR;
 
         static ConfigurationSystem()
         {
+            ReloadConfig();
+        }
+        
+        public static void ReloadConfig()
+        {
             string Temp;
-            var Params = new string[] {};
-            MessageBoxResult MR;
+            var Params = new string[] { };
             try
             {
                 ConfigFile = new StreamReader("config.conf");
@@ -36,25 +41,28 @@ namespace SimpleFormulaDrawer.Core
                     }
                     else
                     {
-                        if (Temp.Split('=').Length == 2)
+                        if (Temp[0] != '#')
                         {
-                            Params = Temp.Split('=');
-                            Params[0] = Params[0].Trim();
-                            Params[1] = Params[1].Trim();
-                            ConfigParameters.Add(Params[0], Params[1]);
-                        }
-                        else
-                        {
-                            MR = MessageBox.Show(
-                                string.Format(
-                                    "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
-                                    Params[0]));
+                            if (Temp.Split('=').Length == 2)
+                            {
+                                Params = Temp.Split('=');
+                                Params[0] = Params[0].Trim();
+                                Params[1] = Params[1].Trim();
+                                ConfigParameters.Add(Params[0], Params[1]);
+                            }
+                            else
+                            {
+                                MR = MessageBox.Show(
+                                    string.Format(
+                                        "Параметр {0} прочитан неверно. Возможно, конфигурационный файл испорчен.",
+                                        Params[0]));
+                            }
                         }
                     }
                 }
             }
         }
-        
+
         public static T ReadConfig<T>(string What)
         {
             object TMP;
@@ -81,8 +89,31 @@ namespace SimpleFormulaDrawer.Core
             }
             else
             {
+                ConfigParameters.Add(What,(Def as object).ToString());
+                WriteConfigFile();
                 return Def;
             }            
+        }
+
+        private static void WriteConfigFile()
+        {
+            var Config = new StreamWriter("config.conf");
+            try
+            {
+                Config.WriteLine("#Configuration");
+            }
+            catch (Exception)
+            {
+                MR =MessageBox.Show(
+                        @"Невозможно обновить конфигурационный файл 
+ Проверьте, есть ли доступ на чтение к папке программы.");
+            }
+
+            foreach (var Item in ConfigParameters)
+            {
+                Config.WriteLine(Item.Key,'=',Item.Value);
+            }
+            return;
         }
     }
 }
