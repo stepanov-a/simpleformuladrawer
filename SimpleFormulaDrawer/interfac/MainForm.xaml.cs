@@ -26,8 +26,6 @@ namespace SimpleFormulaDrawer.interfac
     /// </summary>
     /// 
     /// 
-    /// 
-    /// 
     public partial class MainForm : Window
     {
         private Pictogramm[] ArrPictogramm;
@@ -43,18 +41,27 @@ namespace SimpleFormulaDrawer.interfac
             rndBlue = (byte)rnd.Next(255);
             rndGreen = (byte)rnd.Next(255);
             NewItemm.Foreground = new SolidColorBrush(Color.FromRgb(rndRed, rndGreen, rndBlue));
+            byte Arndred,Arndblue,Arndgreen;
+            int tmp;
+            tmp = rndRed - 255;
+            Arndred=(byte)Math.Abs(tmp);
+            tmp = rndRed - 255;
+            Arndblue = (byte)Math.Abs(tmp);
+
+            tmp = rndRed - 255;
+            Arndgreen = (byte)Math.Abs(tmp);
+            NewItemm.Background = new SolidColorBrush(Color.FromRgb(ArndRed, ArndGreen, ArndBlue));
             NewItemm.Content = "fdsfs";
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
             Boolean FLAG;
             double countxmin, countxmax, countymin, countymax;
-          
             countxmin = -1;
             countxmax = 1;
             countymin = -1;
             countymax = 1;
             this.CountPictogramm = 0;
-            //        this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
+            //   this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
         }
      
         //добавляет в массив из пиктограммок новый элемент.
@@ -143,7 +150,7 @@ namespace SimpleFormulaDrawer.interfac
             //диапазон построения
 
         //constructor
-            public Pictogramm(Double xmin, double ymin, double xmax, double ymax, System.Windows.Controls.ListBox formullist)
+   public Pictogramm(Double xmin, double ymin, double xmax, double ymax, System.Windows.Controls.ListBox formullist)
         { //конструктор забивает в форму диапазон построения. Если диапазон изменился-форма пересоздается (все равно все перерисовывать)
             this.xmin = xmin;
             this.xmax = xmax;
