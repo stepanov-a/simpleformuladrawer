@@ -75,8 +75,14 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddFormul_Click(object sender, RoutedEventArgs e)
         {
-            string str = this.FormulText.Text;
-            this.FormulListBox1.Items.Add(str);
+            var TBI = new ListBoxItem();
+            TBI.Foreground = new SolidColorBrush(Color.FromRgb(127, 127, 127));
+            TBI.Content = FormulText.Text;
+
+            if (TBI.Content.ToString()!= "Formul")
+            {
+                this.FormulListBox1.Items.Add(TBI);
+            }
           
         }
     }
