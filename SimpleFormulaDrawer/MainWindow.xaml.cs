@@ -47,11 +47,7 @@ namespace SimpleFormulaDrawer
             Forms.DF.Show();
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-            var Graph = new GraphForm();
-            Graph.Show();
-        }
+   
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {

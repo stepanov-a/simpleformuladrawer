@@ -38,17 +38,6 @@ namespace SimpleFormulaDrawer.interfac
             Width = Wsize;
         }
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-  /*          this.progressBar1.Width = this.Width;
-            this.listBox1.Width = this.Width;
-            double heiff = (double) (this.Height/3);
-            heiff = Math.Round(heiff);
-            int H = (int) heiff;
-            this.listBox1.Height = H;*/
-          //  this.progressBar1.top=this.Top; 
-
-        }
 
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -78,6 +67,16 @@ namespace SimpleFormulaDrawer.interfac
             string str = this.FormulText.Text;
             this.FormulListBox1.Items.Add(str);
           
+        }
+
+        private void ButtNewGraphClick(object sender, RoutedEventArgs e)
+        {
+            GraphForm Graph = new GraphForm();
+            Graph.Top = this.Top;
+            Graph.Left = this.Left + this.Width+5; //позиция нвоой граф.формы слева =сумме начальной позиции  главной формы и ее ширины +5 -отступ
+            Graph.Height = this.Height; //высота графа равна высоте MainForm
+            Graph.Width = Screen.AllScreens[0].WorkingArea.Width - this.Width - this.Left-5;//Ширина Графа =ширине экрана за вычетом положения и размера главной формы
+            Graph.Show();
         }
     }
 }

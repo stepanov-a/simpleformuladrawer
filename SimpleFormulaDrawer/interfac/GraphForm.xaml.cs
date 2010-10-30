@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -30,8 +31,13 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            image1.Width = Width;
-            image1.Height = Height;
+            image1.Width = this.Width;
+            image1.Height = this.Height;
+        }
+
+        private void Window_Initialized(object sender, EventArgs e)
+        {
+
         }
     }
 }
