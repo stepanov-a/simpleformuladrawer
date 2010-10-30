@@ -41,16 +41,14 @@ namespace SimpleFormulaDrawer.interfac
             rndBlue = (byte)rnd.Next(255);
             rndGreen = (byte)rnd.Next(255);
             NewItemm.Foreground = new SolidColorBrush(Color.FromRgb(rndRed, rndGreen, rndBlue));
-            byte Arndred,Arndblue,Arndgreen;
             int tmp;
             tmp = rndRed - 255;
-            Arndred=(byte)Math.Abs(tmp);
+            byte Arndred = (byte)Math.Abs(tmp);
             tmp = rndRed - 255;
-            Arndblue = (byte)Math.Abs(tmp);
-
+            byte Arndblue = (byte)Math.Abs(tmp);
             tmp = rndRed - 255;
-            Arndgreen = (byte)Math.Abs(tmp);
-            NewItemm.Background = new SolidColorBrush(Color.FromRgb(ArndRed, ArndGreen, ArndBlue));
+            byte Arndgreen = (byte)Math.Abs(tmp);
+            NewItemm.Background = new SolidColorBrush(Color.FromRgb(Arndred, Arndgreen, Arndblue));
             NewItemm.Content = "fdsfs";
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
