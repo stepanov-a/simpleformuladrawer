@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ListBox = System.Windows.Controls.ListBox;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -19,8 +20,10 @@ namespace SimpleFormulaDrawer.interfac
     /// </summary>
     public partial class GraphForm : Window
     {
+      
         public GraphForm()
         {
+
             InitializeComponent();
         }
 
