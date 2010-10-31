@@ -39,12 +39,12 @@
         </Grid.RowDefinitions>
       
         <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="2" Grid.ColumnSpan="2">
-            <ListBox.Background>
+       <!--     <ListBox.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF9AC9FF" Offset="0.979" />
-                    <GradientStop Color="#4BD1E3E3" Offset="0" />
+                    <GradientStop Color="#009AC9FF" Offset="1" />
+                    <GradientStop Color="#00D1E3E3" Offset="0" />
                 </LinearGradientBrush>
-            </ListBox.Background>
+            </ListBox.Background> -->
         </ListBox>
         <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="9" Maximum="100" Grid.ColumnSpan="2" />
         <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2" />
