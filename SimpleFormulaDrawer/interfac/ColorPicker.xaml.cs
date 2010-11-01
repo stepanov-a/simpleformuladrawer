@@ -24,11 +24,14 @@ namespace SimpleFormulaDrawer.Core
             InitializeComponent();
         }
 
-        public Color SelectedColor;
+        public Color SelectedColor=Colors.Black;
+
+        public Color InvertedSelectedColor=Colors.White;
 
         private void SetColor(double OffsetX,double OffsetY)
         {
             var CurColor=new Color();
+            MessageBox.Show(OffsetX.ToString() + "||||" + OffsetY.ToString());
             if (OffsetX < 0.428571428571429)
             {
                 CurColor.R = (byte) (255*(0.428571428571429 - OffsetX)/3*7);
@@ -55,16 +58,15 @@ namespace SimpleFormulaDrawer.Core
             {
                 CurColor.B = (byte)(255 * (1-OffsetX) / 2 * 7);
             }
-
             CurColor=Color.Multiply(CurColor, (float) OffsetY);
             SelectedColor = CurColor;
-            this.label1.Background = new SolidColorBrush(CurColor);
+            InvertedSelectedColor = Color.FromRgb((byte) (255-CurColor.R), (byte) (255-CurColor.G), (byte) (255-CurColor.B));
         }
 
         private void SpectroCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var P = e.GetPosition(SpectroCanvas);
-            SetColor(SpectroCanvas.Width/P.X, SpectroCanvas.Height/P.Y);
+            var P = e.GetPosition(this);
+            SetColor(P.X/ActualWidth, P.Y/ActualHeight);
         }
     }
 }
