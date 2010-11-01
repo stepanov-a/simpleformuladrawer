@@ -58,7 +58,7 @@ namespace SimpleFormulaDrawer.Core
     public class LibraryManager
     {
         private readonly SourceManager Source;
-        private readonly Dictionary<string, string> CompilerDirectives;
+        private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
         private MethodInfo[] Functions;
 
         public string GetSource()
@@ -68,7 +68,6 @@ namespace SimpleFormulaDrawer.Core
 
         public LibraryManager()
         {
-            CompilerDirectives = new Dictionary<string, string> {{"Compiler Version", "v4.0"}};
             Source=new SourceManager();
         }
 
@@ -81,7 +80,7 @@ namespace SimpleFormulaDrawer.Core
             return Is3D;
         }
 
-        public int CheckError(string Function)
+        public static CompilerErrorCollection CheckError(string Function)
         {
             var TSource = new SourceManager();
             TSource.Add(Function,Check3D(Function));
@@ -89,7 +88,7 @@ namespace SimpleFormulaDrawer.Core
             var Compiler = new CSharpCodeProvider(CompilerDirectives);
             var CPR = new CompilerParameters { GenerateInMemory = true };
             var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
-            return CR.Errors.Count == 0 ? 0 : CR.Errors[0].Column;
+            return CR.Errors;
         }
 
         public void CompileSource()

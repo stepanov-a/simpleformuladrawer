@@ -28,45 +28,52 @@ namespace SimpleFormulaDrawer.Core
 
         public Color InvertedSelectedColor=Colors.White;
 
+        private static Color InvertColor(Color What)
+        {
+            var R = (byte) (255-What.R);
+            var G = (byte) (255-What.G);
+            var B = (byte) (255-What.B);
+            return Color.FromRgb(R,G,B);
+        }
+
         private void SetColor(double OffsetX,double OffsetY)
         {
-            var CurColor=new Color();
-            MessageBox.Show(OffsetX.ToString() + "||||" + OffsetY.ToString());
-            if (OffsetX < 0.428571428571429)
-            {
-                CurColor.R = (byte) (255*(0.428571428571429 - OffsetX)/3*7);
-            }
-            if (OffsetX > 0.714285714285714)
-            {
-                CurColor.R = (byte)(255 * (OffsetX - 0.714285714285714) / 2 * 7);
-            }
+            byte R=0, G=0, B=0;
 
-            if (OffsetX <= 0.428571428571429)
+            if (OffsetX>=0 && OffsetX<=0.333333333333)
             {
-                CurColor.G = (byte)(255 * (OffsetX) / 3 * 7);
+                R = (byte) (255*OffsetX*3);
+                G = (byte) (255*(1/3 - OffsetX)*3);
             }
-            if (OffsetX > 0.428571428571429 && OffsetX < 0.714285714285714)
+            if (OffsetX > 0.333333333333 && OffsetX <= 0.66666666666)
             {
-                CurColor.G = (byte)(255 * (0.714285714285714-OffsetX) / 2 * 7);
+                G = (byte)(255 * (2 / 3 - OffsetX) * 3);
+                B = (byte)(255 * (OffsetX - 1 / 3) * 3);
             }
-
-            if (OffsetX <= 0.714285714285714 && OffsetX > 0.428571428571429)
+            if (OffsetX > 0.66666666666 && OffsetX <= 1)
             {
-                CurColor.B = (byte)(255 * (OffsetX - 0.428571428571429) / 2 * 7);
+                R = (byte) (255*(1 - OffsetX)*3);
+                B = (byte) (255*(OffsetX - 2/3)*3);
             }
-            if (OffsetX > 0.714285714285714)
-            {
-                CurColor.B = (byte)(255 * (1-OffsetX) / 2 * 7);
-            }
+            Color CurColor = Color.FromRgb(R, G, B);
             CurColor=Color.Multiply(CurColor, (float) OffsetY);
             SelectedColor = CurColor;
-            InvertedSelectedColor = Color.FromRgb((byte) (255-CurColor.R), (byte) (255-CurColor.G), (byte) (255-CurColor.B));
+            InvertedSelectedColor = InvertColor(CurColor);
         }
 
         private void SpectroCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var P = e.GetPosition(this);
             SetColor(P.X/ActualWidth, P.Y/ActualHeight);
+        }
+
+        private void SpectroCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var P = e.GetPosition(this);
+                SetColor(P.X/ActualWidth, P.Y/ActualHeight);
+            }
         }
     }
 }
