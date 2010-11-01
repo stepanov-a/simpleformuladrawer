@@ -18,7 +18,7 @@
                 <GradientStop Color="Red" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
-        <Canvas HorizontalAlignment="Stretch" Name="SpectroCanvas" VerticalAlignment="Stretch" Opacity="1" Margin="0,0,0,30" MouseDown="SpectroCanvas_MouseDown">
+        <Canvas HorizontalAlignment="Stretch" Name="SpectroCanvas" VerticalAlignment="Stretch" Opacity="1" MouseDown="SpectroCanvas_MouseDown">
             <Canvas.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="White" Offset="0" />
@@ -27,6 +27,6 @@
                 </LinearGradientBrush>
             </Canvas.Background>
         </Canvas>
-        <Label Content="Выбранный цвет" HorizontalAlignment="Stretch" Margin="0,178,0,0" Name="label1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" />
+        <Label Content="Цвет" Name="label1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" FlowDirection="LeftToRight" HorizontalAlignment="Right" Width="41" Margin="0,0,-93,0" />
     </Grid>
 </UserControl>

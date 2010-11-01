@@ -108,23 +108,9 @@ namespace SimpleFormulaDrawer.interfac
         private void AddFormul_Click(object sender, RoutedEventArgs e)
         {
             ListBoxItem NewItemm = new ListBoxItem();
-            System.Random rnd = new Random();
-            byte rndRed, rndBlue, rndGreen;
-            rndRed = (byte)rnd.Next(255);
-            rndBlue = (byte)rnd.Next(255);
-            rndGreen = (byte)rnd.Next(255);
-            NewItemm.Foreground = new SolidColorBrush(Color.FromRgb(rndRed, rndGreen, rndBlue));
+            NewItemm.Foreground = new SolidColorBrush(ColorPicker1.SelectedColor);
             NewItemm.Content = FormulText.Text;
-            int tmp;
-            tmp = rndRed - 255;
-            byte Arndblue = (byte)Math.Abs(tmp);
-            tmp = rndRed - 255;
-            byte Arndred = (byte)Math.Abs(tmp);
-            tmp = rndRed - 255;
-            Arndblue = (byte)Math.Abs(tmp);
-            tmp = rndRed - 255;
-            byte Arndgreen = (byte)Math.Abs(tmp);
-            NewItemm.Background = new SolidColorBrush(Color.FromRgb(Arndred, Arndgreen, Arndblue));
+            NewItemm.Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor);
             if (NewItemm.Content.ToString() != "Formul") //тут так же нужна проверка строки на то, что она-фукция
             {
                 this.FormulListBox1.Items.Add(NewItemm);

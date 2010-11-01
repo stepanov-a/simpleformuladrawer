@@ -49,14 +49,14 @@
             </ListBox.Background> -->
         </ListBox>
         <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="9" Maximum="100" Grid.ColumnSpan="2" />
-        <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2" />
+        <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,0,2" />
         <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="3" Background="#23000000" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" Text="Formul" VerticalContentAlignment="Center" Tag="Formul" Grid.ColumnSpan="2" Grid.RowSpan="1" />
-        <Core:ColorPicker HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Core:ColorPicker x:Name="ColorPicker1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4" Grid.ColumnSpan="2" />
         <Slider Grid.Row="8" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" />
-        <TextBox Grid.Row="5" Name="XminTextbox" VerticalAlignment="Stretch" Text="Minimum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum x" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum x" />
-        <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Maximum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum x" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum x" />
-        <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" />
-        <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
+        <TextBox Grid.Row="6" Name="XminTextbox" VerticalAlignment="Stretch" Text="Minimum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum x" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum x" />
+        <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Maximum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum x" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum x" />
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" />
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
         <Button Content="New Frame" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" />
 </Grid>
 </Window>
