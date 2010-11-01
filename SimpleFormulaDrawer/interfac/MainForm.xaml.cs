@@ -10,14 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Forms;
-using Button = System.Windows.Controls.Button;
-//using ListBox = System.Windows.Forms.ListBox;
-using listbox = System.Windows.Controls.ListBox;
-using MessageBox = System.Windows.MessageBox;
-using TextBox = System.Windows.Controls.TextBox;
-
-//для скрина
+using SimpleFormulaDrawer.Core;
+using System.CodeDom.Compiler;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -35,20 +29,8 @@ namespace SimpleFormulaDrawer.interfac
         {
             InitializeComponent();
             ListBoxItem NewItemm = new ListBoxItem();
-            System.Random rnd = new Random();
-            byte rndRed, rndBlue, rndGreen;
-            rndRed = (byte)rnd.Next(255);
-            rndBlue = (byte)rnd.Next(255);
-            rndGreen = (byte)rnd.Next(255);
-            NewItemm.Foreground = new SolidColorBrush(Color.FromRgb(rndRed, rndGreen, rndBlue));
-            int tmp;
-            tmp = rndRed - 255;
-            byte Arndred = (byte)Math.Abs(tmp);
-            tmp = rndRed - 255;
-            byte Arndblue = (byte)Math.Abs(tmp);
-            tmp = rndRed - 255;
-            byte Arndgreen = (byte)Math.Abs(tmp);
-            NewItemm.Background = new SolidColorBrush(Color.FromRgb(Arndred, Arndgreen, Arndblue));
+            NewItemm.Foreground = new SolidColorBrush(ColorPicker1.SelectedColor);
+            NewItemm.Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor);
             NewItemm.Content = "fdsfs";
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
@@ -73,8 +55,8 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            int Wsize = Screen.AllScreens[0].WorkingArea.Width / 5;//ширина 
-            int Hsize = Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
+            int Wsize = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 5;//ширина 
+            int Hsize = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
             this.Left = 5;
             this.Top = 5;
             this.Height = Hsize - this.Top;
@@ -107,15 +89,23 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddFormul_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem NewItemm = new ListBoxItem();
-            NewItemm.Foreground = new SolidColorBrush(ColorPicker1.SelectedColor);
-            NewItemm.Content = FormulText.Text;
-            NewItemm.Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor);
-            if (NewItemm.Content.ToString() != "Formul") //тут так же нужна проверка строки на то, что она-фукция
+            ListBoxItem NewItemm = new ListBoxItem
+                                       {
+                                           Foreground = new SolidColorBrush(ColorPicker1.SelectedColor),
+                                           Content = FormulText.Text,
+                                           Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor)
+                                       };
+            if (NewItemm.Content.ToString() == "Formula") return;
+            var Errors = LibraryManager.CheckError(NewItemm.Content.ToString());
+            if (Errors.Count==0)
             {
                 this.FormulListBox1.Items.Add(NewItemm);
             }
-
+            else
+            {
+                MessageBox.Show("Ошибка");
+                //Тут надо на самом деле подсвечивать начало чего то неправильного и показывать рядом тултип с описанием ошибки.
+            }
         }
 
         private void ButtNewGraphClick(object sender, RoutedEventArgs e)
