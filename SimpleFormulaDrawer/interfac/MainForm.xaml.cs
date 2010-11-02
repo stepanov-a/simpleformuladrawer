@@ -28,14 +28,7 @@ namespace SimpleFormulaDrawer.interfac
         public MainForm()
         {
             InitializeComponent();
-            ListBoxItem NewItemm = new ListBoxItem
-                                       {
-                                           Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
-                                           Background = new SolidColorBrush(ColorPicker1.SelectedColor),
-                                           Content = "Placehoder"
-                                       };
             this.FormulListBox1.Items.Clear();
-            this.FormulListBox1.Items.Add(NewItemm);
             Boolean FLAG;
             double countxmin = -1;
             double countxmax = 1;
