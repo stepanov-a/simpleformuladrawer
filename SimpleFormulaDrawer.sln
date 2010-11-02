@@ -7,7 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 	ProjectSection(SolutionItems) = preProject
 		Resources\SimpleFormulaDrawer.ico = Resources\SimpleFormulaDrawer.ico
 		Resources\THANKS = Resources\THANKS
-		Resources\WorldStatesList.txt = Resources\WorldStatesList.txt
 	EndProjectSection
 EndProject
 Global
