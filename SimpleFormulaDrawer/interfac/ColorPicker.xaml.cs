@@ -55,7 +55,7 @@ namespace SimpleFormulaDrawer.Core
                 R = (byte) (255*(1 - OffsetX)*3);
                 B = (byte) (255*(OffsetX - 2/3)*3);
             }
-            Color CurColor = Color.FromRgb(R, G, B);
+            var CurColor = Color.FromRgb(R, G, B);
             CurColor=Color.Multiply(CurColor, (float) OffsetY);
             SelectedColor = CurColor;
             InvertedSelectedColor = InvertColor(CurColor);
@@ -69,11 +69,9 @@ namespace SimpleFormulaDrawer.Core
 
         private void SpectroCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var P = e.GetPosition(this);
-                SetColor(P.X/ActualWidth, P.Y/ActualHeight);
-            }
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+            var P = e.GetPosition(this);
+            SetColor(P.X/ActualWidth, P.Y/ActualHeight);
         }
     }
 }

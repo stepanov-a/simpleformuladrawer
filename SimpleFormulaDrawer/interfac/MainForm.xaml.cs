@@ -28,10 +28,12 @@ namespace SimpleFormulaDrawer.interfac
         public MainForm()
         {
             InitializeComponent();
-            ListBoxItem NewItemm = new ListBoxItem();
-            NewItemm.Foreground = new SolidColorBrush(ColorPicker1.SelectedColor);
-            NewItemm.Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor);
-            NewItemm.Content = "fdsfs";
+            ListBoxItem NewItemm = new ListBoxItem
+                                       {
+                                           Foreground = new SolidColorBrush(ColorPicker1.SelectedColor),
+                                           Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
+                                           Content = "fdsfs"
+                                       };
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
             Boolean FLAG;
@@ -115,35 +117,6 @@ namespace SimpleFormulaDrawer.interfac
             Graph.Height = this.Height; //высота графа равна высоте MainForm
             Graph.Width = Screen.AllScreens[0].WorkingArea.Width - this.Width - this.Left - 5;//Ширина Графа =ширине экрана за вычетом положения и размера главной формы
             Graph.Show();*/
-      }
+        }
     }
-
-    //Пиктограмма
-    public class Pictogramm : Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
-    {
-
-        private System.Windows.Controls.ListBox FornulList; //передается конструктором, но может быть изменен.
-        public GraphForm GraphForm; //форма, с графиком
-            //диапазон построения
-            private Double xmin;
-            private double ymin;
-            private double xmax;
-            private double ymax;
-            //диапазон построения
-
-        //constructor
-   public Pictogramm(Double xmin, double ymin, double xmax, double ymax, System.Windows.Controls.ListBox formullist)
-        { //конструктор забивает в форму диапазон построения. Если диапазон изменился-форма пересоздается (все равно все перерисовывать)
-            this.xmin = xmin;
-            this.xmax = xmax;
-            this.ymin = ymin;
-            this.ymax = ymax;
-            this.FornulList = formullist;
-            this.GraphForm = new GraphForm();
-            this.GraphForm.Show();
-        }//End Pictogramm Constructor
-
-    }//end Pictogramm Class
-
-
 }
