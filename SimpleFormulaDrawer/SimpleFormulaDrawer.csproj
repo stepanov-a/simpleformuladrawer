@@ -132,7 +132,6 @@
     <Compile Include="Core\Definitions.cs" />
     <Compile Include="Core\LibraryManager.cs" />
     <Compile Include="Core\LogManager.cs" />
-    <Compile Include="Core\WorldStates.cs" />
     <Compile Include="interfac\DebugForm.xaml.cs">
       <DependentUpon>DebugForm.xaml</DependentUpon>
     </Compile>

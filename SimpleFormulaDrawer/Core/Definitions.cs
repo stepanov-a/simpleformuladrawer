@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 using SimpleFormulaDrawer.interfac;
+using System.Windows.Shapes;
 
 namespace SimpleFormulaDrawer.Core
 {
@@ -61,24 +63,29 @@ namespace SimpleFormulaDrawer.Core
             }
         }
         
-    public class TStateDescription
+    public static class Crest
+    {
+        private readonly static Line[] toRet=new Line[4];
+        private readonly static Brush Strk=new SolidColorBrush(Colors.White);
+        private readonly static Line[] DCrest = new []
+                                                   {
+                                                       new Line {X1 = -10, X2 = -2, Y1 = 0, Y2 = 0, Stroke = Strk},
+                                                       new Line {X1 = 0, X2 = 0, Y1 = 10, Y2 = 2, Stroke = Strk},
+                                                       new Line {X1 = 10, X2 = 2, Y1 = 0, Y2 = 0, Stroke = Strk},
+                                                       new Line {X1 = 0, X2 = 0, Y1 = -10, Y2 = -2, Stroke = Strk}
+                                                   };
+        private static Line MoveLine(Line What,double x,double y)
         {
-            public readonly int Code;
-            public readonly string Description;
-            public TStateDescription(int Code, string Description)
-            {
-                this.Code = Code;
-                this.Description = Description;
-            }
+            return new Line { X1 = What.X1 + x, X2 = What.X2 + x, Y1 = What.Y1 + y, Y2 = What.Y2 + y, Stroke = Strk };
         }
 
-    public class TState
+        public static Line[] CrestToPoint(double x,double y)
         {
-            public readonly TStateDescription C;
-            public TState N;
-            public TState(int Code, string Description)
-            {
-                C = new TStateDescription(Code, Description);
-            }
+            toRet[0] = MoveLine(DCrest[0],x,y);
+            toRet[1] = MoveLine(DCrest[1], x, y);
+            toRet[2] = MoveLine(DCrest[2], x, y);
+            toRet[3] = MoveLine(DCrest[3], x, y);
+            return toRet;
         }
+    }
 }

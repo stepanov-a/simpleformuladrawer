@@ -333,7 +333,6 @@ namespace SimpleFormulaDrawer.Core
             }
             else
             {
-                WorldStates.AddState(2, "Formula Error");
                 Functions = new MethodInfo[0];
             }
             return;
