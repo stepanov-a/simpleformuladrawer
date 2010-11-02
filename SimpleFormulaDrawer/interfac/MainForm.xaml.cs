@@ -35,11 +35,10 @@ namespace SimpleFormulaDrawer.interfac
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
             Boolean FLAG;
-            double countxmin, countxmax, countymin, countymax;
-            countxmin = -1;
-            countxmax = 1;
-            countymin = -1;
-            countymax = 1;
+            double countxmin = -1;
+            double countxmax = 1;
+            double countymin = -1;
+            double countymax = 1;
             this.CountPictogramm = 0;
             //   this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
         }

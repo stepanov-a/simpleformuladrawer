@@ -11,7 +11,7 @@ namespace SimpleFormulaDrawer.Core
     {
         private static StreamReader ConfigFile;
         private static readonly Dictionary<string,string> ConfigParameters = new Dictionary<string, string>();
-        private static readonly string ConfigFileName = "config.conf";
+        private const string ConfigFileName = "config.conf";
 
         static ConfigurationSystem()
         {
