@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace SimpleFormulaDrawer.Core
 {
@@ -15,9 +16,12 @@ namespace SimpleFormulaDrawer.Core
             InitializeComponent();
         }
 
+
         public Color SelectedColor=Colors.Black; //DefaultSelectedColor is Black
 
         public Color InvertedSelectedColor=Colors.White; //Inversion of SelectedColor
+
+        private Line[] TCrest;
 
         private static Color InvertColor(Color What) //Inversion function
         {
@@ -30,6 +34,16 @@ namespace SimpleFormulaDrawer.Core
         private static string ColorToString(Color What) //For debug function
         {
             return What.R.ToString() + '|' + What.G + '|' + What.B;
+        }
+
+        private void DrawCrest(double x, double y)
+        {
+            TCrest =Crest.CrestToPoint(x,y);
+            this.SpectroCanvas.Children.Clear();
+            this.SpectroCanvas.Children.Add(TCrest[0]);
+            this.SpectroCanvas.Children.Add(TCrest[1]);
+            this.SpectroCanvas.Children.Add(TCrest[2]);
+            this.SpectroCanvas.Children.Add(TCrest[3]);
         }
 
         private void SetColor(double OffsetX,double OffsetY) //We can't get color under mouse. so we'll calcuate it!
@@ -65,6 +79,7 @@ namespace SimpleFormulaDrawer.Core
         { //OnMouseDownEvent. We need to set colors on clicked.
             var P = e.GetPosition(this);
             SetColor(P.X/ActualWidth, P.Y/ActualHeight);
+            DrawCrest(P.X,P.Y);
         }
 
         private void SpectroCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -72,6 +87,7 @@ namespace SimpleFormulaDrawer.Core
             if (e.LeftButton != MouseButtonState.Pressed) return;
             var P = e.GetPosition(this);
             SetColor(P.X/ActualWidth, P.Y/ActualHeight);
+            DrawCrest(P.X,P.Y);
         }
     }
 }

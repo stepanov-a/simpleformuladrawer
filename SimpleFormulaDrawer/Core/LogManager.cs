@@ -23,7 +23,6 @@ namespace SimpleFormulaDrawer.Core
             {
                 var STR = string.Format("{0}||{1}", Time(), what);
                 File.WriteLine(STR);
-                WorldStates.AddState(2, STR);
             }
         }
         private static Log Debug;
