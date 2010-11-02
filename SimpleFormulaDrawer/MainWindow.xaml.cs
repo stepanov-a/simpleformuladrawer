@@ -28,6 +28,8 @@ namespace SimpleFormulaDrawer
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             Application.Current.MainWindow = Main;
             Main.Show();
+            this.Hide();
+            Forms.StartupWindow = this;
             InitializeComponent();
         }
 
@@ -43,7 +45,6 @@ namespace SimpleFormulaDrawer
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             LogManager.WriteDebug("GAY");
-            Forms.DF.AddMessage("asas");
             Forms.DF.Show();
         }
 

@@ -142,6 +142,7 @@
     <Compile Include="interfac\MainForm.xaml.cs">
       <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="interfac\Pictogramm.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

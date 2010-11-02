@@ -23,16 +23,19 @@ namespace SimpleFormulaDrawer.interfac
             InitializeComponent();
         }
 
+        public void AddMessage(string What, Color CLR)
+        {
+            var NewItem=new ListBoxItem
+                            {
+                                Content = What, Background = new SolidColorBrush(CLR)
+                            };
+            listBox1.Items.Add(NewItem);
+        }
+
         public void AddMessage(string What)
-        {//метод добавления нового элемента. кэп.
+        {
             listBox1.Items.Add(What);
+            listBox1.SelectedIndex = listBox1.Items.Count;
         }
-
-        private void Window_Initialized(object sender, EventArgs e)
-        {//Размеры текстбокса совпадают с размерами формы. кэп.
-            listBox1.Height=Height;
-            listBox1.Width=Width;
-        }
-
     }
 }

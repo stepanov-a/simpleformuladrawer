@@ -7,8 +7,8 @@ namespace SimpleFormulaDrawer.Core
 {
     public static class Forms
     {
+        public static MainWindow StartupWindow;
         public static readonly DebugForm DF = new DebugForm();
-        //ConfigForm CF=new ConfigForm();
     }
 
     public class DSet
