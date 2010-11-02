@@ -1,0 +1,8 @@
+Really. Why we need worldstates in WPF Application?
+
+We need it in WinForms app, because it's one-threaded and we must process messages without interface lagging.
+In WPF are 2 threads: for UI and for Core, so we won't get lag on UI during processing messages.
+
+But I want to centralize processing of all messages like Logging and Settings.
+
+I'll discuss it with NeoFBI.
