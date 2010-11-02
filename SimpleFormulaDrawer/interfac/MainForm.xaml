@@ -57,5 +57,6 @@
         <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" />
         <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
         <Button Content="New Frame" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" />
-</Grid>
+        <Button Content="DebugFrame" Grid.Column="1" Height="18" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="Debugbutton" VerticalAlignment="Stretch" Width="87" Click="Debugbutton_Click" />
+    </Grid>
 </Window>

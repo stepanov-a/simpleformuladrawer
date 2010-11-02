@@ -30,9 +30,9 @@ namespace SimpleFormulaDrawer.interfac
             InitializeComponent();
             ListBoxItem NewItemm = new ListBoxItem
                                        {
-                                           Foreground = new SolidColorBrush(ColorPicker1.SelectedColor),
-                                           Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
-                                           Content = "fdsfs"
+                                           Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
+                                           Background = new SolidColorBrush(ColorPicker1.SelectedColor),
+                                           Content = "Placehoder"
                                        };
             this.FormulListBox1.Items.Clear();
             this.FormulListBox1.Items.Add(NewItemm);
@@ -92,9 +92,9 @@ namespace SimpleFormulaDrawer.interfac
         {
             ListBoxItem NewItemm = new ListBoxItem
                                        {
-                                           Foreground = new SolidColorBrush(ColorPicker1.SelectedColor),
+                                           Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
                                            Content = FormulText.Text,
-                                           Background = new SolidColorBrush(ColorPicker1.InvertedSelectedColor)
+                                           Background = new SolidColorBrush(ColorPicker1.SelectedColor)
                                        };
             if (NewItemm.Content.ToString() == "Formula") return;
             var Errors = LibraryManager.CheckError(NewItemm.Content.ToString());
@@ -117,6 +117,11 @@ namespace SimpleFormulaDrawer.interfac
             Graph.Height = this.Height; //высота графа равна высоте MainForm
             Graph.Width = Screen.AllScreens[0].WorkingArea.Width - this.Width - this.Left - 5;//Ширина Графа =ширине экрана за вычетом положения и размера главной формы
             Graph.Show();*/
+        }
+
+        private void Debugbutton_Click(object sender, RoutedEventArgs e)
+        {
+            Forms.StartupWindow.Show();
         }
     }
 }

@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="211" d:DesignWidth="357">
     <Grid>
-        <Grid.Background>
+        <Grid.Background> <!-- Because we need 2 gradients: Left to Right and UpDown -->
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                 <GradientStop Color="Red" Offset="0" />
                 <GradientStop Color="Green" Offset="0.33333333" />
