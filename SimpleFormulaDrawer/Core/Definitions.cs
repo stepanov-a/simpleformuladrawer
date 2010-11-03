@@ -65,14 +65,14 @@ namespace SimpleFormulaDrawer.Core
         
     public static class Crest
     {
-        private readonly static Line[] toRet=new Line[4];
+        private readonly static Line[] ToRet=new Line[4];
         private readonly static Brush Strk=new SolidColorBrush(Colors.White);
         private readonly static Line[] DCrest = new []
                                                    {
                                                        new Line {X1 = -10, X2 = -2, Y1 = 0, Y2 = 0, Stroke = Strk},
                                                        new Line {X1 = 0, X2 = 0, Y1 = 10, Y2 = 2, Stroke = Strk},
-                                                       new Line {X1 = 10, X2 = 2, Y1 = 0, Y2 = 0, Stroke = Strk},
-                                                       new Line {X1 = 0, X2 = 0, Y1 = -10, Y2 = -2, Stroke = Strk}
+                                                       new Line {X1 = 2, X2 = 10, Y1 = 0, Y2 = 0, Stroke = Strk},
+                                                       new Line {X1 = 0, X2 = 0, Y1 = -2, Y2 = -10, Stroke = Strk}
                                                    };
         private static Line MoveLine(Line What,double x,double y)
         {
@@ -81,11 +81,11 @@ namespace SimpleFormulaDrawer.Core
 
         public static Line[] CrestToPoint(double x,double y)
         {
-            toRet[0] = MoveLine(DCrest[0],x,y);
-            toRet[1] = MoveLine(DCrest[1], x, y);
-            toRet[2] = MoveLine(DCrest[2], x, y);
-            toRet[3] = MoveLine(DCrest[3], x, y);
-            return toRet;
+            ToRet[0] = MoveLine(DCrest[0],x,y);
+            ToRet[1] = MoveLine(DCrest[1], x, y);
+            ToRet[2] = MoveLine(DCrest[2], x, y);
+            ToRet[3] = MoveLine(DCrest[3], x, y);
+            return ToRet;
         }
     }
 }
