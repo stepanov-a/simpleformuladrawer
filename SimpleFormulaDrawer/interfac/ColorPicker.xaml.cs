@@ -14,6 +14,7 @@ namespace SimpleFormulaDrawer.Core
         public ColorPicker() //Constructor
         {
             InitializeComponent();
+            DrawCrest(0,0);
         }
 
 
@@ -38,12 +39,23 @@ namespace SimpleFormulaDrawer.Core
 
         private void DrawCrest(double x, double y)
         {
-            TCrest =Crest.CrestToPoint(x,y);
-            this.SpectroCanvas.Children.Clear();
-            this.SpectroCanvas.Children.Add(TCrest[0]);
-            this.SpectroCanvas.Children.Add(TCrest[1]);
-            this.SpectroCanvas.Children.Add(TCrest[2]);
-            this.SpectroCanvas.Children.Add(TCrest[3]);
+            if (this.SpectroCanvas.Children.Count == 4)
+            {
+                var TRSF = new TranslateTransform(x, y);
+                this.SpectroCanvas.Children[0].RenderTransform = TRSF;
+                this.SpectroCanvas.Children[1].RenderTransform = TRSF;
+                this.SpectroCanvas.Children[2].RenderTransform = TRSF;
+                this.SpectroCanvas.Children[3].RenderTransform = TRSF;
+            }
+            else
+            {
+                TCrest = Crest.CrestToPoint(0,0);
+                this.SpectroCanvas.Children.Clear();
+                this.SpectroCanvas.Children.Add(TCrest[0]);
+                this.SpectroCanvas.Children.Add(TCrest[1]);
+                this.SpectroCanvas.Children.Add(TCrest[2]);
+                this.SpectroCanvas.Children.Add(TCrest[3]);
+            }
         }
 
         private void SetColor(double OffsetX,double OffsetY) //We can't get color under mouse. so we'll calcuate it!
