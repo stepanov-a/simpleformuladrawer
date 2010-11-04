@@ -8,47 +8,39 @@ namespace SimpleFormulaDrawer.Core
 {
     public class SourceManager
     {
-        private string Text;
-        public int FuncNumber;
-        public SourceManager()
+        private readonly string Text;
+        public SourceManager(string Func,bool Is3D)
         {
-            FuncNumber = 0;
             Text=@"using System;
             namespace FunctionDll
             {
                 public class Functions
                 {
                     static void Main() {}";
-        }
-        public void Add(string Func,bool Is3D)
-        {
+
             if (Is3D)
             {
                 Text +=
                     string.Format(
                         @"  
-                    public static double Func{0}(double x, double y)
+                    public static double Func(double x, double y)
                     {{
-                        return {1};
-                    }}",FuncNumber, Func);
+                        return {0};
+                    }}",Func);
             }
             else
             {
                 Text +=
                     string.Format(
                         @"
-                    public static double Func{0}(double x)
+                    public static double Func(double x)
                     {{
-                        return {1};
-                    }}",FuncNumber, Func);
+                        return {0};
+                    }}",Func);
             }
-            FuncNumber++;
-        }
-
-        public void CompleteSource()
-        {
             Text += "\r\n                }\r\n            }\r\n            ";
         }
+
         public string GetSourceString()
         {
             return Text;
@@ -57,44 +49,30 @@ namespace SimpleFormulaDrawer.Core
 
     public class LibraryManager
     {
-        private readonly SourceManager Source;
         private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
-        private MethodInfo[] Functions;
-
-        public string GetSource()
-        {
-            return Source.GetSourceString();
-        }
+        private readonly Dictionary<string,MethodInfo> Functions;
 
         public LibraryManager()
         {
-            Source=new SourceManager();
+            Functions=new Dictionary<string, MethodInfo>();
         }
 
-        //Returns true if Function has 3D graph
-        public bool AddFunction(string Function)
+        public FunctionParameters AddFunction(string Function)
         {
             var ParsedFunction = ParseFunction(Function);
             var Is3D = Check3D(ParsedFunction);
-            Source.Add(ParsedFunction, Is3D);
-            return Is3D;
-        }
-
-        public static CompilerErrorCollection CheckError(string Function)
-        {
-            var TSource = new SourceManager();
-            TSource.Add(Function,Check3D(Function));
-            TSource.CompleteSource();
+            var TSource = new SourceManager(ParsedFunction, Is3D);
             var Compiler = new CSharpCodeProvider(CompilerDirectives);
             var CPR = new CompilerParameters { GenerateInMemory = true };
             var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
-            return CR.Errors;
-        }
-
-        public void CompileSource()
-        {
-            Source.CompleteSource();
-            Compile();
+            if (CR.Errors.Count==0)
+            {
+                Functions.Add(Function,CR.CompiledAssembly.GetType("FunctionDLL.Functions").GetMethod("Func"));
+            }
+            FunctionParameters toRet;
+            toRet.Errors = CR.Errors;
+            toRet.Is3D = Is3D;
+            return toRet;
         }
 
         private static bool Check3D(IEnumerable<char> Function)
@@ -318,37 +296,19 @@ namespace SimpleFormulaDrawer.Core
             return TMP;
         }
 
-        private void Compile()
-        {
-            var Compiler = new CSharpCodeProvider(CompilerDirectives);
-            var CPR = new CompilerParameters {GenerateInMemory = true};
-            var CR = Compiler.CompileAssemblyFromSource(CPR, Source.GetSourceString());
-            Functions = new MethodInfo[Source.FuncNumber];
-            if (CR.Errors.Count == 0)
-            {
-                for (var i = 0; i < Source.FuncNumber; i++)
-                {
-                    Functions[i] = CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func" + i);
-                }
-            }
-            else
-            {
-                Functions = new MethodInfo[0];
-            }
-            return;
-        }
-
         public float[] Funcs(float x, float y)
         {
             var INum = new object[2];
             object ONum;
-            var RES = new float[Functions.Length];
+            var RES = new float[Functions.Count];
             INum[0] = x;
             INum[1] = y;
-            for (var i = 0; i < Functions.Length; i++)
+            int i = 0;
+            foreach(MethodInfo MF in Functions.Values)
             {
-                ONum = Functions[i].Invoke(null, INum);
+                ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
+                i++;
             }
             return RES;
         }
@@ -357,12 +317,14 @@ namespace SimpleFormulaDrawer.Core
         {
             var INum = new object[1];
             object ONum;
-            var RES = new float[Functions.Length];
+            var RES = new float[Functions.Count];
             INum[0] = x;
-            for (var i = 0; i < Functions.Length; i++)
+            int i = 0;
+            foreach (MethodInfo MF in Functions.Values)
             {
-                ONum = Functions[i].Invoke(null, INum);
+                ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
+                i++;
             }
             return RES;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Media;
 using SimpleFormulaDrawer.interfac;
 using System.Windows.Shapes;
+using System.CodeDom.Compiler;
 
 namespace SimpleFormulaDrawer.Core
 {
@@ -87,5 +88,11 @@ namespace SimpleFormulaDrawer.Core
             ToRet[3] = MoveLine(DCrest[3], x, y);
             return ToRet;
         }
+    }
+
+    public struct FunctionParameters
+    {
+        public bool Is3D;
+        public CompilerErrorCollection Errors;
     }
 }

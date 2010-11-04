@@ -90,7 +90,7 @@ namespace SimpleFormulaDrawer.interfac
                                            Background = new SolidColorBrush(ColorPicker1.SelectedColor)
                                        };
             if (NewItemm.Content.ToString() == "Formula") return;
-            var Errors = LibraryManager.CheckError(NewItemm.Content.ToString());
+            /*var Errors = (NewItemm.Content.ToString());}
             if (Errors.Count==0)
             {
                 this.FormulListBox1.Items.Add(NewItemm);
@@ -99,7 +99,7 @@ namespace SimpleFormulaDrawer.interfac
             {
                 MessageBox.Show("Ошибка");
                 //Тут надо на самом деле подсвечивать начало чего то неправильного и показывать рядом тултип с описанием ошибки.
-            }
+            }*/
         }
 
         private void ButtNewGraphClick(object sender, RoutedEventArgs e)
