@@ -22,7 +22,7 @@ namespace SimpleFormulaDrawer.interfac
     /// 
     public partial class MainForm : Window
     {
-        private Pictogramm[] ArrPictogramm;
+        private List<Pictogramm> ArrPictogramm;
         private Int64 CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
 
         public MainForm()
@@ -37,7 +37,7 @@ namespace SimpleFormulaDrawer.interfac
             this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
             //this.FormulListBox1.Items.Add()
-            this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
+            this.ArrPictogramm.Add(new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1));
         }
      
         //добавляет в массив из пиктограммок новый элемент.
