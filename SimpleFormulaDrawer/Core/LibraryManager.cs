@@ -50,11 +50,11 @@ namespace SimpleFormulaDrawer.Core
     public class LibraryManager
     {
         private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
-        private readonly Dictionary<string,MethodInfo> Functions;
+        private readonly List<MethodInfo> Functions;
 
         public LibraryManager()
         {
-            Functions=new Dictionary<string, MethodInfo>();
+            Functions=new List<MethodInfo>();
         }
 
         public FunctionParameters AddFunction(string Function)
@@ -67,7 +67,7 @@ namespace SimpleFormulaDrawer.Core
             var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
             if (CR.Errors.Count==0)
             {
-                Functions.Add(Function, CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func"));
+                Functions.Add(CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func"));
             }
             FunctionParameters toRet;
             toRet.Errors = CR.Errors;
@@ -304,7 +304,7 @@ namespace SimpleFormulaDrawer.Core
             INum[0] = x;
             INum[1] = y;
             int i = 0;
-            foreach(MethodInfo MF in Functions.Values)
+            foreach(MethodInfo MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
@@ -320,7 +320,7 @@ namespace SimpleFormulaDrawer.Core
             var RES = new float[Functions.Count];
             INum[0] = x;
             int i = 0;
-            foreach (MethodInfo MF in Functions.Values)
+            foreach (MethodInfo MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
