@@ -22,7 +22,7 @@ namespace SimpleFormulaDrawer.interfac
     /// 
     public partial class MainForm : Window
     {
-        private List<Pictogramm> ArrPictogramm;
+        private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
         private Int64 CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
 
         public MainForm()
@@ -30,23 +30,14 @@ namespace SimpleFormulaDrawer.interfac
             InitializeComponent();
             this.FormulListBox1.Items.Clear();
             Boolean FLAG;
-            double countxmin = -1;
-            double countxmax = 1;
-            double countymin = -1;
-            double countymax = 1;
             this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
-            //this.FormulListBox1.Items.Add()
-            this.ArrPictogramm.Add(new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1));
+            AddPictogramm();
         }
-     
-        //добавляет в массив из пиктограммок новый элемент.
-      //  первый (нулевой) элемент добавляется при создании MainForm из конструктора MainForm
-            private void AddPictogramm()
+
+        private void AddPictogramm()
         {
-        //сначала выполняется проверка верности значений в текстбоксах, потом вызывается
-        //конструктор 
-          //      this.ArrPictogramm[CountPictogramm+1]=new Pictogramm();
+            this.ArrPictogramm.Add(new Pictogramm(this.FormulListBox1));
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -117,6 +108,11 @@ namespace SimpleFormulaDrawer.interfac
         private void Debugbutton_Click(object sender, RoutedEventArgs e)
         {
             Forms.StartupWindow.Show();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            AddPictogramm();
         }
     }
 }
