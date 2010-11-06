@@ -67,7 +67,7 @@ namespace SimpleFormulaDrawer.Core
             var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
             if (CR.Errors.Count==0)
             {
-                Functions.Add(Function,CR.CompiledAssembly.GetType("FunctionDLL.Functions").GetMethod("Func"));
+                Functions.Add(Function, CR.CompiledAssembly.GetType("FunctionDll.Functions").GetMethod("Func"));
             }
             FunctionParameters toRet;
             toRet.Errors = CR.Errors;
