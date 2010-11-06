@@ -37,6 +37,7 @@
             <RowDefinition Height="228*" />
             <RowDefinition Height="24*" />
             <RowDefinition Height="19*" />
+            <RowDefinition Height="23*" />
         </Grid.RowDefinitions>
       
         <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="2" Grid.ColumnSpan="2">
@@ -58,5 +59,6 @@
         <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
         <Button Content="New Frame" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" />
         <Button Content="DebugFrame" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="Debugbutton" VerticalAlignment="Stretch" Click="Debugbutton_Click" />
+        <Button Content="Button" Grid.Row="9" Height="23" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="button1" VerticalAlignment="Stretch" Width="178" Grid.ColumnSpan="2" Click="button1_Click" />
     </Grid>
 </Window>
