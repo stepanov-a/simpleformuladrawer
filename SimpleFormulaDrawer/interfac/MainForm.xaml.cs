@@ -35,7 +35,9 @@ namespace SimpleFormulaDrawer.interfac
             double countymin = -1;
             double countymax = 1;
             this.CountPictogramm = 0;
-            //   this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
+            this.FormulListBox1.Items.Clear();
+            //this.FormulListBox1.Items.Add()
+            this.ArrPictogramm[0] = new Pictogramm(countxmin, countymin, countxmax, countymax,this.FormulListBox1);
         }
      
         //добавляет в массив из пиктограммок новый элемент.
