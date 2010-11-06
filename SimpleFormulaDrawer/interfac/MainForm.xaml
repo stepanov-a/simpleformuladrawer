@@ -24,6 +24,7 @@
         <Grid.ColumnDefinitions> <!--Столбцы-->
             <ColumnDefinition Width="89*" />
             <ColumnDefinition Width="89*" />
+            <ColumnDefinition Width="40*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions><!--Строки-->
             <RowDefinition Height="19*" />
@@ -59,6 +60,6 @@
         <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
         <Button Content="New Frame" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" />
         <Button Content="DebugFrame" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="Debugbutton" VerticalAlignment="Stretch" Click="Debugbutton_Click" />
-        <Button Content="AddPictogramm" Grid.Row="9" HorizontalAlignment="Stretch"  Name="Pictogrammer" VerticalAlignment="Stretch" Width="178" Grid.ColumnSpan="2" Click="button1_Click"/>
+        <Button Content="AddPictogramm" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Stretch"  Name="Pictogrammer" VerticalAlignment="Stretch" Width="178" Grid.ColumnSpan="2" Click="button1_Click"/>
     </Grid>
 </Window>
