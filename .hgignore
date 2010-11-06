@@ -1,0 +1,7 @@
+syntax: glob
+Bin/
+_ReSharper*/
+*obj/
+*.suo
+*.user
+syntax: regexp

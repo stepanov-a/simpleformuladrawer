@@ -1,0 +1,62 @@
+﻿<Window x:Class="SimpleFormulaDrawer.interfac.MainForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Core="clr-namespace:SimpleFormulaDrawer.Core" Title="MainForm" Height="620" Width="149" Initialized="Window_Initialized" MinWidth="200" MinHeight="620" ResizeMode="CanResize">
+    <Window.Resources>
+        <Style  TargetType="{x:Type ListBoxItem}">
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="#00000000"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="#FFFFFFFF"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+ 
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#A00362AA" Offset="1" />
+                <GradientStop Color="#FFDBF1FF" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions> <!--Столбцы-->
+            <ColumnDefinition Width="89*" />
+            <ColumnDefinition Width="89*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><!--Строки-->
+            <RowDefinition Height="18*" />
+            <RowDefinition Height="19*" />
+            <RowDefinition Height="175*" />
+            <RowDefinition Height="18*" />
+            <RowDefinition Height="19*" />
+            <RowDefinition Height="23*" />
+            <RowDefinition Height="23*" /><!--Edit's-->
+            <RowDefinition Height="23*" />
+            <RowDefinition Height="228*" />
+            <RowDefinition Height="24*" />
+            <RowDefinition Height="19*" />
+        </Grid.RowDefinitions>
+      
+        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="2" Grid.ColumnSpan="2">
+       <!--     <ListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#009AC9FF" Offset="1" />
+                    <GradientStop Color="#00D1E3E3" Offset="0" />
+                </LinearGradientBrush>
+            </ListBox.Background> -->
+        </ListBox>
+        <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="9" Maximum="100" Grid.ColumnSpan="2" />
+        <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,0,2" />
+        <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="3" Background="#23000000" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" Text="Formula" VerticalContentAlignment="Center" Tag="Formula" Grid.ColumnSpan="2" Grid.RowSpan="1" />
+        <Core:ColorPicker x:Name="ColorPicker1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4" Grid.ColumnSpan="2" />
+        <Slider Grid.Row="8" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" />
+        <TextBox Grid.Row="6" Name="XminTextbox" VerticalAlignment="Stretch" Text="Minimum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum x" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum x" />
+        <TextBox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Maximum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum x" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum x" />
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" />
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
+        <Button Content="New Frame" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" />
+        <Button Content="DebugFrame" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="Debugbutton" VerticalAlignment="Stretch" Click="Debugbutton_Click" />
+    </Grid>
+</Window>
