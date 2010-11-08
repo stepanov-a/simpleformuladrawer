@@ -94,27 +94,30 @@ namespace SimpleFormulaDrawer.interfac
              * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
              */
             int ParamNum = 0;
-            
-            if ((Flag & 0x1) == Flag)
+            try
             {
-                this.Minx = How[ParamNum];
-                ParamNum++;
+                if ((Flag & 0x1) == Flag)
+                {
+                    this.Minx = How[ParamNum];
+                    ParamNum++;
+                }
+                if ((Flag & 0x2) == Flag)
+                {
+                    this.Maxx = How[ParamNum];
+                    ParamNum++;
+                }
+                if ((Flag & 0x4) == Flag)
+                {
+                    this.Miny = How[ParamNum];
+                    ParamNum++;
+                }
+                if ((Flag & 0x8) == Flag)
+                {
+                    this.Maxy = How[ParamNum];
+                }
             }
-            if ((Flag & 0x2) == Flag)
-            {
-                this.Maxx = How[ParamNum];
-                ParamNum++;
-            }
-            if ((Flag & 0x4) == Flag)
-            {
-                this.Miny = How[ParamNum];
-                ParamNum++;
-            }
-            if ((Flag & 0x8) == Flag)
-            {
-                this.Maxy = How[ParamNum];
-                ParamNum++;
-            }
+            catch (Exception)
+            {}
             RedrawFunctions();
         }
     }
