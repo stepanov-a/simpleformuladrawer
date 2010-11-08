@@ -14,7 +14,8 @@ namespace SimpleFormulaDrawer.interfac
         private double Minx, Maxx, Miny, Maxy; //GraphBorders
         private int Quality; //Quality of drawing
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
-        private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные
+        private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные где 3дшная там true
+        private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
 
         public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
         {
@@ -23,7 +24,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Miny = Miny;
             this.Maxy = Maxy;
             this.Quality = Quality;
-            this.GraphForm = new GraphForm();
+            this.GraphForm = new GraphForm(Minx,Maxx,Miny,Maxy,Quality);
             this.GraphForm.Show();
         }
 
