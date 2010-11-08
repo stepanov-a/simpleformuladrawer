@@ -122,9 +122,6 @@ namespace SimpleFormulaDrawer.interfac
             Forms.StartupWindow.Show();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            AddPictogramm();
-        }
+      
     }
 }
