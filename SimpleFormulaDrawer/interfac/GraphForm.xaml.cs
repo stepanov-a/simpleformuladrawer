@@ -24,6 +24,21 @@ namespace SimpleFormulaDrawer.interfac
         public GraphForm(double MinX,double MaxX, double MinY,double MaxY, int Quality)
         {
             InitializeComponent();
+            //вычисление позиции. Позиция ставится так, что ГрафФорм располагается справа от МайнФорм
+            int ScreenActiveWidth = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width;
+            int ScreenActiveHeight = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;
+            int MainWsize = ScreenActiveWidth / 5;//ширина 
+            int MainHsize = ScreenActiveHeight;//высота. надо.
+            this.Left = 5+5+MainWsize;
+            this.Top = 5;
+            this.Height = ScreenActiveHeight-5;
+            this.Width = ScreenActiveWidth - MainWsize-5-5;
+            //  this.Top = 5+MainHsize;
+        }
+
+        private void image1_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
         }
     }
 }
