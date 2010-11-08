@@ -21,26 +21,9 @@ namespace SimpleFormulaDrawer.interfac
     public partial class GraphForm : Window
     {
       
-        public GraphForm()
+        public GraphForm(double MinX,double MaxX, double MinY,double MaxY, int Quality)
         {
-
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            image1.Width = this.Width;
-            image1.Height = this.Height;
-        }
-
-        private void Window_Initialized(object sender, EventArgs e)
-        {
-
         }
     }
 }
