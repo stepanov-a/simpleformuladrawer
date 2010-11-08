@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SimpleFormulaDrawer.Core;
-using System.CodeDom.Compiler;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -30,7 +29,6 @@ namespace SimpleFormulaDrawer.interfac
         {
             InitializeComponent();
             this.FormulListBox1.Items.Clear();
-            Boolean FLAG;
             this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
             AddPictogramm();
@@ -40,16 +38,15 @@ namespace SimpleFormulaDrawer.interfac
         {
             this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
             this.CountPictogramm++;
-            string str;
-            Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm,Form");
+            Forms.DF.AddMessage(string.Format("{0}-GraphPictogramm,Form", CountPictogramm));
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
             this.Left = 0;
             this.Top = 0;
-            this.Height = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;
-            this.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 5;
+            this.Height = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width =System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/5;
         }
 
 

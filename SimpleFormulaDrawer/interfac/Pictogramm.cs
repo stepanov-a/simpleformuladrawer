@@ -93,7 +93,7 @@ namespace SimpleFormulaDrawer.interfac
              * NOTE: IF HOW VARIABLE HAS INVALID LENGTH, PROGRAM FAILS. I'LL CHANGE IT LATER.
              * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
              */
-            int ParamNum = 0;
+            var ParamNum = 0;
             try
             {
                 if ((Flag & 0x1) == Flag)
