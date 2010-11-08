@@ -46,12 +46,10 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            int Wsize = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 5;//ширина 
-            int Hsize = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;//высота. надо.
-            this.Left = 5;
-            this.Top = 5;
-            this.Height = Hsize - this.Top;
-            this.Width = Wsize;
+            this.Left = 0;
+            this.Top = 0;
+            this.Height = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Height;
+            this.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 5;
         }
 
 
