@@ -75,6 +75,19 @@ namespace SimpleFormulaDrawer.Core
             return toRet;
         }
 
+        public bool RemoveFunction(int Index)
+        {
+            try
+            {
+                Functions.RemoveAt(Index);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private static bool Check3D(IEnumerable<char> Function)
         {
             var State = 0;

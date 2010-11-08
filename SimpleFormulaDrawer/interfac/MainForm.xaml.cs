@@ -24,6 +24,7 @@ namespace SimpleFormulaDrawer.interfac
     {
         private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
         private Int64 CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
+        private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
 
         public MainForm()
         {
@@ -37,7 +38,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddPictogramm()
         {
-            this.ArrPictogramm.Add(new Pictogramm(this.FormulListBox1));
+            this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -76,23 +77,31 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddFormul_Click(object sender, RoutedEventArgs e)
         {
-            ListBoxItem NewItemm = new ListBoxItem
+            ListBoxItem NewItem = new ListBoxItem
                                        {
                                            Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
                                            Content = FormulText.Text,
                                            Background = new SolidColorBrush(ColorPicker1.SelectedColor)
-                                       };
-            if (NewItemm.Content.ToString() == "Formula") return;
-            /*var Errors = (NewItemm.Content.ToString());}
+                                       },
+                        TempNewItem = new ListBoxItem
+                                          {
+                                              Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
+                                              Content = FormulText.Text,
+                                              Background = new SolidColorBrush(ColorPicker1.SelectedColor)
+                                          };
+            if (NewItem.Content.ToString() == "Formula") return;
+
+            var Errors=this.ArrPictogramm[SelectedPictogram].AddFunction(NewItem);
             if (Errors.Count==0)
             {
-                this.FormulListBox1.Items.Add(NewItemm);
+                this.FormulListBox1.Items.Add(TempNewItem);
             }
             else
             {
                 MessageBox.Show("Ошибка");
+                this.ArrPictogramm[SelectedPictogram].RemoveFunction(NewItem);
                 //Тут надо на самом деле подсвечивать начало чего то неправильного и показывать рядом тултип с описанием ошибки.
-            }*/
+            }
         }
 
         private void ButtNewGraphClick(object sender, RoutedEventArgs e)
