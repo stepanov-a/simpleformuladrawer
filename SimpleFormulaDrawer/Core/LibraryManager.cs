@@ -75,17 +75,9 @@ namespace SimpleFormulaDrawer.Core
             return toRet;
         }
 
-        public bool RemoveFunction(int Index)
+        public void RemoveFunction(int Index)
         {
-            try
-            {
-                Functions.RemoveAt(Index);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            Functions.RemoveAt(Index);
         }
 
         public static int ErrorPosition(int Pos)
@@ -321,8 +313,8 @@ namespace SimpleFormulaDrawer.Core
             var RES = new float[Functions.Count];
             INum[0] = Variables[0];
             if (Variables.Length>1) {INum[1] = Variables[1];}
-            int i = 0;
-            foreach(MethodInfo MF in Functions)
+            var i = 0;
+            foreach(var MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
