@@ -41,7 +41,7 @@ namespace SimpleFormulaDrawer.interfac
             this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
             this.CountPictogramm++;
             string str;
-      Core.Forms.DF.AddMessage(CountPictogramm.ToString());
+      Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm\form");
         }
 
         private void Window_Initialized(object sender, EventArgs e)

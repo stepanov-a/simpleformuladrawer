@@ -33,7 +33,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Top = 5;
             this.Height = ScreenActiveHeight-5;
             this.Width = ScreenActiveWidth - MainWsize-5-5;
-            //  this.Top = 5+MainHsize;
+          // +\- 5 -для грамотного позиционирвоания с учетом бордюров
         }
 
         private void image1_ImageFailed(object sender, ExceptionRoutedEventArgs e)
