@@ -76,6 +76,46 @@ namespace SimpleFormulaDrawer.interfac
                 return;
             }
         }
-
+        
+        public void ChangeDrawingBorders(int Flag,params int[] How)
+        {
+            /*
+             Flag can containt that values or their combinations:
+             * Values
+             * 0x0:Unhandled
+             * 0x1:MinX
+             * 0x2:MaxX
+             * 0x4:MinY
+             * 0x8:MaxY
+             * Combinations (Sample):
+             * 0xF:AllBorders
+             * 0x3:MinX and MaxX
+             * NOTE: IF HOW VARIABLE HAS INVALID LENGTH, PROGRAM FAILS. I'LL CHANGE IT LATER.
+             * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
+             */
+            int ParamNum = 0;
+            
+            if ((Flag & 0x1) == Flag)
+            {
+                this.Minx = How[ParamNum];
+                ParamNum++;
+            }
+            if ((Flag & 0x2) == Flag)
+            {
+                this.Maxx = How[ParamNum];
+                ParamNum++;
+            }
+            if ((Flag & 0x4) == Flag)
+            {
+                this.Miny = How[ParamNum];
+                ParamNum++;
+            }
+            if ((Flag & 0x8) == Flag)
+            {
+                this.Maxy = How[ParamNum];
+                ParamNum++;
+            }
+            RedrawFunctions();
+        }
     }
 }

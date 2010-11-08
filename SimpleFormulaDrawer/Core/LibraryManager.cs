@@ -88,6 +88,11 @@ namespace SimpleFormulaDrawer.Core
             }
         }
 
+        public static int ErrorPosition(int Pos)
+        {
+            return Pos - 32;
+        }
+
         private static bool Check3D(IEnumerable<char> Function)
         {
             var State = 0;
