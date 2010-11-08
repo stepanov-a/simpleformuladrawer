@@ -36,9 +36,12 @@ namespace SimpleFormulaDrawer.interfac
             AddPictogramm();
         }
 
-        private void AddPictogramm()
+        private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
         {
             this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
+            this.CountPictogramm++;
+            string str;
+      Core.Forms.DF.AddMessage(CountPictogramm.ToString());
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -106,7 +109,9 @@ namespace SimpleFormulaDrawer.interfac
 
         private void ButtNewGraphClick(object sender, RoutedEventArgs e)
         {
-        /*    GraphForm Graph = new GraphForm();
+
+            AddPictogramm();
+          /*    GraphForm Graph = new GraphForm();
             Graph.Top = this.Top;
             Graph.Left = this.Left + this.Width + 5; //позиция нвоой граф.формы слева =сумме начальной позиции  главной формы и ее ширины +5 -отступ
             Graph.Height = this.Height; //высота графа равна высоте MainForm
