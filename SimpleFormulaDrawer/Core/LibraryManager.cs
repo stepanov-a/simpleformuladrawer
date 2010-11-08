@@ -309,31 +309,15 @@ namespace SimpleFormulaDrawer.Core
             return TMP;
         }
 
-        public float[] Funcs(float x, float y)
+        public float[] Funcs(params double[] Variables)
         {
             var INum = new object[2];
             object ONum;
             var RES = new float[Functions.Count];
-            INum[0] = x;
-            INum[1] = y;
+            INum[0] = Variables[0];
+            if (Variables.Length>1) {INum[1] = Variables[1];}
             int i = 0;
             foreach(MethodInfo MF in Functions)
-            {
-                ONum = MF.Invoke(null, INum);
-                RES[i] = float.Parse(ONum.ToString());
-                i++;
-            }
-            return RES;
-        }
-
-        public float[] Funcs(float x)
-        {
-            var INum = new object[1];
-            object ONum;
-            var RES = new float[Functions.Count];
-            INum[0] = x;
-            int i = 0;
-            foreach (MethodInfo MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
                 RES[i] = float.Parse(ONum.ToString());
