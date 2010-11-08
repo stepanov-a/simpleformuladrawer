@@ -13,8 +13,8 @@ namespace SimpleFormulaDrawer.interfac
         private GraphForm GraphForm; //форма, с графиком
         private double Minx, Maxx, Miny, Maxy; //GraphBorders
         private int Quality; //Quality of drawing
-        private LibraryManager LMGR=new LibraryManager();
-        private List<bool> List3D=new List<bool>();
+        private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
+        private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные
 
         public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
         {
