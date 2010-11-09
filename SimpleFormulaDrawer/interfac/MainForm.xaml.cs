@@ -34,12 +34,21 @@ namespace SimpleFormulaDrawer.interfac
             AddPictogramm();
         }
 
+
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
         {
-            this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
+            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 5));
             this.CountPictogramm++;
-            Forms.DF.AddMessage(string.Format("{0}-GraphPictogramm,Form", CountPictogramm));
-            Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm,Form");
+            string str;
+            Core.Forms.DF.AddMessage(CountPictogramm.ToString() + "-GraphPictogramm,Form");//добавление в логи
+            ListBoxItem NewItem = new ListBoxItem();
+            NewItem.Content = this.ArrPictogramm[CountPictogramm - 1];
+            NewItem.Width = Double.NaN;
+            //   NewItem.Width = this.Width/160*30;//отношение размеров формы с этим едитом по ширине
+            //      NewItem.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 30;
+            double ListHeight = this.PictlistBox.Height;
+            NewItem.Height = this.PictlistBox.Height;
+            this.PictlistBox.Items.Add(NewItem);
         }
 
         private void Window_Initialized(object sender, EventArgs e)
