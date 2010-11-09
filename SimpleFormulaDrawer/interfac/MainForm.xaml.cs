@@ -47,7 +47,8 @@ namespace SimpleFormulaDrawer.interfac
             //   NewItem.Width = this.Width/160*30;//отношение размеров формы с этим едитом по ширине
             //      NewItem.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 30;
             double ListHeight = this.PictlistBox.Height;
-            NewItem.Height = this.PictlistBox.Height;
+      //      Core.Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
+             NewItem.Height = this.Height/25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
             this.PictlistBox.Items.Add(NewItem);
         }
 
