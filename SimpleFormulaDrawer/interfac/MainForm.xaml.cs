@@ -23,14 +23,13 @@ namespace SimpleFormulaDrawer.interfac
     public partial class MainForm : Window
     {
         private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
-        private Int64 CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
+        private int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
 
         public MainForm()
         {
             InitializeComponent();
             this.FormulListBox1.Items.Clear();
-            Boolean FLAG;
             this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
             AddPictogramm();
@@ -41,8 +40,16 @@ namespace SimpleFormulaDrawer.interfac
             this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
             this.CountPictogramm++;
             string str;
-            Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm,Form");
-        }
+            Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm,Form");//добавление в логи
+            ListBoxItem NewItem= new ListBoxItem();
+            NewItem.Content = this.ArrPictogramm[CountPictogramm - 1];
+            NewItem.Width = Double.NaN;
+         //   NewItem.Width = this.Width/160*30;//отношение размеров формы с этим едитом по ширине
+      //      NewItem.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 30;
+            double ListHeight = this.PictlistBox.Height;
+            NewItem.Height = this.PictlistBox.Height;
+            this.PictlistBox.Items.Add(NewItem);
+          }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
