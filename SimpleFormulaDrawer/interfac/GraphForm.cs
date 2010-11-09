@@ -16,9 +16,14 @@ namespace SimpleFormulaDrawer.interfac
 
         public GraphForm()
         {
+            InitializeComponent();
+        }
+
+        private void GraphForm_Load(object sender, EventArgs e)
+        {
             this.Top = 0;
-            this.Left = Screen.PrimaryScreen.WorkingArea.Width/5;
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width/5*4;
+            this.Left = Screen.PrimaryScreen.WorkingArea.Width / 5;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width / 5 * 4;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
 
@@ -37,6 +42,5 @@ namespace SimpleFormulaDrawer.interfac
             if (!Is3DRender) return;
             Is3DRender = false;
         }
-
     }
 }

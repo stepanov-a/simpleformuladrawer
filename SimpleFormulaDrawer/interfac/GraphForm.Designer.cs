@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(463, 355);
             this.Name = "GraphForm";
             this.Text = "GraphForm";
+            this.Load += new System.EventHandler(this.GraphForm_Load);
             this.ResumeLayout(false);
 
         }
