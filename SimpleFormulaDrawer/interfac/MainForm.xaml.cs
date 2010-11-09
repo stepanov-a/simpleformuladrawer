@@ -22,7 +22,7 @@ namespace SimpleFormulaDrawer.interfac
     public partial class MainForm : Window
     {
         private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
-        private Int64 CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
+        private int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
 
         public MainForm()
@@ -39,6 +39,7 @@ namespace SimpleFormulaDrawer.interfac
             this.ArrPictogramm.Add(new Pictogramm(-10,10,-10,10,5));
             this.CountPictogramm++;
             Forms.DF.AddMessage(string.Format("{0}-GraphPictogramm,Form", CountPictogramm));
+            Core.Forms.DF.AddMessage(CountPictogramm.ToString()+"-GraphPictogramm,Form");
         }
 
         private void Window_Initialized(object sender, EventArgs e)
