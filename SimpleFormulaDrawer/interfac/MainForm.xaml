@@ -14,7 +14,7 @@
         </Style>
     </Window.Resources>
  
-    <Grid>
+    <Grid Name="MainGrid">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#A00362AA" Offset="1" />
@@ -22,9 +22,9 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions> <!--Столбцы-->
-            <ColumnDefinition Width="73*" />
-            <ColumnDefinition Width="72*" />
-            <ColumnDefinition Width="33*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions><!--Строки-->
             <RowDefinition Height="19*" />
@@ -61,6 +61,6 @@
         <Button Content="New Graph Element  &gt;&gt;" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" Grid.ColumnSpan="2" />
         <Button Content="D" Name="Debugbutton" VerticalAlignment="Stretch" Click="Debugbutton_Click" Grid.Row="10" Grid.Column="2" />
         <CheckBox Content="Show 3D Functions" Grid.ColumnSpan="2" Grid.Row="8" HorizontalAlignment="Stretch" Name="checkBox1" VerticalAlignment="Stretch" />
-        <ListBox Grid.Column="2" HorizontalAlignment="Stretch" Name="PictlistBox" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="10" Background="#00000000" IsTabStop="False" DataContext="{Binding}" IsEnabled="True" IsSynchronizedWithCurrentItem="True"></ListBox>
+        <ListBox Grid.Column="2" HorizontalAlignment="Stretch" Name="PictlistBox" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="10" Background="#00000000" IsTabStop="False" DataContext="{Binding}" IsEnabled="True" IsSynchronizedWithCurrentItem="True" Focusable="False" IsTextSearchEnabled="False"></ListBox>
     </Grid>
 </Window>
