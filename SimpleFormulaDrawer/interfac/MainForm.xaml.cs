@@ -37,19 +37,30 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
         {
+         //   MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
             this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 5));
             this.CountPictogramm++;
-            string str;
-            Core.Forms.DF.AddMessage(CountPictogramm.ToString() + "-GraphPictogramm,Form");//добавление в логи
+            Core.Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
             ListBoxItem NewItem = new ListBoxItem();
             NewItem.Content = this.ArrPictogramm[CountPictogramm - 1];
             NewItem.Width = Double.NaN;
-            //   NewItem.Width = this.Width/160*30;//отношение размеров формы с этим едитом по ширине
-            //      NewItem.Width = System.Windows.Forms.Screen.AllScreens[0].WorkingArea.Width / 30;
             double ListHeight = this.PictlistBox.Height;
       //      Core.Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
              NewItem.Height = this.Height/25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
             this.PictlistBox.Items.Add(NewItem);
+            Boolean FullBar;
+            FullBar = (this.CountPictogramm > 23);
+            if (FullBar)
+            {
+                int ColIndex;
+                ColIndex = MainGrid.ColumnDefinitions.Count-1 ;
+                Core.Forms.DF.AddMessage(ColIndex.ToString()+"ColumnsDef-1");//добавление в логи
+                GridLengthConverter myGridLengthConverter = new GridLengthConverter();//Для управления шириной грида ее нужно конвертировать. танцы с бубном вокруг костра
+                MainGrid.ColumnDefinitions[ColIndex].Width = (GridLength)myGridLengthConverter.ConvertFromString("4*");
+              
+            }
+            
+         //   Core.Forms.DF.AddMessage(GridRow.ToString()+"-GridRow");
         }
 
         private void Window_Initialized(object sender, EventArgs e)
