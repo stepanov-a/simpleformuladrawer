@@ -27,18 +27,18 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions><!--Строки-->
-            <RowDefinition Height="19*" />
-            <RowDefinition Height="146*" />
+            <RowDefinition Height="3.0*" />
             <RowDefinition Height="20*" />
-            <RowDefinition Height="20*" />
-            <RowDefinition Height="22*" />
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="25*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="3.0*" />
             <!--Edit's-->
-            <RowDefinition Height="24*" />
-            <RowDefinition Height="19*" />
-            <RowDefinition Height="242*" />
-            <RowDefinition Height="19*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="24.0*" />
+            <RowDefinition Height="2.0*" />
         </Grid.RowDefinitions>
       
         <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="2">
@@ -53,13 +53,13 @@
         <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2" />
         <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="2" Background="#23000000" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" Text="Formula" VerticalContentAlignment="Center" Tag="Formula" Grid.ColumnSpan="2" />
         <Core:ColorPicker x:Name="ColorPicker1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.ColumnSpan="2" />
-        <Slider Grid.Row="7" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" />
+        <Slider Grid.Row="7" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Top" SmallChange="1" Grid.ColumnSpan="2" Value="1" />
         <TextBox Grid.Row="5" Name="XminTextbox" VerticalAlignment="Stretch" Text="Minimum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum x" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum x" />
         <TextBox Grid.Row="5" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Maximum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum x" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum x" Grid.Column="1" />
         <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" />
         <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" />
         <Button Content="New Graph Element  &gt;&gt;" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" Grid.ColumnSpan="2" />
-        <Button Content="D" Name="Debugbutton" VerticalAlignment="Stretch" Click="Debugbutton_Click" Grid.Row="10" Grid.Column="2" />
+        <Button Content="D" Name="Debugbutton" VerticalAlignment="Stretch"  Click="Debugbutton_Click" Grid.Row="10" Grid.Column="2"  Style="{DynamicResource ButtonStyler}" />
         <CheckBox Content="Show 3D Functions" Grid.ColumnSpan="2" Grid.Row="8" HorizontalAlignment="Stretch" Name="checkBox1" VerticalAlignment="Stretch" />
         <ListBox Grid.Column="2" HorizontalAlignment="Stretch" Name="PictlistBox" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="10" Background="#00000000" IsTabStop="False" DataContext="{Binding}" IsEnabled="True" IsSynchronizedWithCurrentItem="True" Focusable="False" IsTextSearchEnabled="False"></ListBox>
     </Grid>
