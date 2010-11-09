@@ -24,13 +24,16 @@ namespace SimpleFormulaDrawer.interfac
         private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
         private int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
-
+        private double PictWidth;
+        private double PictHeight;
         public MainForm()
         {
             InitializeComponent();
             this.FormulListBox1.Items.Clear();
             this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
+            this.PictHeight = Height / 25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
+            //Расчитывается в конструкторе, чтобы не пересчитывать его, и не делать листбоксы из штук разного размера
             AddPictogramm();
         }
 
@@ -38,7 +41,7 @@ namespace SimpleFormulaDrawer.interfac
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
         {
          //   MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
-            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 5));
+            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));
             this.CountPictogramm++;
             Core.Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
             ListBoxItem NewItem = new ListBoxItem();
@@ -46,7 +49,7 @@ namespace SimpleFormulaDrawer.interfac
             NewItem.Width = Double.NaN;
             double ListHeight = this.PictlistBox.Height;
       //      Core.Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
-             NewItem.Height = this.Height/25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
+            NewItem.Height = this.PictHeight;
             this.PictlistBox.Items.Add(NewItem);
             Boolean FullBar;
             FullBar = (this.CountPictogramm > 23);
