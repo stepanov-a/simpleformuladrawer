@@ -24,7 +24,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Miny = Miny;
             this.Maxy = Maxy;
             this.Quality = Quality;
-            this.GraphForm = new GraphForm(Minx,Maxx,Miny,Maxy,Quality);
+            this.GraphForm = new GraphForm();
             this.GraphForm.Show();
         }
 

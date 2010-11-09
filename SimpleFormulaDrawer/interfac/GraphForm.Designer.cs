@@ -34,10 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(463, 355);
             this.Name = "GraphForm";
             this.Text = "GraphForm";
-            this.Load += new System.EventHandler(this.GraphForm_Load);
             this.ResumeLayout(false);
 
         }

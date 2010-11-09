@@ -5,6 +5,7 @@ using System.Windows.Media;
 using SimpleFormulaDrawer.interfac;
 using System.Windows.Shapes;
 using System.CodeDom.Compiler;
+using System.Drawing;
 
 namespace SimpleFormulaDrawer.Core
 {
@@ -67,7 +68,7 @@ namespace SimpleFormulaDrawer.Core
     public static class Crest
     {
         private readonly static Line[] ToRet=new Line[4];
-        private readonly static Brush Strk=new SolidColorBrush(Colors.White);
+        private readonly static System.Windows.Media.Brush Strk=new SolidColorBrush(Colors.White);
         private readonly static Line[] DCrest = new []
                                                    {
                                                        new Line {X1 = -10, X2 = -2, Y1 = 0, Y2 = 0, Stroke = Strk},
@@ -94,5 +95,58 @@ namespace SimpleFormulaDrawer.Core
     {
         public bool Is3D;
         public CompilerErrorCollection Errors;
+    }
+
+    public struct Point3DF
+    {
+        public static readonly Point3DF Empty =new Point3DF();
+        private float x, y, z;
+
+        public Point3DF(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+        public bool IsEmpty
+        {
+            get
+            {
+                return x == 0f && y == 0f && z == 0f;
+            }
+        }
+        public float X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                x = value;
+            }
+        }
+        public float Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                y = value;
+            }
+        }
+        public float Z
+        {
+            get
+            {
+                return z;
+            }
+            set
+            {
+                z = value;
+            }
+        }
     }
 }
