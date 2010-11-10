@@ -72,7 +72,17 @@ namespace SimpleFormulaDrawer.interfac
             this.Left = 0;
             this.Top = 0;
             this.Height = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
-            this.Width =System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/5;
+            //здесь должно быть вычисление пропорций экрана. Если он 4\3, то форма занимает такую-то часть от всего, если нет-другое число
+            double widt=System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/6;
+            Boolean err = widt < this.MinWidth;
+            if (err)
+            {
+                this.Width = this.MinWidth;
+            }
+            else
+            {
+                this.Width = widt;
+            }
         }
 
 
