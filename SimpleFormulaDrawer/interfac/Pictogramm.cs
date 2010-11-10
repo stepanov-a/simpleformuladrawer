@@ -18,7 +18,7 @@ namespace SimpleFormulaDrawer.interfac
         private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
 
         public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
-        {
+        {//в качестве параметров передаются границы области определения и качество
             this.Minx = Minx;
             this.Maxx = Maxx;
             this.Miny = Miny;
