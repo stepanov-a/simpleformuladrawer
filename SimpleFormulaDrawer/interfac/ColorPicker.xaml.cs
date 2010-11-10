@@ -11,13 +11,15 @@ namespace SimpleFormulaDrawer.Core
     
     public partial class ColorPicker : UserControl
     {
+        private double OffsetX=0, OffsetY=0;
+
+
         public ColorPicker() //Constructor
         {
             InitializeComponent();
-            DrawCrest(0,0);
+            DrawCrest();
         }
-
-
+        
         public Color SelectedColor=Colors.Black; //DefaultSelectedColor is Black
 
         public Color InvertedSelectedColor=Colors.White; //Inversion of SelectedColor
@@ -37,11 +39,11 @@ namespace SimpleFormulaDrawer.Core
             return What.R.ToString() + '|' + What.G + '|' + What.B;
         }
 
-        private void DrawCrest(double x, double y)
+        private void DrawCrest()
         {
             if (this.SpectroCanvas.Children.Count == 4)
             {
-                var TRSF = new TranslateTransform(x, y);
+                var TRSF = new TranslateTransform(this.ActualWidth * OffsetX, this.ActualHeight * OffsetY);
                 this.SpectroCanvas.Children[0].RenderTransform = TRSF;
                 this.SpectroCanvas.Children[1].RenderTransform = TRSF;
                 this.SpectroCanvas.Children[2].RenderTransform = TRSF;
@@ -58,7 +60,7 @@ namespace SimpleFormulaDrawer.Core
             }
         }
 
-        private void SetColor(double OffsetX,double OffsetY) //We can't get color under mouse. so we'll calcuate it!
+        private void SetColor() //We can't get color under mouse. so we'll calcuate it!
         {
             byte R=0, G=0, B=0; //RGB
 
@@ -90,16 +92,25 @@ namespace SimpleFormulaDrawer.Core
         private void SpectroCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         { //OnMouseDownEvent. We need to set colors on clicked.
             var P = e.GetPosition(this);
-            SetColor(P.X/ActualWidth, P.Y/ActualHeight);
-            DrawCrest(P.X,P.Y);
+            OffsetX = P.X/ActualWidth;
+            OffsetY = P.Y/ActualHeight;
+            SetColor();
+            DrawCrest();
         }
 
         private void SpectroCanvas_MouseMove(object sender, MouseEventArgs e)
         { //OnMouseMoveEvent. We need to set colors on undermouse color.
             if (e.LeftButton != MouseButtonState.Pressed) return;
             var P = e.GetPosition(this);
-            SetColor(P.X/ActualWidth, P.Y/ActualHeight);
-            DrawCrest(P.X,P.Y);
+            OffsetX = P.X / ActualWidth;
+            OffsetY = P.Y / ActualHeight;
+            SetColor();
+            DrawCrest();
+        }
+
+        private void SpectroCanvas_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            DrawCrest();
         }
     }
 }

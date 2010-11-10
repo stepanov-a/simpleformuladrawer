@@ -64,6 +64,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void RedrawFunctions()
         {
+            GraphForm.Set3DRendering(List3D.IndexOf(true)!=-1);
             //throw new NotImplementedException();
         }
 
