@@ -9,7 +9,7 @@ namespace SimpleFormulaDrawer.Core
     public class SourceManager
     {
         private readonly string Text;
-        public SourceManager(string Func,bool Is3D)
+        public SourceManager(string Func)
         {
             Text=@"using System;
             namespace FunctionDll
@@ -17,27 +17,12 @@ namespace SimpleFormulaDrawer.Core
                 public class Functions
                 {
                     static void Main() {}";
-
-            if (Is3D)
-            {
-                Text +=
-                    string.Format(
+            Text +=string.Format(
                         @"  
                     public static double Func(double x, double y)
                     {{
                         return {0};
                     }}",Func);
-            }
-            else
-            {
-                Text +=
-                    string.Format(
-                        @"
-                    public static double Func(double x)
-                    {{
-                        return {0};
-                    }}",Func);
-            }
             Text += "\r\n                }\r\n            }\r\n            ";
         }
 
@@ -61,7 +46,7 @@ namespace SimpleFormulaDrawer.Core
         {
             var ParsedFunction = ParseFunction(Function);
             var Is3D = Check3D(ParsedFunction);
-            var TSource = new SourceManager(ParsedFunction, Is3D);
+            var TSource = new SourceManager(ParsedFunction);
             var Compiler = new CSharpCodeProvider(CompilerDirectives);
             var CPR = new CompilerParameters { GenerateInMemory = true };
             var CR = Compiler.CompileAssemblyFromSource(CPR, TSource.GetSourceString());
@@ -112,7 +97,7 @@ namespace SimpleFormulaDrawer.Core
                         }
                 }
             }
-            return State==1?true:false;
+            return (State==1);
         }
 
         private static void MakeStep(ref string Func, ref string TMP, ref int i)
@@ -312,7 +297,14 @@ namespace SimpleFormulaDrawer.Core
             object ONum;
             var RES = new float[Functions.Count];
             INum[0] = Variables[0];
-            if (Variables.Length>1) {INum[1] = Variables[1];}
+            if (Variables.Length > 1)
+            {
+                INum[1] = Variables[1];
+            } 
+            else
+            {
+                INum[1] = null;
+            }
             var i = 0;
             foreach(var MF in Functions)
             {
