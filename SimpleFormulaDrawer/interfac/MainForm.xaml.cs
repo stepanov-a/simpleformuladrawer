@@ -22,7 +22,6 @@ namespace SimpleFormulaDrawer.interfac
     public partial class MainForm : Window
     {
         public List<Pictogramm> ArrPictogramm = new List<Pictogramm>();
-        public int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
         private double PictWidth;
         private double PictHeight;
@@ -31,7 +30,6 @@ namespace SimpleFormulaDrawer.interfac
         {
             InitializeComponent();
             this.FormulListBox1.Items.Clear();
-            this.CountPictogramm = 0;
             this.FormulListBox1.Items.Clear();
             this.PictHeight = Height / 25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
             //Расчитывается в конструкторе, чтобы не пересчитывать его, и не делать листбоксы из штук разного размера
@@ -44,17 +42,16 @@ namespace SimpleFormulaDrawer.interfac
         {
 #if DEBUG
             MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
-            Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
+            Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+ArrPictogramm.Count.ToString());//добавление в логи
 #endif
-            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10, CountPictogramm));
-            var NewItem = new ListBoxItem {Content = this.ArrPictogramm[CountPictogramm]};
-            this.CountPictogramm++;
+            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));
+            var NewItem = new ListBoxItem { Content = this.ArrPictogramm.Last() };
 #if DEBUG
             Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
 #endif
             NewItem.Height = this.PictHeight;
             this.PictlistBox.Items.Add(NewItem);
-            bool FullBar = (this.CountPictogramm > 23);
+            bool FullBar = (this.ArrPictogramm.Count > 23);
             if (FullBar)
             {
                 int ColIndex;

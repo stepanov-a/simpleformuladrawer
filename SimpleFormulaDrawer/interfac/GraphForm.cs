@@ -27,6 +27,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Left = Screen.PrimaryScreen.WorkingArea.Width / 5;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width / 5 * 4;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            this.ShowInTaskbar = false;
         }
 
         public void Set3DRendering(bool How)
