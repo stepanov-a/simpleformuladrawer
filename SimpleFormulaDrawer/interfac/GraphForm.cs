@@ -31,25 +31,18 @@ namespace SimpleFormulaDrawer.interfac
             this.ShowInTaskbar = false;
         }
 
+        private void GraphForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Parent.ClosePictogramm();
+        }
+
         public void Set3DRendering(bool How)
         {
             if (Is3DRender == How) return;
             Is3DRender = How;
         }
-        public void Enable3DRendering()
-        {
-            if (Is3DRender) return;
-            Is3DRender = true;
-        }
-        public void Disable3DRendering()
-        {
-            if (!Is3DRender) return;
-            Is3DRender = false;
-        }
+        
+        
 
-        private void GraphForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Parent.ClosePictogramm();
-        }
     }
 }

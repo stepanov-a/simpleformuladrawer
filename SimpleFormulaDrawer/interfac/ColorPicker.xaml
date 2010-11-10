@@ -14,7 +14,7 @@
                 <GradientStop Color="Red" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
-        <Canvas HorizontalAlignment="Stretch" Name="SpectroCanvas" VerticalAlignment="Stretch" Opacity="1" MouseDown="SpectroCanvas_MouseDown" MouseMove="SpectroCanvas_MouseMove">
+        <Canvas HorizontalAlignment="Stretch" Name="SpectroCanvas" VerticalAlignment="Stretch" Opacity="1" MouseDown="SpectroCanvas_MouseDown" MouseMove="SpectroCanvas_MouseMove" SizeChanged="SpectroCanvas_SizeChanged">
             <Canvas.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="White" Offset="0" />

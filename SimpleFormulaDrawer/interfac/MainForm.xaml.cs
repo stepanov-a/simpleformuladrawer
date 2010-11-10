@@ -44,13 +44,12 @@ namespace SimpleFormulaDrawer.interfac
 #endif// енд Иф дебаг!
 
             this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));//констуктор описан в модуле Pictogramm, параметры-диапазон построения, получившаяся пиктограмма добавляется в LIST, описанный выше
-            var NewItem = new ListBoxItem { Content = this.ArrPictogramm.Last() };//созданпие нового айтема для листа, в качестве контента айтема передается последний элемент списка (строчкой выше он заполняется)
+            var NewItem = new ListBoxItem {Content = this.ArrPictogramm.Last(), Height = this.PictHeight};//созданпие нового айтема для листа, в качестве контента айтема передается последний элемент списка (строчкой выше он заполняется)
 
 #if DEBUG//Иф дебаг!
             Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
 #endif// енд Иф дебаг!
 
-            NewItem.Height = this.PictHeight;//высота пиктограммы приравневается расчитанной ранее константе
             this.PictlistBox.Items.Add(NewItem);//добавление новой пиктограммы
             bool FullBar = (this.ArrPictogramm.Count > 23);//вообще было бы неплохо это переписать, 
             //т.к. в случае смены разрешения или размеров формы (ну мало ли) на экране может находиться меньше 23 пиктограмм, 
