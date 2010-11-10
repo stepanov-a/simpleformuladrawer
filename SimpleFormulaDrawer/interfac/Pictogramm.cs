@@ -9,7 +9,6 @@ namespace SimpleFormulaDrawer.interfac
 {
     public class Pictogramm : Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
-
         private ListBox FormulList=new ListBox(); //передается конструктором, но может быть изменен.
         private GraphForm GraphForm; //форма, с графиком
         private double Minx, Maxx, Miny, Maxy; //GraphBorders
@@ -17,9 +16,8 @@ namespace SimpleFormulaDrawer.interfac
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные где 3дшная там true
         private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
-        private int Num;
 
-        public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality,int Num)//constructor
+        public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
         {
             this.Minx = Minx;
             this.Maxx = Maxx;
@@ -28,14 +26,18 @@ namespace SimpleFormulaDrawer.interfac
             this.Quality = Quality;
             this.GraphForm = new GraphForm(this);
             this.GraphForm.Show();
-            this.Num = Num;
+            this.Click += Click_event;
         }
 
         public void ClosePictogramm()
         {
-            Forms.MF.CountPictogramm--;
-            Forms.MF.PictlistBox.Items.RemoveAt(Num);
-            Forms.MF.ArrPictogramm.RemoveAt(Num);
+            Forms.MF.PictlistBox.Items.Remove(this.Parent);
+            Forms.MF.ArrPictogramm.Remove(this);
+        }
+
+        private void Click_event(object sender, RoutedEventArgs e)
+        {
+            GraphForm.BringToFront();
         }
 
         private void RedrawFunctions()
