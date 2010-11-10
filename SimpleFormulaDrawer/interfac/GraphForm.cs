@@ -14,6 +14,7 @@ namespace SimpleFormulaDrawer.interfac
     {
         private bool Is3DRender;
         private Pictogramm Parent;
+        public int FormState = 0;
 
         public GraphForm(Pictogramm Parent)
         {

@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using SimpleFormulaDrawer.Core;
 using System.CodeDom.Compiler;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace SimpleFormulaDrawer.interfac
 {
-    public class Pictogramm : Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
+    public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
-        private ListBox FormulList=new ListBox(); //передается конструктором, но может быть изменен.
+        private System.Windows.Controls.ListBox FormulList = new System.Windows.Controls.ListBox(); //передается конструктором, но может быть изменен.
         private GraphForm GraphForm; //форма, с графиком
         private double Minx, Maxx, Miny, Maxy; //GraphBorders
         private int Quality; //Quality of drawing
@@ -38,6 +39,27 @@ namespace SimpleFormulaDrawer.interfac
         private void Click_event(object sender, RoutedEventArgs e)
         {
             GraphForm.BringToFront();
+            switch (GraphForm.FormState)
+            {
+                case 0:
+                    {
+                        GraphForm.BringToFront();
+                        GraphForm.FormState = 1;
+                        break;
+                    }
+                case 1:
+                    {
+                        GraphForm.Hide();
+                        GraphForm.FormState = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        GraphForm.Show();
+                        GraphForm.FormState = 1;
+                        break;
+                    }
+            }
         }
 
         private void RedrawFunctions()
@@ -102,9 +124,10 @@ namespace SimpleFormulaDrawer.interfac
              * Combinations (Sample):
              * 0xF:AllBorders
              * 0x3:MinX and MaxX
-             * NOTE: IF HOW VARIABLE HAS INVALID LENGTH, PROGRAM FAILS. I'LL CHANGE IT LATER.
+             * NOTE: IF HOW VARIABLE HAS INVALID LENGTH (Less then need or >4), NOTHING HAPPENS.
              * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
              */
+            if (How.Length > 4) return;
             var ParamNum = 0;
             try
             {
