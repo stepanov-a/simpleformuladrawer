@@ -41,7 +41,7 @@
             <RowDefinition Height="2.0*" />
         </Grid.RowDefinitions>
       
-        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="listBox1_SelectionChanged" Grid.Row="1" Grid.ColumnSpan="2">
+        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Grid.Row="1" Grid.ColumnSpan="2">
         </ListBox>
         <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="10" Maximum="100" Grid.ColumnSpan="2" />
         <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2" />
