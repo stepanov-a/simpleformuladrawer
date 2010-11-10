@@ -105,6 +105,7 @@ namespace SimpleFormulaDrawer.interfac
                 FormulList.Items.RemoveAt(Index);
                 List3D.RemoveAt(Index);
                 LMGR.RemoveFunction(Index);
+                RedrawFunctions();
             }
             catch (Exception)
             {
