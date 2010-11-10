@@ -23,11 +23,11 @@ namespace SimpleFormulaDrawer
     {
         public MainWindow()
         {
-            var Main = new MainForm();
+            Forms.MF = new MainForm();
             LogManager.Init("debug.log", "error.log");
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Application.Current.MainWindow = Main;
-            Main.Show();
+            Application.Current.MainWindow = Forms.MF;
+            Forms.MF.Show();
             this.Hide();
             Forms.StartupWindow = this;
             InitializeComponent();

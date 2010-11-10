@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using SimpleFormulaDrawer.Core;
 using System.CodeDom.Compiler;
+using System.Windows;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -16,16 +17,25 @@ namespace SimpleFormulaDrawer.interfac
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные где 3дшная там true
         private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
+        private int Num;
 
-        public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
+        public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality,int Num)//constructor
         {
             this.Minx = Minx;
             this.Maxx = Maxx;
             this.Miny = Miny;
             this.Maxy = Maxy;
             this.Quality = Quality;
-            this.GraphForm = new GraphForm();
+            this.GraphForm = new GraphForm(this);
             this.GraphForm.Show();
+            this.Num = Num;
+        }
+
+        public void ClosePictogramm()
+        {
+            Forms.MF.CountPictogramm--;
+            Forms.MF.PictlistBox.Items.RemoveAt(Num);
+            Forms.MF.ArrPictogramm.RemoveAt(Num);
         }
 
         private void RedrawFunctions()

@@ -12,6 +12,7 @@ namespace SimpleFormulaDrawer.Core
     public static class Forms
     {
         public static MainWindow StartupWindow;
+        public static MainForm MF;
         public static readonly DebugForm DF = new DebugForm();
     }
 

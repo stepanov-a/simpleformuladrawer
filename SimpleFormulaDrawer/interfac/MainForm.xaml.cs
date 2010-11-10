@@ -21,8 +21,8 @@ namespace SimpleFormulaDrawer.interfac
     /// 
     public partial class MainForm : Window
     {
-        private List<Pictogramm> ArrPictogramm=new List<Pictogramm>();
-        private int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
+        public List<Pictogramm> ArrPictogramm = new List<Pictogramm>();
+        public int CountPictogramm; //Нранит индекс последнго элемента в ArrPicrogramm
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
         private double PictWidth;
         private double PictHeight;
@@ -43,27 +43,24 @@ namespace SimpleFormulaDrawer.interfac
         {
 #if DEBUG
             MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
+            Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
 #endif
-            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));
+            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10, CountPictogramm));
+            var NewItem = new ListBoxItem {Content = this.ArrPictogramm[CountPictogramm]};
             this.CountPictogramm++;
-            Core.Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
-            ListBoxItem NewItem = new ListBoxItem();
-            NewItem.Content = this.ArrPictogramm[CountPictogramm - 1];
-            NewItem.Width = Double.NaN;
-            double ListHeight = this.PictlistBox.Height;
-      //      Core.Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
+#if DEBUG
+            Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
+#endif
             NewItem.Height = this.PictHeight;
             this.PictlistBox.Items.Add(NewItem);
-            Boolean FullBar;
-            FullBar = (this.CountPictogramm > 23);
+            bool FullBar = (this.CountPictogramm > 23);
             if (FullBar)
             {
                 int ColIndex;
                 ColIndex = MainGrid.ColumnDefinitions.Count-1 ;
-                Core.Forms.DF.AddMessage(ColIndex.ToString()+"ColumnsDef-1");//добавление в логи
+                Forms.DF.AddMessage(ColIndex.ToString()+"ColumnsDef-1");//добавление в логи
                 GridLengthConverter myGridLengthConverter = new GridLengthConverter();//Для управления шириной грида ее нужно конвертировать. танцы с бубном вокруг костра
                 MainGrid.ColumnDefinitions[ColIndex].Width = (GridLength)myGridLengthConverter.ConvertFromString("4*");
-              
             }
             
          //   Core.Forms.DF.AddMessage(GridRow.ToString()+"-GridRow");

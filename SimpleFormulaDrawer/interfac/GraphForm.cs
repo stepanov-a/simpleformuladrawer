@@ -13,10 +13,12 @@ namespace SimpleFormulaDrawer.interfac
     public partial class GraphForm : Form
     {
         private bool Is3DRender;
+        private Pictogramm Parent;
 
-        public GraphForm()
+        public GraphForm(Pictogramm Parent)
         {
             InitializeComponent();
+            this.Parent = Parent;
         }
 
         private void GraphForm_Load(object sender, EventArgs e)
@@ -41,6 +43,11 @@ namespace SimpleFormulaDrawer.interfac
         {
             if (!Is3DRender) return;
             Is3DRender = false;
+        }
+
+        private void GraphForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Parent.ClosePictogramm();
         }
     }
 }
