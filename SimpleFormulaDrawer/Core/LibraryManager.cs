@@ -70,7 +70,7 @@ namespace SimpleFormulaDrawer.Core
             return Pos - 32;
         }
 
-        private static bool Check3D(IEnumerable<char> Function)
+        public static bool Check3D(IEnumerable<char> Function)
         {
             var State = 0;
             var Operators=new DSet("+-*/()^");
