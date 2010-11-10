@@ -35,6 +35,7 @@ namespace SimpleFormulaDrawer.interfac
             this.FormulListBox1.Items.Clear();
             this.PictHeight = Height / 25; //25-ЧИИСЛО НА ОДНОЙ СТРАНИЦЫ
             //Расчитывается в конструкторе, чтобы не пересчитывать его, и не делать листбоксы из штук разного размера
+
             AddPictogramm();
         }
 
