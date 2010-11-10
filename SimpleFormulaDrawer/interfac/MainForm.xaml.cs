@@ -26,6 +26,7 @@ namespace SimpleFormulaDrawer.interfac
         private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
         private double PictWidth;
         private double PictHeight;
+
         public MainForm()
         {
             InitializeComponent();
@@ -40,7 +41,9 @@ namespace SimpleFormulaDrawer.interfac
 
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
         {
-         //   MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
+#if DEBUG
+            MainGrid.ShowGridLines = true; //отображение линий грида. после отладки убрать.
+#endif
             this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));
             this.CountPictogramm++;
             Core.Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+CountPictogramm.ToString());//добавление в логи
