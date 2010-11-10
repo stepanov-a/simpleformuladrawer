@@ -10,12 +10,13 @@ namespace SimpleFormulaDrawer.interfac
 {
     public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
+        private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
         private System.Windows.Controls.ListBox FormulList = new System.Windows.Controls.ListBox(); //передается конструктором, но может быть изменен.
         private GraphForm GraphForm; //форма, с графиком
         private double Minx, Maxx, Miny, Maxy; //GraphBorders
         private int Quality; //Quality of drawing
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
-        private List<bool> List3D=new List<bool>(); //Какие из функций 3дшные где 3дшная там true
+        private int Count3D = 0;//Количество 3х мерных функций
         private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
 
         public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
@@ -64,7 +65,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void RedrawFunctions()
         {
-            GraphForm.Set3DRendering(List3D.IndexOf(true)!=-1);
+            GraphForm.Set3DRendering(Count3D==0);
             //throw new NotImplementedException();
         }
 
@@ -78,7 +79,7 @@ namespace SimpleFormulaDrawer.interfac
         {
             FormulList.Items.Add(What);
             var FParams = LMGR.AddFunction(What.Content.ToString());
-            List3D.Add(FParams.Is3D);
+            if (FParams.Is3D) Count3D++;
             RedrawFunctions();
             return FParams.Errors;
         }
@@ -88,7 +89,7 @@ namespace SimpleFormulaDrawer.interfac
             try
             {
                 LMGR.RemoveFunction(FormulList.Items.IndexOf(What));
-                List3D.RemoveAt(FormulList.Items.IndexOf(What));
+                if (LibraryManager.Check3D(What.Content.ToString())) Count3D--;
                 FormulList.Items.Remove(What);
                 RedrawFunctions();
             }
@@ -103,7 +104,7 @@ namespace SimpleFormulaDrawer.interfac
             try
             {
                 FormulList.Items.RemoveAt(Index);
-                List3D.RemoveAt(Index);
+                if (LibraryManager.Check3D(FormulList.Items[Index].ToString())) Count3D--;
                 LMGR.RemoveFunction(Index);
                 RedrawFunctions();
             }
