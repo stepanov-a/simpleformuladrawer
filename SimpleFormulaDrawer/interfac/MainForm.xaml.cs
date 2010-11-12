@@ -22,7 +22,7 @@ namespace SimpleFormulaDrawer.interfac
     public partial class MainForm : Window
     {
         public List<Pictogramm> ArrPictogramm = new List<Pictogramm>();//прикольно. Лист из пиктограмм. нечто вроде списка\массива
-        private int SelectedPictogram=0; //Текущая выбранная пиктограмма.
+        public int SelectedPictogram=0; //Текущая выбранная пиктограмма.
         private double PictHeight;//высота пиктограммы. Расчитывается конструктором, чтобы не создавать иконок разных размеров
         //ширина расчитывается динамически, в зависимости от размеров Грида и Листбокса, поэтому хранить ее не надо.
         public MainForm()
@@ -43,7 +43,7 @@ namespace SimpleFormulaDrawer.interfac
             Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+ArrPictogramm.Count.ToString());//добавление в логи
 #endif// енд Иф дебаг!
 
-            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10, 10));//констуктор описан в модуле Pictogramm, параметры-диапазон построения, получившаяся пиктограмма добавляется в LIST, описанный выше
+            this.ArrPictogramm.Add(new Pictogramm(-10, 10, -10, 10,-10,10, 10));//констуктор описан в модуле Pictogramm, параметры-диапазон построения, получившаяся пиктограмма добавляется в LIST, описанный выше
             var NewItem = new ListBoxItem {Content = this.ArrPictogramm.Last(), Height = this.PictHeight};//созданпие нового айтема для листа, в качестве контента айтема передается последний элемент списка (строчкой выше он заполняется)
 
 #if DEBUG//Иф дебаг!

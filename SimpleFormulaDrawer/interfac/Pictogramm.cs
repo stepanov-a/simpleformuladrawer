@@ -5,6 +5,7 @@ using SimpleFormulaDrawer.Core;
 using System.CodeDom.Compiler;
 using System.Windows;
 using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -13,18 +14,20 @@ namespace SimpleFormulaDrawer.interfac
         private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
         private System.Windows.Controls.ListBox FormulList = new System.Windows.Controls.ListBox(); //передается конструктором, но может быть изменен.
         private GraphForm GraphForm; //форма, с графиком
-        private double Minx, Maxx, Miny, Maxy; //GraphBorders
+        private double Minx, Maxx, Miny, Maxy,Minz,Maxz; //GraphBorders
         private int Quality; //Quality of drawing
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private int Count3D = 0;//Количество 3х мерных функций
         private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
 
-        public Pictogramm(int Minx, int Maxx , int Miny, int Maxy, int Quality)//constructor
+        public Pictogramm(double Minx, double Maxx , double Miny, double Maxy,double Minz, double Maxz, int Quality)//constructor
         {//в качестве параметров передаются границы области определения и качество
             this.Minx = Minx;
             this.Maxx = Maxx;
             this.Miny = Miny;
             this.Maxy = Maxy;
+            this.Minz=Minz;
+            this.Maxz = Maxz;
             this.Quality = Quality;
             this.GraphForm = new GraphForm(this);
             this.GraphForm.Show();
@@ -66,6 +69,7 @@ namespace SimpleFormulaDrawer.interfac
         private void RedrawFunctions()
         {
             GraphForm.Set3DRendering(Count3D==0);
+            GraphForm.DrawAxis(Minx,Maxx,Miny,Maxy,Minz,Maxz);
             //throw new NotImplementedException();
         }
 
@@ -80,7 +84,7 @@ namespace SimpleFormulaDrawer.interfac
             FormulList.Items.Add(What);
             var FParams = LMGR.AddFunction(What.Content.ToString());
             if (FParams.Is3D) Count3D++;
-            RedrawFunctions();
+            if (FParams.Errors.Count==0) RedrawFunctions();
             return FParams.Errors;
         }
 

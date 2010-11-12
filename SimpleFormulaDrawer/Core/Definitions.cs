@@ -16,6 +16,14 @@ namespace SimpleFormulaDrawer.Core
         public static readonly DebugForm DF = new DebugForm();
     }
 
+    public static class Shared
+    {
+        public static float WhereZero(double min,double max,float range)
+        {
+            return (float) (-range/(max - min)*min);
+        }
+    }
+
     public class DSet
         {
             private readonly Dictionary<int, object> Arr;

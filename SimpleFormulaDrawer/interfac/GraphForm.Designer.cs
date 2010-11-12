@@ -39,6 +39,7 @@
             this.Text = "GraphForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GraphForm_FormClosed);
             this.Load += new System.EventHandler(this.GraphForm_Load);
+            this.Resize += new System.EventHandler(this.GraphForm_Resize);
             this.ResumeLayout(false);
 
         }
