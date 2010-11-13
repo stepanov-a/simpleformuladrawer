@@ -14,7 +14,9 @@ namespace SimpleFormulaDrawer.interfac
     public partial class GraphForm : Form
     {
         private bool Is3DRender;
-        private Pictogramm Parent;
+        private new Pictogramm Parent;
+        private double Rotation, Altitude; //Для рендера 3Д. Поворот относительно OZ и поворот относительно OX 
+
         public int FormState = 0;
         private Pen AxisColor = new Pen(Color.Black);
         private Graphics GR;
@@ -31,6 +33,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Left = Screen.PrimaryScreen.WorkingArea.Width / 5;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width / 5 * 4;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Depth = (this.Width + this.Height) / 2;
             this.ShowInTaskbar = false;
             this.BackColor = Color.White;
             this.GR = this.CreateGraphics();
@@ -46,6 +49,13 @@ namespace SimpleFormulaDrawer.interfac
             Is3DRender = How;
         }
         
+        public static PointF ConvertTo2DPoint(Point3DF What)
+        {
+            var toRet = new PointF();
+            //NOTE:Need Alexander Igorevitch
+            return toRet;
+        }
+
         public void DrawAxis(params double [] AxisMarks)
         {
             /*Эта функция принимает 6 аргументов и обрабатывает 4 или 6 аргументов в зависимоти от флага IS3DRender.
@@ -61,12 +71,12 @@ namespace SimpleFormulaDrawer.interfac
             if ((Is3DRender && AxisMarks.Length<4) || (!Is3DRender && AxisMarks.Length<6)) throw new InvalidDataException();
             if (Is3DRender)
             {
-                
+                //NOTE:Incomplete.
             }
             else
             {
-                GR.DrawLine(AxisColor, 0, ZeroY, this.Width, ZeroY);
-                GR.DrawLine(AxisColor,ZeroX,0,ZeroX,this.Height);
+                GR.DrawLine(AxisColor, 0, ZeroY, this.Width, ZeroY); //OX
+                GR.DrawLine(AxisColor,ZeroX,0,ZeroX,this.Height); //OY
             }
         }
 
