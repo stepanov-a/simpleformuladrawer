@@ -33,6 +33,12 @@ namespace SimpleFormulaDrawer.interfac
             //Расчитывается в конструкторе, чтобы не пересчитывать его, и не делать листбоксы из штук разного размера
             AddPictogramm();//создание первой пиктограммы происходит при запуске приложения
             //во-первых без нее все приложение бессмысленно, а во-вторых-так меньше возни
+            this.XmaxTextbox.Text = "10";
+            this.XminTextbox.Text = "-10";
+            this.YmaxTextbox.Text = "10";
+            this.YminTextbox.Text = "-10";
+            this.ZMinTextbox.Text = "-10";
+            this.ZMaxTextbox.Text = "10";
         }
 
 
