@@ -18,7 +18,6 @@ namespace SimpleFormulaDrawer.interfac
         private int Quality; //Quality of drawing
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private int Count3D = 0;//Количество 3х мерных функций
-        private bool Show3D = true; // Флаг, который показывает отображать ли 3ю ось
 
         public Pictogramm(double Minx, double Maxx , double Miny, double Maxy,double Minz, double Maxz, int Quality)//constructor
         {//в качестве параметров передаются границы области определения и качество
