@@ -27,40 +27,42 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions><!--Строки-->
-            <RowDefinition Height="3.0*" />
-            <RowDefinition Height="20*" /><!--ListBox-->
+            <RowDefinition Height="38*" />
+            <RowDefinition Height="217*" /><!--ListBox-->
             <!--FormulaEditSection-->
-            <RowDefinition Height="3.0*" />
+            <RowDefinition Height="39*" />
 
-            <RowDefinition Height="3.0*" /><!--ColorPicker-->
-            <RowDefinition Height="3.0*" /> <!--AddFormulButton-->
+            <RowDefinition Height="38*" />
+            <RowDefinition Height="39*" />
+            <!--ColorPicker-->
+            <RowDefinition Height="38*" /> <!--AddFormulButton-->
             <!--Edit's-->
-            <RowDefinition Height="3.0*" /><!--Min\Max X-->
-            <RowDefinition Height="3.0*" /><!--Min/Max X-->
-            <RowDefinition Height="3.0*" /><!--Slider-->
+            <RowDefinition Height="38*" /><!--Min\Max X-->
+            <RowDefinition Height="38*" /><!--Min/Max X-->
+            <RowDefinition Height="38*" /><!--Slider-->
             <!--Edit's-->
-            <RowDefinition Height="1.5*" /> <!--Show3D-->
-            <RowDefinition Height="1.0*" /><!--Пустой кусок, в релизе тут будет нолик-->
-                <RowDefinition Height="2.0*" />
+            <RowDefinition Height="19*" /> <!--Show3D-->
+            <RowDefinition Height="13*" /><!--Пустой кусок, в релизе тут будет нолик-->
+                <RowDefinition Height="26*" />
         </Grid.RowDefinitions>
       
-        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Grid.Row="1" Grid.ColumnSpan="2">
+        <ListBox HorizontalAlignment="Stretch" Name="FormulListBox1" VerticalAlignment="Stretch" ItemsSource="{Binding}" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
         </ListBox>
-        <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="10" Maximum="100" Grid.ColumnSpan="2" />
-        <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2" />
+        <ProgressBar Height="19" HorizontalAlignment="Stretch" Name="progressBar1" VerticalAlignment="Bottom" Grid.Row="11" Maximum="100" Grid.ColumnSpan="2" />
+        <Button Content="Add Formul To This List" HorizontalAlignment="Stretch" Name="AddFormul" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AddFormul_Click" Grid.Row="4" Grid.ColumnSpan="2"/>
         <TextBox HorizontalAlignment="Stretch" Name="FormulText" VerticalAlignment="Stretch" Grid.Row="2" Background="#23000000" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" Text="Formula" VerticalContentAlignment="Center" Tag="Formula" Grid.ColumnSpan="2" />
         <Core:ColorPicker x:Name="ColorPicker1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.ColumnSpan="2" />
-        <Slider Grid.Row="7" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Stretch" SmallChange="1" Grid.ColumnSpan="2" Value="1" Margin="0,0,0,15" />
+        <Slider Grid.Row="8" Height="24" HorizontalAlignment="Stretch" Name="QualitySlider" VerticalAlignment="Stretch" SmallChange="1" Grid.ColumnSpan="2" Value="1" Margin="0,0,0,15" />
         <TextBox Grid.Row="5" Name="XminTextbox" VerticalAlignment="Stretch" Text="Minimum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum x" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum x" VerticalContentAlignment="Center" />
         <TextBox Grid.Row="5" HorizontalAlignment="Stretch" Name="XmaxTextbox" VerticalAlignment="Stretch" Text="Maximum x" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum x" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum x" Grid.Column="1" VerticalContentAlignment="Center" />
         <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YminTextbox" VerticalAlignment="Stretch" Text="Minimum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum y" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" ToolTip="Minimum y" VerticalContentAlignment="Center" />
         <TextBox Grid.Row="6" HorizontalAlignment="Stretch" Name="YmaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum y" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum y" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum y" VerticalContentAlignment="Center" />
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="ZMinTextbox" VerticalAlignment="Stretch" Grid.Column="0" Text="Minimum z" HorizontalContentAlignment="Center" FontSize="14" Tag="Minimum z" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Minimum z" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="7" HorizontalAlignment="Stretch" Name="ZMaxTextbox" VerticalAlignment="Stretch" Grid.Column="1" Text="Maximum z" HorizontalContentAlignment="Center" FontSize="14" Tag="Maximum z" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus" ToolTip="Maximum z" VerticalContentAlignment="Center"/>
         <Button Content="New Graph Element  &gt;&gt;" HorizontalAlignment="Stretch" Name="buttNewGraph" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Click="ButtNewGraphClick" Grid.ColumnSpan="2" />
-        <Button Content="D" Name="Debugbutton" VerticalAlignment="Stretch"  Click="Debugbutton_Click" Grid.Row="10" Grid.Column="2"  Style="{DynamicResource ButtonStyler}" />
-        <CheckBox Content="Show 3D Functions" Grid.ColumnSpan="2" Grid.Row="8" HorizontalAlignment="Stretch" Name="checkBox1" VerticalAlignment="Stretch" />
-        <ListBox Grid.Column="2" HorizontalAlignment="Stretch" Name="PictlistBox" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="10" Background="#00000000" IsTabStop="False" DataContext="{Binding}" IsEnabled="True" IsSynchronizedWithCurrentItem="True" Focusable="False" IsTextSearchEnabled="False" AllowDrop="True" ClipToBounds="True" SelectionMode="Extended" Style="{DynamicResource PictlistBoxStyle1}">
-
-
+        <Button Content="D" Name="Debugbutton" VerticalAlignment="Stretch"  Click="Debugbutton_Click" Grid.Row="11" Grid.Column="2"  Style="{DynamicResource ButtonStyler}" />
+        <CheckBox Content="Show 3D Functions" Grid.ColumnSpan="2" Grid.Row="9" HorizontalAlignment="Stretch" Name="checkBox1" VerticalAlignment="Stretch" />
+        <ListBox Grid.Column="2" HorizontalAlignment="Stretch" Name="PictlistBox" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="11" Background="#00000000" IsTabStop="False" DataContext="{Binding}" IsEnabled="True" IsSynchronizedWithCurrentItem="True" Focusable="False" IsTextSearchEnabled="False" AllowDrop="True" ClipToBounds="True" SelectionMode="Extended" Style="{DynamicResource PictlistBoxStyle1}">
         </ListBox>
-    </Grid>
+        </Grid>
 </Window>

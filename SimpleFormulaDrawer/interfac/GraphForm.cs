@@ -69,6 +69,9 @@ namespace SimpleFormulaDrawer.interfac
             MessageBox.Show(string.Format("{0}||{1}||{2}||{3}", ZeroX, ZeroY, ZeroZ,Is3DRender));
 #endif
             if ((Is3DRender && AxisMarks.Length<4) || (!Is3DRender && AxisMarks.Length<6)) throw new InvalidDataException();
+
+            this.Is3DRender = false;//NOTE:Do not render 3d graphics. I Need GLUSKERR.
+
             if (Is3DRender)
             {
                 //NOTE:Incomplete.
