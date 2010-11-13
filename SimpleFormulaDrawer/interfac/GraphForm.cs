@@ -43,7 +43,6 @@ namespace SimpleFormulaDrawer.interfac
 
         public void Set3DRendering(bool How)
         {
-            if (Is3DRender == How) return;
             Is3DRender = How;
         }
         
@@ -56,6 +55,9 @@ namespace SimpleFormulaDrawer.interfac
             float ZeroX = Shared.WhereZero(AxisMarks[0], AxisMarks[1], this.Width);
             float ZeroY = Shared.WhereZero(AxisMarks[2], AxisMarks[3], this.Height);
             float ZeroZ = Shared.WhereZero(AxisMarks[4], AxisMarks[5], this.Depth);
+#if DEBUG
+            MessageBox.Show(string.Format("{0}||{1}||{2}||{3}", ZeroX, ZeroY, ZeroZ,Is3DRender));
+#endif
             if ((Is3DRender && AxisMarks.Length<4) || (!Is3DRender && AxisMarks.Length<6)) throw new InvalidDataException();
             if (Is3DRender)
             {

@@ -68,7 +68,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void RedrawFunctions()
         {
-            GraphForm.Set3DRendering(Count3D==0);
+            GraphForm.Set3DRendering(Count3D!=0);
             GraphForm.DrawAxis(Minx,Maxx,Miny,Maxy,Minz,Maxz);
             //throw new NotImplementedException();
         }
