@@ -5,6 +5,7 @@ using System.Windows.Media;
 using SimpleFormulaDrawer.interfac;
 using System.Windows.Shapes;
 using System.CodeDom.Compiler;
+using System.Windows.Controls;
 using System.Drawing;
 
 namespace SimpleFormulaDrawer.Core
@@ -21,6 +22,15 @@ namespace SimpleFormulaDrawer.Core
         public static float WhereZero(double min,double max,float range)
         {
             return (float) (-range/(max - min)*min);
+        }
+        public static float WhereNum(double num,double min,double max,float range)
+        {
+            return (float) (num*(range/(max-min))+WhereZero(min,max,range));
+        }
+
+        public static double NumOnPosition(double pos,double min,double max,float range)
+        {
+            return pos/(range/(max - min))+min;
         }
     }
 
@@ -157,5 +167,12 @@ namespace SimpleFormulaDrawer.Core
                 z = value;
             }
         }
+    }
+
+    public struct MainFormContent
+    {
+        public double MinX, MaxX, MinY, MaxY, MinZ, MaxZ,Quality;
+        public bool Show3DBox;
+        public ListBox FormulListBox;
     }
 }

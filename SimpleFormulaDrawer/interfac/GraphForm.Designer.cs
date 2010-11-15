@@ -37,8 +37,10 @@
             this.ClientSize = new System.Drawing.Size(463, 355);
             this.Name = "GraphForm";
             this.Text = "GraphForm";
+            this.Activated += new System.EventHandler(this.GraphForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GraphForm_FormClosed);
             this.Load += new System.EventHandler(this.GraphForm_Load);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GraphForm_MouseUp);
             this.Resize += new System.EventHandler(this.GraphForm_Resize);
             this.ResumeLayout(false);
 
