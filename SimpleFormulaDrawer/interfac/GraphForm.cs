@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SimpleFormulaDrawer.Core;
+using System.Threading;
 
 namespace SimpleFormulaDrawer.interfac
 {
@@ -19,7 +20,10 @@ namespace SimpleFormulaDrawer.interfac
 
         public int FormState = 0;
         private Pen AxisColor = new Pen(Color.Black);
-        private Graphics GR;
+        private Brush AxisFont = new SolidBrush(Color.Black);
+        private Graphics GR; //Графический контекст формы
+        private Bitmap BMP=new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.Bounds.Height); //Модель в памяти на весь экран. Форма не сможет быть больше :)
+        private Graphics GBMP; //Отображение BMP на обьект Graphics. Нужно для рисования на нем.
         public int Depth;//Глубина формы. Да, я не курил.
         public GraphForm(Pictogramm Parent)
         {
@@ -37,6 +41,7 @@ namespace SimpleFormulaDrawer.interfac
             this.ShowInTaskbar = false;
             this.BackColor = Color.White;
             this.GR = this.CreateGraphics();
+            this.GBMP = Graphics.FromImage(BMP);
         }
 
         private void GraphForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -78,15 +83,87 @@ namespace SimpleFormulaDrawer.interfac
             }
             else
             {
-                GR.DrawLine(AxisColor, 0, ZeroY, this.Width, ZeroY); //OX
-                GR.DrawLine(AxisColor,ZeroX,0,ZeroX,this.Height); //OY
+                GBMP.DrawLine(AxisColor, 0, ZeroY, this.Width, ZeroY); //OX
+                GBMP.DrawLine(AxisColor, ZeroX, 0, ZeroX, this.Height); //OY
             }
+            MarkAxis(AxisMarks);
+        }
+
+        private void MarkAxis(params double[] AxisMarks)
+        {
+            /*Количество марок расчитывается так: обязательно рисуется 0, если есть.
+             * Если есть, обязательно рисуется +-1 и далее по единице.
+             * если 0 не присутствует, то делается так: на каждую марку приходится 50 пикселей и вперед без песни :)
+             * Если марки не попадают по целым числам, хотя они есть то предыдущая строчка нарушается в пользу целых чисел.
+             * И кажется, это большой кусок логического кода :)
+             * */
+            if (Is3DRender)
+            {
+                #region 3D
+                //NOTE:Incomplete
+                #endregion
+            }
+            else
+            {
+                #region 2D
+                int Marks = CheckIfSpecialMarksExists(AxisMarks[0], AxisMarks[1]);
+                Marks = 2;
+                switch (Marks) //X
+                {
+                    case 0: //Рисуем 0, а потом в обе стороны по 50 пикселей , если нет целых
+                        {
+
+                            break;
+                        }
+                    case 1: //Рисуем целое и потом если не других целых то в обе стороны по 50 пикселей
+                        {
+
+                            break;
+                        }
+                    case 2: //Рисуем по 50 пикселей
+                        {
+                            int i = 0;
+                            while (i<this.Width)
+                            {
+                                GBMP.DrawString(Math.Round(Shared.NumOnPosition(i, AxisMarks[0], AxisMarks[1], this.Width), 2).ToString(), new Font("Sans Serif", 8), AxisFont, i, Shared.WhereZero(AxisMarks[2], AxisMarks[3], this.Height));
+                                i += 50;
+                            }
+                            break;
+                        }
+                }
+                #endregion
+            }
+            Redraw();
+        }
+
+        private int CheckIfSpecialMarksExists(double Min, double Max)
+        {
+            if (Min <= 0 && Max >= 0) return 0; //Если там есть 0
+            if (Max-Min>=1) return 1; // Если там есть целое
+            return 2; //Если ни нуля ни целого
+        }
+
+        private void Redraw()
+        {
+            Monitor.Enter(this);
+            GR.DrawImageUnscaled(BMP,0,0);
+            Monitor.Exit(this);
         }
 
         private void GraphForm_Resize(object sender, EventArgs e)
         {
             GR = this.CreateGraphics();
             this.Depth = (this.Width + this.Height)/2; //Я так сказал.
+        }
+
+        private void GraphForm_Activated(object sender, EventArgs e)
+        {
+            Redraw();
+        }
+
+        private void GraphForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            Redraw();
         }
 
     }

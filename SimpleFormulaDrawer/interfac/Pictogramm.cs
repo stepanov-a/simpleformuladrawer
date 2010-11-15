@@ -12,22 +12,13 @@ namespace SimpleFormulaDrawer.interfac
     public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
         private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
-        private System.Windows.Controls.ListBox FormulList = new System.Windows.Controls.ListBox(); //передается конструктором, но может быть изменен.
         private GraphForm GraphForm; //форма, с графиком
-        private double Minx, Maxx, Miny, Maxy,Minz,Maxz; //GraphBorders
-        private int Quality; //Quality of drawing
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private int Count3D = 0;//Количество 3х мерных функций
+        public MainFormContent Datastore;
 
-        public Pictogramm(double Minx, double Maxx , double Miny, double Maxy,double Minz, double Maxz, int Quality)//constructor
-        {//в качестве параметров передаются границы области определения и качество
-            this.Minx = Minx;
-            this.Maxx = Maxx;
-            this.Miny = Miny;
-            this.Maxy = Maxy;
-            this.Minz=Minz;
-            this.Maxz = Maxz;
-            this.Quality = Quality;
+        public Pictogramm(MainFormContent DataStore)//constructor
+        {//в качестве параметров передается структура, описывающая главную форму приложения
             this.GraphForm = new GraphForm(this);
             this.GraphForm.Show();
             this.Click += Click_event;
@@ -68,19 +59,13 @@ namespace SimpleFormulaDrawer.interfac
         private void RedrawFunctions()
         {
             GraphForm.Set3DRendering(Count3D!=0);
-            GraphForm.DrawAxis(Minx,Maxx,Miny,Maxy,Minz,Maxz);
+            GraphForm.DrawAxis(Datastore.MinX,Datastore.MaxX,Datastore.MinY,Datastore.MaxY,Datastore.MinZ,Datastore.MaxZ);
             //throw new NotImplementedException();
-        }
-
-        public void ChangeQuality(int How)
-        {
-            Quality = How;
-            RedrawFunctions();
         }
 
         public CompilerErrorCollection AddFunction(ListBoxItem What)
         {
-            FormulList.Items.Add(What);
+            Datastore.FormulListBox.Items.Add(What);
             var FParams = LMGR.AddFunction(What.Content.ToString());
             if (FParams.Is3D) Count3D++;
             if (FParams.Errors.Count==0) RedrawFunctions();
@@ -91,9 +76,9 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                LMGR.RemoveFunction(FormulList.Items.IndexOf(What));
+                LMGR.RemoveFunction(Datastore.FormulListBox.Items.IndexOf(What));
                 if (LibraryManager.Check3D(What.Content.ToString())) Count3D--;
-                FormulList.Items.Remove(What);
+                Datastore.FormulListBox.Items.Remove(What);
                 RedrawFunctions();
             }
             catch (Exception)
@@ -106,8 +91,8 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                FormulList.Items.RemoveAt(Index);
-                if (LibraryManager.Check3D(FormulList.Items[Index].ToString())) Count3D--;
+                Datastore.FormulListBox.Items.RemoveAt(Index);
+                if (LibraryManager.Check3D(Datastore.FormulListBox.Items[Index].ToString())) Count3D--;
                 LMGR.RemoveFunction(Index);
                 RedrawFunctions();
             }
@@ -127,37 +112,49 @@ namespace SimpleFormulaDrawer.interfac
              * 0x2:MaxX
              * 0x4:MinY
              * 0x8:MaxY
+             * 0x10:MinZ
+             * 0x20:MaxZ
              * Combinations (Sample):
              * 0xF:AllBorders
              * 0x3:MinX and MaxX
-             * NOTE: IF HOW VARIABLE HAS INVALID LENGTH (Less then need or >4), NOTHING HAPPENS.
+             * NOTE: IF HOW VARIABLE HAS INVALID LENGTH (Less then need or >6), NOTHING HAPPENS.
              * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
              */
-            if (How.Length > 4) return;
+            if (How.Length > 6) return;
             var ParamNum = 0;
             try
             {
                 if ((Flag & 0x1) == Flag)
                 {
-                    this.Minx = How[ParamNum];
+                    this.Datastore.MinX = How[ParamNum];
                     ParamNum++;
                 }
                 if ((Flag & 0x2) == Flag)
                 {
-                    this.Maxx = How[ParamNum];
+                    this.Datastore.MaxX = How[ParamNum];
                     ParamNum++;
                 }
                 if ((Flag & 0x4) == Flag)
                 {
-                    this.Miny = How[ParamNum];
+                    this.Datastore.MinY = How[ParamNum];
                     ParamNum++;
                 }
                 if ((Flag & 0x8) == Flag)
                 {
-                    this.Maxy = How[ParamNum];
+                    this.Datastore.MaxY = How[ParamNum];
+                    ParamNum++;
+                }
+                if ((Flag & 0x10) ==Flag)
+                {
+                    this.Datastore.MinZ = How[ParamNum];
+                    ParamNum++;
+                }
+                if ((Flag & 0x20) == Flag)
+                {
+                    this.Datastore.MaxZ = How[ParamNum];
                 }
             }
-            catch (Exception)
+            catch
             {}
             RedrawFunctions();
         }
