@@ -24,7 +24,6 @@ namespace SimpleFormulaDrawer
         public MainWindow()
         {
             Forms.MF = new MainForm();
-            LogManager.Init("debug.log", "error.log");
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             Application.Current.MainWindow = Forms.MF;
             Forms.MF.Show();
@@ -42,11 +41,8 @@ namespace SimpleFormulaDrawer
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            LogManager.WriteDebug("GAY");
             Forms.DF.Show();
         }
-
-   
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {

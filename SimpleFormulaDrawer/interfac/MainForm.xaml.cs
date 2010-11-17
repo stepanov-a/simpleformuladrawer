@@ -169,7 +169,5 @@ namespace SimpleFormulaDrawer.interfac
 
             Forms.StartupWindow.Show();
         }
-
-      
     }
 }
