@@ -44,16 +44,18 @@ namespace SimpleFormulaDrawer.interfac
 
         private MainFormContent CreateContent()
         {
-            var toRet = new MainFormContent();
-            toRet.MinX = Convert.ToDouble(this.XminTextbox.Text);
-            toRet.MaxX = Convert.ToDouble(this.XmaxTextbox.Text);
-            toRet.MinY = Convert.ToDouble(this.YminTextbox.Text);
-            toRet.MaxY = Convert.ToDouble(this.YmaxTextbox.Text);
-            toRet.MinZ = Convert.ToDouble(this.ZMinTextbox.Text);
-            toRet.MaxZ = Convert.ToDouble(this.ZMaxTextbox.Text);
-            toRet.Quality = this.QualitySlider.Value;
-            toRet.Show3DBox = this.Show3DCheckBox.IsChecked.Value;
-            toRet.FormulListBox = this.FormulListBox1;
+            var toRet = new MainFormContent
+                            {
+                                MinX = Convert.ToDouble(this.XminTextbox.Text),
+                                MaxX = Convert.ToDouble(this.XmaxTextbox.Text),
+                                MinY = Convert.ToDouble(this.YminTextbox.Text),
+                                MaxY = Convert.ToDouble(this.YmaxTextbox.Text),
+                                MinZ = Convert.ToDouble(this.ZMinTextbox.Text),
+                                MaxZ = Convert.ToDouble(this.ZMaxTextbox.Text),
+                                Quality = this.QualitySlider.Value,
+                                Show3DBox = this.Show3DCheckBox.IsChecked.Value,
+                                FormulListBox = this.FormulListBox1
+                            };
             return toRet;
         }
 
@@ -79,9 +81,9 @@ namespace SimpleFormulaDrawer.interfac
             {
                 int ColIndex;//ИНТЕЖЕРный индекс последней колонки
                 ColIndex = MainGrid.ColumnDefinitions.Count-1 ;//индекс последней колонки=количеству колонок-1, т.к. нумерация с нуля.
-                Forms.DF.AddMessage(ColIndex.ToString()+"ColumnsDef-1");//добавление в логи
+                Forms.DF.AddMessage(string.Format("{0}ColumnsDef-1", ColIndex));//добавление в логи
                 //предыдущие три строчки впринципе можно переписать, заменив ColIndex цифрой2,но пока пускай так будет..
-                GridLengthConverter myGridLengthConverter = new GridLengthConverter();//Для управления шириной грида ее нужно конвертировать. танцы с бубном вокруг костра
+                var myGridLengthConverter = new GridLengthConverter();//Для управления шириной грида ее нужно конвертировать. танцы с бубном вокруг костра
                 MainGrid.ColumnDefinitions[ColIndex].Width = (GridLength)myGridLengthConverter.ConvertFromString("4*");//возня с изменением размеров, ничего сексуального
             }
             
@@ -94,16 +96,9 @@ namespace SimpleFormulaDrawer.interfac
             this.Top = 0;
             this.Height = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Height;
             //здесь должно быть вычисление пропорций экрана. Если он 4\3, то форма занимает такую-то часть от всего, если нет-другое число
-            double widt=System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/6;
-            Boolean err = widt < this.MinWidth;
-            if (err)
-            {
-                this.Width = this.MinWidth;
-            }
-            else
-            {
-                this.Width = widt;
-            }
+            double width=System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/6;
+            var err = width < this.MinWidth;
+            this.Width = err ? this.MinWidth : width;
         }
 
 

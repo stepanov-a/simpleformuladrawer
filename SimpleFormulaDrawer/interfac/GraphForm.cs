@@ -139,8 +139,7 @@ namespace SimpleFormulaDrawer.interfac
         private int CheckIfSpecialMarksExists(double Min, double Max)
         {
             if (Min <= 0 && Max >= 0) return 0; //Если там есть 0
-            if (Max-Min>=1) return 1; // Если там есть целое
-            return 2; //Если ни нуля ни целого
+            return Max-Min>=1 ? 1 : 2;
         }
 
         private void Redraw()
