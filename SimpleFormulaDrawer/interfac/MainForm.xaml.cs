@@ -62,7 +62,7 @@ namespace SimpleFormulaDrawer.interfac
             }
             catch
             {
-                toRet = new MainFormContent();
+                toRet = MainFormContent.Default();
             }
             return toRet;
         }
