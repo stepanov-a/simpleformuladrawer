@@ -44,7 +44,10 @@ namespace SimpleFormulaDrawer.interfac
 
         private MainFormContent CreateContent()
         {
-            var toRet = new MainFormContent
+            MainFormContent toRet;
+            try
+            {
+                toRet = new MainFormContent
                             {
                                 MinX = Convert.ToDouble(this.XminTextbox.Text),
                                 MaxX = Convert.ToDouble(this.XmaxTextbox.Text),
@@ -56,6 +59,11 @@ namespace SimpleFormulaDrawer.interfac
                                 Show3DBox = this.Show3DCheckBox.IsChecked.Value,
                                 FormulListBox = this.FormulListBox1
                             };
+            }
+            catch
+            {
+                toRet = new MainFormContent();
+            }
             return toRet;
         }
 
