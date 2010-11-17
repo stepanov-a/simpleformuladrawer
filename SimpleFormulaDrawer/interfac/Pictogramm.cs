@@ -12,16 +12,13 @@ namespace SimpleFormulaDrawer.interfac
     public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
         private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
-        private GraphForm GraphForm; //форма, с графиком
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private int Count3D = 0;//Количество 3х мерных функций
         public MainFormContent Datastore;
 
         public Pictogramm(MainFormContent DataStore)//constructor
         {//в качестве параметров передается структура, описывающая главную форму приложения
-            this.GraphForm = new GraphForm(this);
-            this.GraphForm.Show();
-            this.Click += Click_event;
+            this.Datastore = DataStore;
         }
 
         public void ClosePictogramm()
@@ -30,42 +27,12 @@ namespace SimpleFormulaDrawer.interfac
             Forms.MF.ArrPictogramm.Remove(this);
         }
 
-        private void Click_event(object sender, RoutedEventArgs e)
-        {
-            GraphForm.BringToFront();
-            switch (GraphForm.FormState)
-            {
-                case 0:
-                    {
-                        GraphForm.BringToFront();
-                        GraphForm.FormState = 1;
-                        break;
-                    }
-                case 1:
-                    {
-                        GraphForm.Hide();
-                        GraphForm.FormState = 2;
-                        break;
-                    }
-                case 2:
-                    {
-                        GraphForm.Show();
-                        GraphForm.FormState = 1;
-                        break;
-                    }
-            }
-        }
-
         private void RedrawFunctions()
         {
-            GraphForm.Set3DRendering(Count3D!=0);
-            GraphForm.DrawAxis(Datastore.MinX,Datastore.MaxX,Datastore.MinY,Datastore.MaxY,Datastore.MinZ,Datastore.MaxZ);
-            //throw new NotImplementedException();
         }
 
         public CompilerErrorCollection AddFunction(ListBoxItem What)
         {
-            Datastore.FormulListBox.Items.Add(What);
             var FParams = LMGR.AddFunction(What.Content.ToString());
             if (FParams.Is3D) Count3D++;
             if (FParams.Errors.Count==0) RedrawFunctions();
@@ -76,9 +43,9 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                LMGR.RemoveFunction(Datastore.FormulListBox.Items.IndexOf(What));
+                LMGR.RemoveFunction(Forms.MF.FormulListBox1.Items.IndexOf(What));
                 if (LibraryManager.Check3D(What.Content.ToString())) Count3D--;
-                Datastore.FormulListBox.Items.Remove(What);
+                Forms.MF.FormulListBox1.Items.Remove(What);
                 RedrawFunctions();
             }
             catch (Exception)
@@ -91,8 +58,8 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                Datastore.FormulListBox.Items.RemoveAt(Index);
-                if (LibraryManager.Check3D(Datastore.FormulListBox.Items[Index].ToString())) Count3D--;
+                Forms.MF.FormulListBox1.Items.RemoveAt(Index);
+                if (LibraryManager.Check3D(Forms.MF.FormulListBox1.Items[Index].ToString())) Count3D--;
                 LMGR.RemoveFunction(Index);
                 RedrawFunctions();
             }

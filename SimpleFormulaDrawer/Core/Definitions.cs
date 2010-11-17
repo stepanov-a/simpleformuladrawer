@@ -22,6 +22,7 @@ namespace SimpleFormulaDrawer.Core
         {
             return (float) (-range/(max - min)*min);
         }
+
         public static float WhereNum(double num,double min,double max,float range)
         {
             return (float) (num*(range/(max-min))+WhereZero(min,max,range));
@@ -172,21 +173,5 @@ namespace SimpleFormulaDrawer.Core
     {
         public double MinX, MaxX, MinY, MaxY, MinZ, MaxZ,Quality;
         public bool Show3DBox;
-        public ListBox FormulListBox;
-        public static MainFormContent Default()
-        {
-            var toRet=new MainFormContent
-                          {
-                              MinX = -10,
-                              MaxX = 10,
-                              MinY = -10,
-                              MaxY = 10,
-                              MinZ = -10,
-                              MaxZ = 10,
-                              Show3DBox = true,
-                              FormulListBox = new ListBox()
-                          };
-            return toRet;
-        }
     }
 }
