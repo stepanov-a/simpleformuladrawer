@@ -45,10 +45,7 @@ namespace SimpleFormulaDrawer
 
         private MainFormContent CreateContent()
         {
-            MainFormContent toRet;
-            try
-            {
-                toRet = new MainFormContent
+            return new MainFormContent
                             {
                                 MinX = Convert.ToDouble(this.XminTextbox.Text),
                                 MaxX = Convert.ToDouble(this.XmaxTextbox.Text),
@@ -58,14 +55,7 @@ namespace SimpleFormulaDrawer
                                 MaxZ = Convert.ToDouble(this.ZMaxTextbox.Text),
                                 Quality = this.QualitySlider.Value,
                                 Show3DBox = this.Show3DCheckBox.IsChecked.Value,
-                                FormulListBox = this.FormulListBox1
                             };
-            }
-            catch
-            {
-                toRet = MainFormContent.Default();
-            }
-            return toRet;
         }
 
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
