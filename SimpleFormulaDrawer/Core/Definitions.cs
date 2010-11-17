@@ -187,6 +187,7 @@ namespace SimpleFormulaDrawer.Core
                               Show3DBox = true,
                               FormulListBox = new ListBox()
                           };
+            return toRet;
         }
     }
 }
