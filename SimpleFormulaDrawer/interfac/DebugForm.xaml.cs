@@ -35,7 +35,6 @@ namespace SimpleFormulaDrawer.interfac
         public void AddMessage(string What)
         {
             listBox1.Items.Add(What);
-            listBox1.SelectedIndex = listBox1.Items.Count;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
