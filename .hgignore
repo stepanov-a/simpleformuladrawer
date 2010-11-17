@@ -4,4 +4,6 @@ _ReSharper*/
 *obj/
 *.suo
 *.user
+*.vs10x
+*.ReSharper
 syntax: regexp
