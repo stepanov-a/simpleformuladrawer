@@ -108,6 +108,7 @@ namespace SimpleFormulaDrawer.Core
                 Config.WriteLine(String.Format("{0}={1}",Item.Key,Item.Value));
             }
             Config.Close();
+            Config.Dispose();
             return;
         }
     }

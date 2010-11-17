@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace SimpleFormulaDrawer.Core
@@ -7,7 +8,7 @@ namespace SimpleFormulaDrawer.Core
     {
         private class Log
         {
-            private readonly StreamWriter File;
+            public readonly StreamWriter File;
 
             public Log(string fileName)
             {
@@ -25,8 +26,10 @@ namespace SimpleFormulaDrawer.Core
                 File.WriteLine(STR);
             }
         }
+
         private static Log Debug;
         private static Log Error;
+
         public static void Init(string debugName,string errorName)
         {
             Directory.CreateDirectory("Logs");

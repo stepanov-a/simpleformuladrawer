@@ -44,6 +44,10 @@ namespace SimpleFormulaDrawer.Core
 
         public FunctionParameters AddFunction(string Function)
         {
+            /*Здесь может быть проблема безопастности, так как компилируется то, что пользователь напишет в текстбоксе
+             * НО ко всем функциям добавится Math и я пока что не нашел способа как это обходить
+             * следовательно безопастность не нарушается
+             * */
             var ParsedFunction = ParseFunction(Function);
             var Is3D = Check3D(ParsedFunction);
             var TSource = new SourceManager(ParsedFunction);
@@ -57,6 +61,7 @@ namespace SimpleFormulaDrawer.Core
             FunctionParameters toRet;
             toRet.Errors = CR.Errors;
             toRet.Is3D = Is3D;
+            Compiler.Dispose();
             return toRet;
         }
 
