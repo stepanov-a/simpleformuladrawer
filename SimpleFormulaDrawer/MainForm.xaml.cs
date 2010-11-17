@@ -11,8 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SimpleFormulaDrawer.Core;
+using SimpleFormulaDrawer.interfac;
 
-namespace SimpleFormulaDrawer.interfac
+namespace SimpleFormulaDrawer
 {
     /// <summary>
     /// Логика взаимодействия для MainForm.xaml
@@ -166,8 +167,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void Debugbutton_Click(object sender, RoutedEventArgs e)
         {//показывает самую страшную формочку, которую когда-либо видел пользователь)
-
-            Forms.StartupWindow.Show();
+            Forms.DF.Show();
         }
     }
 }
