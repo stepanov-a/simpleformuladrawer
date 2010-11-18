@@ -173,5 +173,6 @@ namespace SimpleFormulaDrawer.Core
     {
         public double MinX, MaxX, MinY, MaxY, MinZ, MaxZ,Quality;
         public bool Show3DBox;
+        public ListBox FormulListBox;
     }
 }

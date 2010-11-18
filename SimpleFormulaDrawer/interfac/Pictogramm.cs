@@ -15,6 +15,7 @@ namespace SimpleFormulaDrawer.interfac
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
         private int Count3D = 0;//Количество 3х мерных функций
         public MainFormContent Datastore;
+        public GraphForm GR; // Грфаическая форма.
 
         public Pictogramm(MainFormContent DataStore)//constructor
         {//в качестве параметров передается структура, описывающая главную форму приложения
@@ -43,9 +44,9 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                LMGR.RemoveFunction(Forms.MF.FormulListBox1.Items.IndexOf(What));
+                LMGR.RemoveFunction(Datastore.FormulListBox.Items.IndexOf(What));
                 if (LibraryManager.Check3D(What.Content.ToString())) Count3D--;
-                Forms.MF.FormulListBox1.Items.Remove(What);
+                Datastore.FormulListBox.Items.Remove(What);
                 RedrawFunctions();
             }
             catch (Exception)
@@ -58,8 +59,8 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                Forms.MF.FormulListBox1.Items.RemoveAt(Index);
-                if (LibraryManager.Check3D(Forms.MF.FormulListBox1.Items[Index].ToString())) Count3D--;
+                Datastore.FormulListBox.Items.RemoveAt(Index);
+                if (LibraryManager.Check3D(Datastore.FormulListBox.Items[Index].ToString())) Count3D--;
                 LMGR.RemoveFunction(Index);
                 RedrawFunctions();
             }
