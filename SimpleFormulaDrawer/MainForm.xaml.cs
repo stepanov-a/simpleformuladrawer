@@ -39,6 +39,7 @@ namespace SimpleFormulaDrawer
             this.YminTextbox.Text = "-10";
             this.ZMinTextbox.Text = "-10";
             this.ZMaxTextbox.Text = "10";
+            this.Width = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/5;
             AddPictogramm();//создание первой пиктограммы происходит при запуске приложения
             //во-первых без нее все приложение бессмысленно, а во-вторых-так меньше возни
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
-using SimpleFormulaDrawer.interfac;
+﻿using System.Windows;
 using SimpleFormulaDrawer.Core;
 
 namespace SimpleFormulaDrawer
@@ -16,9 +10,8 @@ namespace SimpleFormulaDrawer
     {
         public App()
         {
-            Forms.MF = new MainForm();
-            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Application.Current.MainWindow = Forms.MF;
+            Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            Current.MainWindow = Forms.MF;
             Forms.MF.Show();
         }
     }

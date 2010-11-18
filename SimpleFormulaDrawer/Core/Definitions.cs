@@ -12,26 +12,8 @@ namespace SimpleFormulaDrawer.Core
 {
     public static class Forms
     {
-        public static MainForm MF;
+        public static readonly MainForm MF = new MainForm();
         public static readonly DebugForm DF = new DebugForm();
-    }
-
-    public static class Shared
-    {
-        public static float WhereZero(double min,double max,float range)
-        {
-            return (float) (-range/(max - min)*min);
-        }
-
-        public static float WhereNum(double num,double min,double max,float range)
-        {
-            return (float) (num*(range/(max-min))+WhereZero(min,max,range));
-        }
-
-        public static double NumOnPosition(double pos,double min,double max,float range)
-        {
-            return pos/(range/(max - min))+min;
-        }
     }
 
     public class DSet
