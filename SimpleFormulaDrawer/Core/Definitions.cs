@@ -157,4 +157,20 @@ namespace SimpleFormulaDrawer.Core
         public bool Show3DBox;
         public ListBox FormulListBox;
     }
+
+    public  class Element
+    {
+        //один элемент класса ObjectList
+    }
+
+
+
+           public class ObjectList
+           {
+              
+                   public Element el;//выше
+
+           }
+    
+
 }
