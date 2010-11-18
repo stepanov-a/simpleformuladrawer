@@ -46,16 +46,17 @@ namespace SimpleFormulaDrawer
         private MainFormContent CreateContent()
         {
             return new MainFormContent
-                            {
-                                MinX = Convert.ToDouble(this.XminTextbox.Text),
-                                MaxX = Convert.ToDouble(this.XmaxTextbox.Text),
-                                MinY = Convert.ToDouble(this.YminTextbox.Text),
-                                MaxY = Convert.ToDouble(this.YmaxTextbox.Text),
-                                MinZ = Convert.ToDouble(this.ZMinTextbox.Text),
-                                MaxZ = Convert.ToDouble(this.ZMaxTextbox.Text),
-                                Quality = this.QualitySlider.Value,
-                                Show3DBox = this.Show3DCheckBox.IsChecked.Value,
-                            };
+                       {
+                           MinX = Convert.ToDouble(this.XminTextbox.Text),
+                           MaxX = Convert.ToDouble(this.XmaxTextbox.Text),
+                           MinY = Convert.ToDouble(this.YminTextbox.Text),
+                           MaxY = Convert.ToDouble(this.YmaxTextbox.Text),
+                           MinZ = Convert.ToDouble(this.ZMinTextbox.Text),
+                           MaxZ = Convert.ToDouble(this.ZMaxTextbox.Text),
+                           Quality = this.QualitySlider.Value,
+                           Show3DBox = this.Show3DCheckBox.IsChecked.Value,
+                           FormulListBox = this.FormulListBox1
+                       };
         }
 
         private void AddPictogramm() //добавляет новую пиктограмму в массив(лист) пиктограмм
