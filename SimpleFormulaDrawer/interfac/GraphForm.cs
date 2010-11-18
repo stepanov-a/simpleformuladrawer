@@ -12,7 +12,7 @@ namespace SimpleFormulaDrawer.interfac
     {
         private Bitmap BMP=new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.WorkingArea.Height); //Картинка - буфер
         private Graphics GR, GBMP;//Нативная графика окна и картинки соответственно
-
+        private ObjectList[][][] Points; //Массивы точек. 1е измерение - номер графика 2е измерение - Y для x 3е измерение для Z по X и Y Способ разбора определяется дополнительным кодом.
         #region UserIteractions
         public GraphForm()
         {
@@ -22,6 +22,7 @@ namespace SimpleFormulaDrawer.interfac
             this.Width = Screen.PrimaryScreen.WorkingArea.Width - this.Left;
             this.Activated+=GRActivated;
             this.GBMP = Graphics.FromImage(BMP);
+            this.GR = this.CreateGraphics();
         }
 
         private void GRActivated(object sender, System.EventArgs e)
