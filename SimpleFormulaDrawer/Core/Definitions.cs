@@ -158,19 +158,61 @@ namespace SimpleFormulaDrawer.Core
         public ListBox FormulListBox;
     }
 
-    public  class Element
-    {
-        //один элемент класса ObjectList
+    public  class Item
+    { //кусок одного элемента списка
+        private object content;//
+
+        public Item(object obj)
+        {
+            content = obj;
+        }
     }
 
 
 
-           public class ObjectList
-           {
-              
-                   public Element el;//выше
-
-           }
+   public class ObjectElement
+    {   //один полноценный элемент списка 
+        public Item el;//выше
+        public ObjectElement next;//на следующий элемент
+        public ObjectElement(object content)//конструктор
+        {
+            this.el=new Item(content);//новый элемент
+        }
+    }
     
+ public class ObjectList//список объектов
+ {
+     private ObjectElement StartEl;//стартовая хрень
+
+     public void AddElement(ObjectElement element)
+     {
+         ObjectElement tmpEl;
+         if (StartEl == null) //нулевая тра ля ля
+         {
+             StartEl = new ObjectElement(element);
+         }
+         else
+         {
+             tmpEl = StartEl;
+             while (tmpEl != null) //поиск последнего тра ля ля
+             {
+                 tmpEl = tmpEl.next;
+             }
+             tmpEl = new ObjectElement(element);
+         }
+     }
+
+
+    private void FlushList()
+    {
+        this.StartEl = new ObjectElement(null);
+        GC.Collect();
+    }
+    public ObjectList()//конструктор
+    {
+    //   this.StartEl=new ObjectElement();
+    }
+ }
+        
 
 }
