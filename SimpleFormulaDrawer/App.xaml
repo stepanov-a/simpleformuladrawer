@@ -4,12 +4,10 @@
              ShutdownMode="OnMainWindowClose"
              >
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="interfac\ResourceDictionary1.xaml"/>
+                <ResourceDictionary Source="Interface\ResourceDictionary1.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>

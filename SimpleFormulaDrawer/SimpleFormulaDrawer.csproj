@@ -106,11 +106,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="interfac\ColorPicker.xaml">
+    <Page Include="Interface\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="interfac\DebugForm.xaml">
+    <Page Include="Interface\DebugForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,22 +122,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="interfac\ColorPicker.xaml.cs">
+    <Compile Include="Interface\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Definitions.cs" />
     <Compile Include="Core\LibraryManager.cs" />
-    <Compile Include="interfac\DebugForm.xaml.cs">
+    <Compile Include="Interface\DebugForm.xaml.cs">
       <DependentUpon>DebugForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="interfac\GraphForm.cs">
+    <Compile Include="Interface\GraphForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.xaml.cs">
       <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="interfac\Pictogramm.cs" />
-    <Page Include="interfac\ResourceDictionary1.xaml">
+    <Compile Include="Interface\Pictogramm.cs" />
+    <Page Include="Interface\ResourceDictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,8 +156,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="interfac\GraphForm.resx">
+    <EmbeddedResource Include="Interface\GraphForm.resx">
       <DependentUpon>GraphForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
