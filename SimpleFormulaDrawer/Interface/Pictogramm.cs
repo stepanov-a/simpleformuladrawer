@@ -126,8 +126,10 @@ namespace SimpleFormulaDrawer.interfac
                     this.Datastore.MaxZ = How[ParamNum];
                 }
             }
-            catch
-            {}
+            catch (Exception E)
+            {
+                Forms.DF.AddMessage(E.Message,System.Windows.Media.Colors.Red);
+            }
             RedrawFunctions();
         }
     }
