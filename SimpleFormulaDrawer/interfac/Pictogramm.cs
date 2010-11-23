@@ -27,11 +27,11 @@ namespace SimpleFormulaDrawer.interfac
         public void ClosePictogramm()
         {
             Forms.MF.PictlistBox.Items.Remove(this.Parent);
-            Forms.MF.ArrPictogramm.Remove(this);
         }
 
         private void RedrawFunctions()
         {
+            //GR.AddGraphic();
         }
 
         public CompilerErrorCollection AddFunction(ListBoxItem What)
@@ -39,6 +39,7 @@ namespace SimpleFormulaDrawer.interfac
             var FParams = LMGR.AddFunction(What.Content.ToString());
             if (FParams.Is3D) Count3D++;
             if (FParams.Errors.Count==0) RedrawFunctions();
+            RedrawFunctions();
             return FParams.Errors;
         }
 
@@ -85,7 +86,7 @@ namespace SimpleFormulaDrawer.interfac
              * 0x10:MinZ
              * 0x20:MaxZ
              * Combinations (Sample):
-             * 0xF:AllBorders
+             * 0x3F:AllBorders
              * 0x3:MinX and MaxX
              * NOTE: IF HOW VARIABLE HAS INVALID LENGTH (Less then need or >6), NOTHING HAPPENS.
              * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
@@ -94,6 +95,7 @@ namespace SimpleFormulaDrawer.interfac
             var ParamNum = 0;
             try
             {
+                if (Flag == 0x0) throw new AccessViolationException();
                 if ((Flag & 0x1) == Flag)
                 {
                     this.Datastore.MinX = How[ParamNum];

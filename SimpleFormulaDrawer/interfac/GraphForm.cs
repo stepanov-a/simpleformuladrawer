@@ -21,11 +21,23 @@ namespace SimpleFormulaDrawer.interfac
             this.Activated+=GRActivated;
             this.GBMP = Graphics.FromImage(BMP);
             this.GR = this.CreateGraphics();
+            this.ShowInTaskbar = false;
         }
 
-        private void GRActivated(object sender, System.EventArgs e)
+        private void GRActivated(object sender, EventArgs e)
         {
             this.Redraw();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 5, 0);
+            this.Size = new Size(Screen.PrimaryScreen.WorkingArea.Width - this.Left,
+                                                Screen.PrimaryScreen.WorkingArea.Height);
+            this.Name = "Форма графиков";
+            this.ResumeLayout(false);
         }
 
         #endregion
@@ -37,16 +49,27 @@ namespace SimpleFormulaDrawer.interfac
         }
         #endregion
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.StartPosition =FormStartPosition.Manual;
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 5,0);
-            this.Size = new System.Drawing.Size(Screen.PrimaryScreen.WorkingArea.Width - this.Left,
-                                                Screen.PrimaryScreen.WorkingArea.Height);
-            this.Name = "GraphForm";
-            this.ResumeLayout(false);
+        #region Drawing functions
 
+        public void FlushBuffer()
+        {
+            this.GBMP.Clear(Color.White);
         }
+
+        public int AddGraphic()
+        {
+            throw new NotImplementedException("AddGraphic");
+        }
+
+        public int AddGraphic(ObjectList Graph)
+        {
+            throw new NotImplementedException("AddGraphic");
+        }
+
+        public void AddNextPoint(ObjectList Pnt)
+        {
+            throw new NotImplementedException("AddNextPoint");
+        }
+        #endregion
     }
 }

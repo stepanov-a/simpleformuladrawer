@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using SimpleFormulaDrawer.Core;
-
+using Forms = SimpleFormulaDrawer.Core.Forms;
 namespace SimpleFormulaDrawer
 {
     /// <summary>
@@ -10,8 +9,7 @@ namespace SimpleFormulaDrawer
     {
         public App()
         {
-            Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Current.MainWindow = Forms.MF;
+            this.MainWindow = Forms.MF;
             Forms.MF.Show();
         }
     }

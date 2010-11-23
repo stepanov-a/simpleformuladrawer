@@ -22,8 +22,7 @@ namespace SimpleFormulaDrawer
     /// 
     public partial class MainForm : Window
     {
-        public List<Pictogramm> ArrPictogramm = new List<Pictogramm>();//прикольно. Лист из пиктограмм. нечто вроде списка\массива
-        public int SelectedPictogram=0; //Текущая выбранная пиктограмма.
+        private Pictogramm Selected;
         private double PictHeight;//высота пиктограммы. Расчитывается конструктором, чтобы не создавать иконок разных размеров
         //ширина расчитывается динамически, в зависимости от размеров Грида и Листбокса, поэтому хранить ее не надо.
         
@@ -41,7 +40,7 @@ namespace SimpleFormulaDrawer
             this.ZMaxTextbox.Text = "10";
             this.Width = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width/5;
             AddPictogramm();//создание первой пиктограммы происходит при запуске приложения
-            //во-первых без нее все приложение бессмысленно, а во-вторых-так меньше возни
+            //во-первых без нее все приложение бессмысленно, а во-вторых - так меньше возни
         }
 
         private MainFormContent CreateContent()
@@ -67,28 +66,26 @@ namespace SimpleFormulaDrawer
             Forms.DF.AddMessage("Create New Pictogramm/graphform, his number is  "+ArrPictogramm.Count.ToString());//добавление в логи
 #endif// енд Иф дебаг!
 
-            this.ArrPictogramm.Add(new Pictogramm(this.CreateContent()));//констуктор описан в модуле Pictogramm, параметры-диапазон построения, получившаяся пиктограмма добавляется в LIST, описанный выше
-            var NewItem = new ListBoxItem {Content = this.ArrPictogramm.Last(), Height = this.PictHeight};//созданпие нового айтема для листа, в качестве контента айтема передается последний элемент списка (строчкой выше он заполняется)
+            //this.ArrPictogramm.Add(new Pictogramm(this.CreateContent()));//констуктор описан в модуле Pictogramm, параметры-диапазон построения, получившаяся пиктограмма добавляется в LIST, описанный выше
+            var NewItem = new ListBoxItem {Content = new Pictogramm(this.CreateContent()), Height = this.PictHeight};//созданпие нового айтема для листа, в качестве контента айтема передается последний элемент списка (строчкой выше он заполняется)
 
 #if DEBUG//Иф дебаг!
             Forms.DF.AddMessage(this.PictlistBox.Height.ToString()+"-PicrPistBox Height");
 #endif// енд Иф дебаг!
 
             this.PictlistBox.Items.Add(NewItem);//добавление новой пиктограммы
-            bool FullBar = (this.ArrPictogramm.Count > 23);//вообще было бы неплохо это переписать, 
+            this.Selected =(Pictogramm) NewItem.Content;
+            bool FullBar = (this.PictlistBox.Items.Count > 23);//вообще было бы неплохо это переписать, 
             //т.к. в случае смены разрешения или размеров формы (ну мало ли) на экране может находиться меньше 23 пиктограмм, 
             //и грид будет сдвигаться с задержкой
             if (FullBar) //если заполнено все видимое пространство листбокса
             {
-                int ColIndex;//ИНТЕЖЕРный индекс последней колонки
-                ColIndex = MainGrid.ColumnDefinitions.Count-1 ;//индекс последней колонки=количеству колонок-1, т.к. нумерация с нуля.
+                int ColIndex = MainGrid.ColumnDefinitions.Count-1;
                 Forms.DF.AddMessage(string.Format("{0}ColumnsDef-1", ColIndex));//добавление в логи
                 //предыдущие три строчки впринципе можно переписать, заменив ColIndex цифрой2,но пока пускай так будет..
                 var myGridLengthConverter = new GridLengthConverter();//Для управления шириной грида ее нужно конвертировать. танцы с бубном вокруг костра
                 MainGrid.ColumnDefinitions[ColIndex].Width = (GridLength)myGridLengthConverter.ConvertFromString("4*");//возня с изменением размеров, ничего сексуального
             }
-            
-         //   Core.Forms.DF.AddMessage(GridRow.ToString()+"-GridRow");
         }
 
         private void Window_Initialized(object sender, EventArgs e)
@@ -101,7 +98,6 @@ namespace SimpleFormulaDrawer
             var err = width < this.MinWidth;
             this.Width = err ? this.MinWidth : width;
         }
-
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {//отвечает за симпотичный эффпект появления и исчезновения содержимого текстбоксов с координатами MINIMUM\MAXIMUM X\Y
@@ -128,24 +124,18 @@ namespace SimpleFormulaDrawer
                                            Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
                                            Content = FormulText.Text,
                                            Background = new SolidColorBrush(ColorPicker1.SelectedColor)
-                                       },
-                        TempNewItem = new ListBoxItem
-                                          {//задает ему цвета и текст
-                                              Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
-                                              Content = FormulText.Text,
-                                              Background = new SolidColorBrush(ColorPicker1.SelectedColor)
-                                          };
+                                       };
             if (NewItem.Content.ToString() == "Formula") return;
 
-            var Errors=this.ArrPictogramm[SelectedPictogram].AddFunction(NewItem);//ошибки при лдобавлении функции. лично мне реализация не нравится, я туда муть вбивал, видимо это временный вариант
+            var Errors = Selected.AddFunction(NewItem);//ошибки при лдобавлении функции. лично мне реализация не нравится, я туда муть вбивал, видимо это временный вариант
             if (Errors.Count==0)//если ошибок нет
             {
-                this.FormulListBox1.Items.Add(TempNewItem);//добавляем новый айтем в лист
+                this.FormulListBox1.Items.Add(NewItem);//добавляем новый айтем в лист
             }
             else //если ошибки есть
             {
                 MessageBox.Show("Ошибка");//ругаемся
-                this.ArrPictogramm[SelectedPictogram].RemoveFunction(NewItem);
+                Selected.RemoveFunction(NewItem);
                 //Тут надо на самом деле подсвечивать начало чего то неправильного и показывать рядом тултип с описанием ошибки.
             }
         }
@@ -160,6 +150,11 @@ namespace SimpleFormulaDrawer
         private void Debugbutton_Click(object sender, RoutedEventArgs e)
         {//показывает самую страшную формочку, которую когда-либо видел пользователь)
             Forms.DF.Show();
+        }
+
+        private void PictlistBox_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Selected = (Pictogramm) this.FormulListBox1.SelectedItem;
         }
     }
 }
