@@ -13,12 +13,15 @@ namespace SimpleFormulaDrawer.interfac
         private Bitmap BMP=new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.WorkingArea.Height); //Картинка - буфер
         private Graphics GR, GBMP;//Нативная графика окна и картинки соответственно
         private ObjectList[] Points; //Массив графиков.
+        private bool IsNotFirstShow = false;
+
         #region UserIteractions
 
         public GraphForm()
         {
             this.InitializeComponent();
             this.Activated+=GRActivated;
+            this.Shown += FShown;
             this.GBMP = Graphics.FromImage(BMP);
             this.GR = this.CreateGraphics();
             this.ShowInTaskbar = false;
@@ -26,7 +29,12 @@ namespace SimpleFormulaDrawer.interfac
 
         private void GRActivated(object sender, EventArgs e)
         {
-            this.Redraw();
+            if (IsNotFirstShow) this.Redraw();
+        }
+
+        private void FShown(object sender, EventArgs e)
+        {
+            IsNotFirstShow = true;
         }
 
         private void InitializeComponent()
