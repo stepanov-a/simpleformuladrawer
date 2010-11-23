@@ -22,7 +22,7 @@ namespace SimpleFormulaDrawer
     /// 
     public partial class MainForm : Window
     {
-        private Pictogramm Selected;
+        public Pictogramm Selected;
         private double PictHeight;//высота пиктограммы. Расчитывается конструктором, чтобы не создавать иконок разных размеров
         //ширина расчитывается динамически, в зависимости от размеров Грида и Листбокса, поэтому хранить ее не надо.
         

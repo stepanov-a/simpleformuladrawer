@@ -20,7 +20,7 @@ namespace SimpleFormulaDrawer.interfac
         public Pictogramm(MainFormContent DataStore)//constructor
         {//в качестве параметров передается структура, описывающая главную форму приложения
             this.Datastore = DataStore;
-            this.GR=new GraphForm();
+            this.GR=new GraphForm(this);
             GR.Show();
         }
 
