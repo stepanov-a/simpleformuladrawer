@@ -163,14 +163,10 @@ namespace SimpleFormulaDrawer.Core
         //один элемент класса ObjectList
     }
 
-
-
-           public class ObjectList
-           {
-              
-                   public Element el;//выше
-
-           }
+    public class ObjectList
+    {
+        public Element el;//выше
+    }
     
 
 }

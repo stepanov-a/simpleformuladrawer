@@ -10,9 +10,9 @@ namespace SimpleFormulaDrawer.interfac
     {
         private Bitmap BMP=new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.WorkingArea.Height); //Картинка - буфер
         private Graphics GR, GBMP;//Нативная графика окна и картинки соответственно
-        private ObjectList[] Points; //Массив графиков.
-        private bool IsNotFirstShow = false;
-        private Pictogramm Source; //Пиктограмма - родитель.
+        private ObjectList Points; //Массив графиков.
+        private bool IsNotFirstShow;
+        private readonly Pictogramm Source; //Пиктограмма - родитель.
 
         #region UserIteractions
 
