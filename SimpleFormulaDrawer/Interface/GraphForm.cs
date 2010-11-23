@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SimpleFormulaDrawer.Core;
 using System.Drawing;
@@ -15,17 +12,25 @@ namespace SimpleFormulaDrawer.interfac
         private Graphics GR, GBMP;//Нативная графика окна и картинки соответственно
         private ObjectList[] Points; //Массив графиков.
         private bool IsNotFirstShow = false;
+        private Pictogramm Source; //Пиктограмма - родитель.
 
         #region UserIteractions
 
-        public GraphForm()
+        public GraphForm(Pictogramm Parent)
         {
             this.InitializeComponent();
             this.Shown += FShown;
             this.Closing += FClosing;
+            this.Activated += FActivate;
             this.GBMP = Graphics.FromImage(BMP);
             this.GR = this.CreateGraphics();
             this.ShowInTaskbar = false;
+            this.Source = Parent;
+        }
+
+        private void FActivate(object sender, EventArgs e)
+        {
+            if (IsNotFirstShow) Forms.MF.Selected = Source;
         }
 
         private void FShown(object sender, EventArgs e)
@@ -35,6 +40,7 @@ namespace SimpleFormulaDrawer.interfac
 
         private void FClosing(object sender, CancelEventArgs e)
         {
+            Source.ClosePictogramm();
             IsNotFirstShow = false;
         }
 
