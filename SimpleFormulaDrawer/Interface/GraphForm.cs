@@ -59,7 +59,7 @@ namespace SimpleFormulaDrawer.interfac
 
         #region NativeFunctions
 
-        private void Redraw()
+        public void Redraw()
         {
             if (GR!=null && BMP!=null && IsNotFirstShow) GR.DrawImageUnscaled(BMP,0,0);
         }

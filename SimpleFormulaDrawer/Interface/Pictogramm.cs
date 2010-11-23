@@ -31,7 +31,8 @@ namespace SimpleFormulaDrawer.interfac
 
         private void RedrawFunctions()
         {
-            //GR.AddGraphic();
+            GR.FlushBuffer();
+            GR.Redraw();
         }
 
         public CompilerErrorCollection AddFunction(ListBoxItem What)
