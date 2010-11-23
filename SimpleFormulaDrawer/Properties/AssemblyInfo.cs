@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("SimpleFormulaDrawer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("SantIS")]
 [assembly: AssemblyProduct("SimpleFormulaDrawer")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
+[assembly: AssemblyCopyright("Copyright © SantIS 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,7 +37,7 @@ using System.Windows;
     // or application resource dictionaries)
     ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
     //(used if a resource is not found in the page, 
-    // app, or any theme specific resource dictionaries)
+    // app, or any theme specific resource dictionaries
 )]
 
 
