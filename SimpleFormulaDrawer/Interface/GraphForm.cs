@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -20,21 +21,21 @@ namespace SimpleFormulaDrawer.interfac
         public GraphForm()
         {
             this.InitializeComponent();
-            this.Activated+=GRActivated;
             this.Shown += FShown;
+            this.Closing += FClosing;
             this.GBMP = Graphics.FromImage(BMP);
             this.GR = this.CreateGraphics();
             this.ShowInTaskbar = false;
         }
 
-        private void GRActivated(object sender, EventArgs e)
-        {
-            if (IsNotFirstShow) this.Redraw();
-        }
-
         private void FShown(object sender, EventArgs e)
         {
             IsNotFirstShow = true;
+        }
+
+        private void FClosing(object sender, CancelEventArgs e)
+        {
+            IsNotFirstShow = false;
         }
 
         private void InitializeComponent()
@@ -51,10 +52,12 @@ namespace SimpleFormulaDrawer.interfac
         #endregion
 
         #region NativeFunctions
+
         private void Redraw()
         {
-            if (GR!=null && BMP!=null) GR.DrawImageUnscaled(BMP,0,0);
+            if (GR!=null && BMP!=null && IsNotFirstShow) GR.DrawImageUnscaled(BMP,0,0);
         }
+
         #endregion
 
         #region Drawing functions
