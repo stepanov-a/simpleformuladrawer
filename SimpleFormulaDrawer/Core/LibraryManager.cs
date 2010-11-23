@@ -6,9 +6,16 @@ using System.CodeDom.Compiler;
 
 namespace SimpleFormulaDrawer.Core
 {
+    /// <remarks>
+    /// Этот класс отвечает за генерацию текста исходного кода для метода функции, введенной пользователем
+    /// </remarks>
     public class SourceManager
     {
         private readonly string Text;
+        /// <summary>
+        /// Генерирует исходный код из функции Func
+        /// </summary>
+        /// <param name="Func">Функция, преобразованная LibraryManager-ом</param>
         public SourceManager(string Func)
         {
             Text=@"using System;
@@ -26,23 +33,37 @@ namespace SimpleFormulaDrawer.Core
             Text += "\r\n                }\r\n            }\r\n            ";
         }
 
+        /// <summary>
+        /// Возвращает полученный исходный текст
+        /// </summary>
+        /// <returns>Текст исходного кода</returns>
         public string GetSourceString()
         {
             return Text;
         }
     }
-
+    /// <remarks>
+    /// Этот класс отвечает за компиляцию функций, введенных пользователем.
+    /// </remarks>
     public class LibraryManager
     {
         private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
         private readonly List<MethodInfo> Functions;
 
+        /// <summary>
+        /// Просто конструктор.
+        /// </summary>
         public LibraryManager()
         {
             Functions=new List<MethodInfo>();
         }
 
-        public FunctionParameters AddFunction(string Function)
+        /// <summary>
+        /// Функция для компиляции функций, введенных пользователем.
+        /// </summary>
+        /// <param name="Function">Исходная функция, написанная пользователем</param>
+        /// <returns>Структура FunctionParameters с результатами разбора и компиляции</returns>
+        public FunctionParameters CompileFunction(string Function)
         {
             /*Здесь может быть проблема безопастности, так как компилируется то, что пользователь напишет в текстбоксе
              * НО ко всем функциям добавится Math и я пока что не нашел способа как это обходить
@@ -65,16 +86,20 @@ namespace SimpleFormulaDrawer.Core
             return toRet;
         }
 
+        /// <summary>
+        /// Удаляет функцию по номеру из списка.
+        /// </summary>
+        /// <param name="Index">Номер функции</param>
         public void RemoveFunction(int Index)
         {
             Functions.RemoveAt(Index);
         }
 
-        public static int ErrorPosition(int Pos)
-        {
-            return Pos - 32;
-        }
-
+        /// <summary>
+        /// Проверяет, зависит ли функция от одной переменной или от двух.
+        /// </summary>
+        /// <param name="Function">Сама функция</param>
+        /// <returns>True если от двух, False если от одной или 0</returns>
         public static bool Check3D(IEnumerable<char> Function)
         {
             var State = 0;
@@ -105,6 +130,12 @@ namespace SimpleFormulaDrawer.Core
             return (State==1);
         }
 
+        /// <summary>
+        /// Внутренняя функция для преобразования конструкций вида a^b  в конструкции  вида Pow(a,b)
+        /// </summary>
+        /// <param name="Func">Сама функция</param>
+        /// <param name="TMP">Временная строка</param>
+        /// <param name="i">Адрес преобразуемого символа ^</param>
         private static void MakeStep(ref string Func, ref string TMP, ref int i)
         {
             int State;
@@ -217,6 +248,11 @@ namespace SimpleFormulaDrawer.Core
             #endregion
         }
 
+        /// <summary>
+        /// Функция для преобразования введенной пользователем формулы в понятный C# компилятору код.
+        /// </summary>
+        /// <param name="Func">Функция, введенная пользователем</param>
+        /// <returns>Преобразованная функция</returns>
         private static string ParseFunction(string Func)
         {
             var TMP = "";
@@ -296,6 +332,11 @@ namespace SimpleFormulaDrawer.Core
             return TMP;
         }
 
+        /// <summary>
+        /// Функция, возвращающая координату Y по заданным x и z
+        /// </summary>
+        /// <param name="Variables">X и [Z]</param>
+        /// <returns>Массив чисел, содержащий координаты Y для каждой функции</returns>
         public float[] Funcs(params double[] Variables)
         {
             var INum = new object[2];

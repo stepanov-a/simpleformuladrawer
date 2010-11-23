@@ -34,7 +34,7 @@ namespace SimpleFormulaDrawer.Core
             return Color.FromRgb(R,G,B);
         }
 
-        private static string ColorToString(Color What) //For debug function
+        string ToString(Color What) //For debug function
         {
             return What.R.ToString() + '|' + What.G + '|' + What.B;
         }

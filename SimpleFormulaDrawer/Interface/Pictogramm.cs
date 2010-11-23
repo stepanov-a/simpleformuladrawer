@@ -36,7 +36,7 @@ namespace SimpleFormulaDrawer.interfac
 
         public CompilerErrorCollection AddFunction(ListBoxItem What)
         {
-            var FParams = LMGR.AddFunction(What.Content.ToString());
+            var FParams = LMGR.CompileFunction(What.Content.ToString());
             if (FParams.Is3D) Count3D++;
             if (FParams.Errors.Count==0) RedrawFunctions();
             RedrawFunctions();
