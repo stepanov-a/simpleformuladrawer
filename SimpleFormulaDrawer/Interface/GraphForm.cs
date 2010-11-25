@@ -87,6 +87,10 @@ namespace SimpleFormulaDrawer.interfac
         {
             throw new NotImplementedException("AddNextPoint");
         }
+
+        private void PutPixel(PointF Pixel,int Graph )
+        {
+        }
         #endregion
     }
 }

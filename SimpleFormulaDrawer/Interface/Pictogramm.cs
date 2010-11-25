@@ -5,6 +5,7 @@ using SimpleFormulaDrawer.Core;
 using System.CodeDom.Compiler;
 using System.Windows;
 using System.Windows.Forms;
+using System.Threading;
 using MessageBox = System.Windows.MessageBox;
 
 namespace SimpleFormulaDrawer.interfac
@@ -29,9 +30,30 @@ namespace SimpleFormulaDrawer.interfac
             Forms.MF.PictlistBox.Items.Remove(this.Parent);
         }
 
+        private void DrawThreadPart(object ThreadNum)
+        {
+            try
+            {
+                int Num = (int)ThreadNum;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
+        }
+
+
         private void RedrawFunctions()
         {
             GR.FlushBuffer();
+            //Сейчас начнется многопоточная жесть
+            for (var i = 0; i < CPUCount;i++ )
+            {
+                Thread ComputeThread=new Thread(DrawThreadPart);
+                ComputeThread.Start(i); //TODO
+            }
+            //Сейчас многопоточная жесть заканчивается
             GR.Redraw();
         }
 

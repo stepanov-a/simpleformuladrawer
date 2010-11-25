@@ -184,7 +184,7 @@ namespace SimpleFormulaDrawer.Core
  {
      private ObjectElement StartEl;//стартовая хрень
 
-     public void AddElement(ObjectElement element)
+     public void AddElement(object element)
      {
          ObjectElement tmpEl;
          if (StartEl == null) //нулевая тра ля ля
