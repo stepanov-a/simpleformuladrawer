@@ -337,11 +337,11 @@ namespace SimpleFormulaDrawer.Core
         /// </summary>
         /// <param name="Variables">X и [Z]</param>
         /// <returns>Массив чисел, содержащий координаты Y для каждой функции</returns>
-        public float[] Funcs(params double[] Variables)
+        public ObjectList Funcs(params double[] Variables)
         {
             var INum = new object[2];
             object ONum;
-            var RES = new float[Functions.Count];
+            var RES = new ObjectList();
             INum[0] = Variables[0];
             if (Variables.Length > 1)
             {
@@ -355,7 +355,7 @@ namespace SimpleFormulaDrawer.Core
             foreach(var MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
-                RES[i] = float.Parse(ONum.ToString());
+                RES.AddElement(float.Parse(ONum.ToString()));
                 i++;
             }
             return RES;
