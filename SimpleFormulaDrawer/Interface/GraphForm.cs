@@ -61,7 +61,18 @@ namespace SimpleFormulaDrawer.interfac
 
         public void Redraw()
         {
-            if (GR!=null && BMP!=null && IsNotFirstShow) GR.DrawImageUnscaled(BMP,0,0);
+            if ((GR != null && BMP != null) && IsNotFirstShow)
+            {
+                try
+                {
+                    GR.DrawImage(BMP, 0, 0);
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show(E.Message);
+                    throw;
+                }
+            }
         }
 
         #endregion
@@ -88,8 +99,13 @@ namespace SimpleFormulaDrawer.interfac
             throw new NotImplementedException("AddNextPoint");
         }
 
-        private void PutPixel(PointF Pixel,int Graph )
+        public void PutPixelG(PointF Pixel,int Graph )
         {
+        }
+
+        public void PutPixelC(PointF Pixel,Color CLR)
+        {
+            this.BMP.SetPixel((int) Pixel.X, (int) Pixel.Y, CLR);
         }
         #endregion
     }

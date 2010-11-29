@@ -7,56 +7,48 @@ using System.CodeDom.Compiler;
 namespace SimpleFormulaDrawer.Core
 {
     /// <remarks>
-    /// Этот класс отвечает за генерацию текста исходного кода для метода функции, введенной пользователем
-    /// </remarks>
-    public class SourceManager
-    {
-        private readonly string Text;
-        /// <summary>
-        /// Генерирует исходный код из функции Func
-        /// </summary>
-        /// <param name="Func">Функция, преобразованная LibraryManager-ом</param>
-        public SourceManager(string Func)
-        {
-            Text=@"using System;
-            namespace FunctionDll
-            {
-                public class Functions
-                {
-                    static void Main() {}";
-            Text +=string.Format(
-                        @"  
-                    public static double Func(double x, double y)
-                    {{
-                        return {0};
-                    }}",Func);
-            Text += "\r\n                }\r\n            }\r\n            ";
-        }
-
-        /// <summary>
-        /// Возвращает полученный исходный текст
-        /// </summary>
-        /// <returns>Текст исходного кода</returns>
-        public string GetSourceString()
-        {
-            return Text;
-        }
-    }
-    /// <remarks>
     /// Этот класс отвечает за компиляцию функций, введенных пользователем.
     /// </remarks>
     public class LibraryManager
     {
-        private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
-        private readonly List<MethodInfo> Functions;
-
         /// <summary>
-        /// Просто конструктор.
+        /// Класс для создания исходного кода по строке - функции
         /// </summary>
-        public LibraryManager()
+        private class SourceManager
         {
-            Functions=new List<MethodInfo>();
+            private readonly string Text;
+            /// <summary>
+            /// Генерирует исходный код из функции Func
+            /// </summary>
+            /// <param name="Func">Функция, преобразованная LibraryManager-ом</param>
+            public SourceManager(string Func)
+            {
+                Text=@"using System;
+                namespace FunctionDll
+                {
+                    public class Functions
+                    {
+                        static void Main() {}";
+                Text +=string.Format(
+                            @"  
+                        public static double Func(double x, double y)
+                        {{
+                            return {0};
+                        }}",Func);
+                Text += "\r\n                }\r\n            }\r\n            ";
+            }
+            /// <summary>
+            /// Возвращает полученный исходный текст
+            /// </summary>
+            /// <returns>Текст исходного кода</returns>
+            public string GetSourceString()
+            {
+                return Text;
+            }
         }
+
+        private static readonly Dictionary<string, string> CompilerDirectives = new Dictionary<string, string> { { "Compiler Version", "v4.0" } };
+        private readonly List<MethodInfo> Functions = new List<MethodInfo>();
 
         /// <summary>
         /// Функция для компиляции функций, введенных пользователем.
