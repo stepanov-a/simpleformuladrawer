@@ -11,7 +11,7 @@ namespace SimpleFormulaDrawer.Core
     
     public partial class ColorPicker : UserControl
     {
-        private double OffsetX=0, OffsetY=0;
+        private double OffsetX, OffsetY;
 
 
         public ColorPicker() //Constructor

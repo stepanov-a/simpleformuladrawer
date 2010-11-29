@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using SimpleFormulaDrawer.Core;
@@ -14,7 +15,7 @@ namespace SimpleFormulaDrawer.interfac
     {
         private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
-        private int Count3D = 0;//Количество 3х мерных функций
+        private int Count3D;//Количество 3х мерных функций
         public MainFormContent Datastore;
         public GraphForm GR; // Грфаическая форма.
 
@@ -34,13 +35,14 @@ namespace SimpleFormulaDrawer.interfac
         {
             try
             {
-                int Num = (int)ThreadNum;
+                var Num = (int)ThreadNum;
             }
             catch (Exception)
             {
                 return;
             }
-            
+            GR.PutPixelC(new PointF(100,100), Color.Black);
+            GR.Redraw();
         }
 
 
@@ -50,8 +52,8 @@ namespace SimpleFormulaDrawer.interfac
             //Сейчас начнется многопоточная жесть
             for (var i = 0; i < CPUCount;i++ )
             {
-                Thread ComputeThread=new Thread(DrawThreadPart);
-                ComputeThread.Start(i); //TODO
+                var ComputeThread=new Thread(DrawThreadPart);
+                ComputeThread.Start(i);
             }
             //Сейчас многопоточная жесть заканчивается
             GR.Redraw();
@@ -112,7 +114,7 @@ namespace SimpleFormulaDrawer.interfac
              * 0x3F:AllBorders
              * 0x3:MinX and MaxX
              * NOTE: IF HOW VARIABLE HAS INVALID LENGTH (Less then need or >6), NOTHING HAPPENS.
-             * Order of How Elements:MinX,MaxX,MinY,MaxY. Some may be deleted.
+             * Order of How Elements:MinX,MaxX,MinY,MaxY,MinZ,MaxZ. Some may be deleted.
              */
             if (How.Length > 6) return;
             var ParamNum = 0;

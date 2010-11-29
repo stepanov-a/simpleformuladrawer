@@ -119,7 +119,7 @@ namespace SimpleFormulaDrawer
 
         private void AddFormul_Click(object sender, RoutedEventArgs e)
         { //добавляет формулу в формуллист. Функция выглядит как-будто ее писали с перепоя, но Павлуша сказал, что так надо :)
-            ListBoxItem NewItem = new ListBoxItem //создает новый Айтем
+            var NewItem = new ListBoxItem //создает новый Айтем
                                        {//задает ему цвета и текст
                                            Foreground = new SolidColorBrush(ColorPicker1.InvertedSelectedColor),
                                            Content = FormulText.Text,
