@@ -347,7 +347,7 @@ namespace SimpleFormulaDrawer.Core
             foreach(var MF in Functions)
             {
                 ONum = MF.Invoke(null, INum);
-                RES.AddElement(float.Parse(ONum.ToString()));
+                RES.Add(float.Parse(ONum.ToString()));
                 i++;
             }
             return RES;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
@@ -158,61 +159,25 @@ namespace SimpleFormulaDrawer.Core
         public ListBox FormulListBox;
     }
 
-    public  class Item
-    { //кусок одного элемента списка
-        private object content;//
-
-        public Item(object obj)
+    public class ObjectList:ArrayList
+    {
+        /// <summary>
+        /// Инициализация ObjectList - а по диапазону чисел. хранить будет числа.
+        /// </summary>
+        /// <param name="Start">Начальное значение</param>
+        /// <param name="End">Конечное значение</param>
+        /// <param name="Step">Шаг</param>
+        ObjectList(double Start,double End,double Step)
         {
-            content = obj;
+            var C=new DoubleCollection(); //Извращение, но так быстрее.
+            for (var i = Start; i <= End;i+=Step )
+            {
+                C.Add(i);
+            }
+            this.AddRange(C);
+            C = null;
         }
     }
-
-
-
-   public class ObjectElement
-    {   //один полноценный элемент списка 
-        public Item el;//выше
-        public ObjectElement next;//на следующий элемент
-        public ObjectElement(object content)//конструктор
-        {
-            this.el=new Item(content);//новый элемент
-        }
-    }
-    
- public class ObjectList//список объектов
- {
-     private ObjectElement StartEl;//стартовая хрень
-
-     public void AddElement(object element)
-     {
-         ObjectElement tmpEl;
-         if (StartEl == null) //нулевая тра ля ля
-         {
-             StartEl = new ObjectElement(element);
-         }
-         else
-         {
-             tmpEl = StartEl;
-             while (tmpEl != null) //поиск последнего тра ля ля
-             {
-                 tmpEl = tmpEl.next;
-             }
-             tmpEl = new ObjectElement(element);
-         }
-     }
-
-
-    private void FlushList()
-    {
-        this.StartEl = new ObjectElement(null);
-        GC.Collect();
-    }
-    public ObjectList()//конструктор
-    {
-    //   this.StartEl=new ObjectElement();
-    }
- }
-        
+      
 
 }
