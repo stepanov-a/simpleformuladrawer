@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SimpleFormulaDrawer.interfac
+namespace SimpleFormulaDrawer.Interface
 {
     /// <summary>
     /// Логика взаимодействия для DebugForm.xaml

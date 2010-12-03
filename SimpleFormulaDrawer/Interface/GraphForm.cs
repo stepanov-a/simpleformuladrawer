@@ -4,13 +4,13 @@ using System.Windows.Forms;
 using SimpleFormulaDrawer.Core;
 using System.Drawing;
 
-namespace SimpleFormulaDrawer.interfac
+namespace SimpleFormulaDrawer.Interface
 {
     public class GraphForm:Form
     {
         private Bitmap BMP=new Bitmap(Screen.PrimaryScreen.Bounds.Width,Screen.PrimaryScreen.WorkingArea.Height); //Картинка - буфер
-        private Graphics GR, GBMP;//Нативная графика окна и картинки соответственно
-        private ObjectList Points; //Массив графиков.
+        private Graphics GR;//Нативная графика окна
+        public Graphics GBMP;//Нативная графика картинки. В нее можно рисовать.
         private bool IsNotFirstShow;
         private readonly Pictogramm Source; //Пиктограмма - родитель.
 
@@ -57,8 +57,6 @@ namespace SimpleFormulaDrawer.interfac
 
         #endregion
 
-        #region NativeFunctions
-
         public void Redraw()
         {
             if ((GR != null && BMP != null) && IsNotFirstShow)
@@ -74,39 +72,5 @@ namespace SimpleFormulaDrawer.interfac
                 }
             }
         }
-
-        #endregion
-
-        #region Drawing functions
-
-        public void FlushBuffer()
-        {
-            this.GBMP.Clear(Color.White);
-        }
-
-        public int AddGraphic()
-        {
-            throw new NotImplementedException("AddGraphic");
-        }
-
-        public int AddGraphic(ObjectList Graph)
-        {
-            throw new NotImplementedException("AddGraphic");
-        }
-
-        public void AddNextPoint(ObjectList Pnt)
-        {
-            throw new NotImplementedException("AddNextPoint");
-        }
-
-        public void PutPixelG(PointF Pixel,int Graph )
-        {
-        }
-
-        public void PutPixelC(PointF Pixel,Color CLR)
-        {
-            this.BMP.SetPixel((int) Pixel.X, (int) Pixel.Y, CLR);
-        }
-        #endregion
     }
 }
