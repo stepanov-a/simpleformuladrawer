@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
-using SimpleFormulaDrawer.interfac;
 using System.Windows.Shapes;
 using System.CodeDom.Compiler;
 using System.Windows.Controls;
 using System.Drawing;
+using SimpleFormulaDrawer.Interface;
 
 namespace SimpleFormulaDrawer.Core
 {
@@ -167,7 +167,7 @@ namespace SimpleFormulaDrawer.Core
         /// <param name="Start">Начальное значение</param>
         /// <param name="End">Конечное значение</param>
         /// <param name="Step">Шаг</param>
-        ObjectList(double Start,double End,double Step)
+        public ObjectList(double Start,double End,double Step)
         {
             var C=new DoubleCollection(); //Извращение, но так быстрее.
             for (var i = Start; i <= End;i+=Step )
@@ -176,6 +176,11 @@ namespace SimpleFormulaDrawer.Core
             }
             this.AddRange(C);
             C = null;
+        }
+
+        public ObjectList()
+        {
+            this.Clear();
         }
     }
       

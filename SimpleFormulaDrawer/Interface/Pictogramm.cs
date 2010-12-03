@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Controls;
-using System.Collections.Generic;
 using SimpleFormulaDrawer.Core;
 using System.CodeDom.Compiler;
-using System.Windows;
-using System.Windows.Forms;
 using System.Threading;
-using MessageBox = System.Windows.MessageBox;
 
-namespace SimpleFormulaDrawer.interfac
+namespace SimpleFormulaDrawer.Interface
 {
     public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
@@ -41,15 +37,14 @@ namespace SimpleFormulaDrawer.interfac
             {
                 return;
             }
-            GR.PutPixelC(new PointF(100,100), Color.Black);
             GR.Redraw();
         }
 
 
         private void RedrawFunctions()
         {
-            GR.FlushBuffer();
-            //Сейчас начнется многопоточная жесть
+            GR.GBMP.Clear(Color.White);
+            //Сейчас начнется многопоточная жесть);
             for (var i = 0; i < CPUCount;i++ )
             {
                 var ComputeThread=new Thread(DrawThreadPart);
