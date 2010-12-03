@@ -133,11 +133,12 @@
     <Compile Include="Interface\GraphForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\GraphFormHelper.cs" />
     <Compile Include="MainForm.xaml.cs">
       <DependentUpon>MainForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\Pictogramm.cs" />
-    <Page Include="Interface\ResourceDictionary1.xaml">
+    <Page Include="ResourceDictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace SimpleFormulaDrawer.Interface
 {
-    public class Pictogramm : System.Windows.Controls.Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
+    public partial class Pictogramm : Button //класс-наследник от кнопки, содержащий в себе граф. форму (сюда же и листбокс надо копировать, по идее)
     {
         private static readonly int CPUCount = Environment.ProcessorCount; //Не угадаете что
         private LibraryManager LMGR=new LibraryManager(); //Текущий менеджер библиотек.
@@ -43,8 +43,8 @@ namespace SimpleFormulaDrawer.Interface
 
         private void RedrawFunctions()
         {
-            GR.GBMP.Clear(Color.White);
-            //Сейчас начнется многопоточная жесть);
+            GraphFormHelper.FlushBuffer(GR);
+            //Сейчас начнется многопоточная жесть
             for (var i = 0; i < CPUCount;i++ )
             {
                 var ComputeThread=new Thread(DrawThreadPart);
@@ -93,6 +93,11 @@ namespace SimpleFormulaDrawer.Interface
             }
         }
         
+        /// <summary>
+        /// Функция для изменения границ рисования
+        /// </summary>
+        /// <param name="Flag">Комбинация границ</param>
+        /// <param name="How">Новые цифры MinX,MaxX,MinY,MaxY,MinZ,MaxZ</param>
         public void ChangeDrawingBorders(int Flag,params int[] How)
         {
             /*
@@ -116,32 +121,32 @@ namespace SimpleFormulaDrawer.Interface
             try
             {
                 if (Flag == 0x0) throw new AccessViolationException();
-                if ((Flag & 0x1) == Flag)
+                if (HasFlag(Flag,0x1))
                 {
                     this.Datastore.MinX = How[ParamNum];
                     ParamNum++;
                 }
-                if ((Flag & 0x2) == Flag)
+                if (HasFlag(Flag, 0x2))
                 {
                     this.Datastore.MaxX = How[ParamNum];
                     ParamNum++;
                 }
-                if ((Flag & 0x4) == Flag)
+                if (HasFlag(Flag, 0x4))
                 {
                     this.Datastore.MinY = How[ParamNum];
                     ParamNum++;
                 }
-                if ((Flag & 0x8) == Flag)
+                if (HasFlag(Flag, 0x8))
                 {
                     this.Datastore.MaxY = How[ParamNum];
                     ParamNum++;
                 }
-                if ((Flag & 0x10) ==Flag)
+                if (HasFlag(Flag, 0x10))
                 {
                     this.Datastore.MinZ = How[ParamNum];
                     ParamNum++;
                 }
-                if ((Flag & 0x20) == Flag)
+                if (HasFlag(Flag, 0x20))
                 {
                     this.Datastore.MaxZ = How[ParamNum];
                 }
