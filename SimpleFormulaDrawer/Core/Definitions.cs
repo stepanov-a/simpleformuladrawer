@@ -183,6 +183,15 @@ namespace SimpleFormulaDrawer.Core
             this.Clear();
         }
     }
-      
+}
 
+namespace SimpleFormulaDrawer.Interface
+{
+    public partial class Pictogramm
+    {
+        private static bool HasFlag(int What,int Flag)
+        {
+            return ((What & Flag) == What);
+        }
+    }
 }
