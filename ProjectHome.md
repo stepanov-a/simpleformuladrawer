@@ -1,0 +1,2 @@
+&lt;wiki:gadget url="http://www.ohloh.net/p/SFD/widgets/project\_basic\_stats.xml" height="220" border="0"/&gt;&lt;wiki:gadget url="http://www.ohloh.net/p/SFD/widgets/project\_partner\_badge.xml" height="53" width="400" border="0"/&gt;
+&lt;wiki:gadget url="http://www.ohloh.net/p/SFD/widgets/project\_users.xml?style=gray" height="100" border="0"/&gt;
